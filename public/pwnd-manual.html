@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Manual de Regras v1.0 — PWND! Bug Bounty Chaos. Find it. Report it. Get paid.">
-    <title>PWND! — Bug Bounty Chaos · Manual de Regras v1.0</title>
+    <meta name="description" content="Manual de Regras V1.1 — PWND! Bug Bounty Chaos. Find it. Report it. Get paid.">
+    <title>PWND! — Bug Bounty Chaos · Manual de Regras V1.1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
@@ -913,7 +913,7 @@
 
     <!-- ================= COVER ================= -->
     <header class="cover">
-        <div class="tag">Manual de Regras · v1.0 · Edição Tabletop</div>
+        <div class="tag">Manual de Regras — V1.1 — Edição Tabletop</div>
         <h1>PWND!<span class="cursor"></span></h1>
         <h2>Bug Bounty Chaos</h2>
         <p class="tagline">The Ultimate Corporate Hacking Board Game</p>
@@ -931,7 +931,7 @@
     <div class="doc-layout">
         <nav class="toc" aria-label="Sumário">
             <div class="toc-header">
-                <span class="toc-title">Manual de Regras · v1.0</span>
+                <span class="toc-title">Manual de Regras — V1.1</span>
                 <div class="toc-game">PWND!</div>
                 <div class="toc-sub">Bug Bounty Chaos · Tabletop Edition</div>
             </div>
@@ -1109,7 +1109,7 @@
 
                 <h3>4.2 · Preparação dos Baralhos</h3>
                 <ol>
-                    <li><strong>Main Deck (Baralho de Ação):</strong> antes de embaralhar, separe 1 Bypass para a mão de cada jogador. Embaralhe no Main Deck <strong>80 Vulnerability Cards</strong>, <strong>36 Tool Cards</strong> (12 tipos × 3 cópias cada) e <strong>4 Safeguards</strong> (2 Bypass + 2 CVE Assignment Protection) — total de <strong>120 cartas</strong>. Bypass restantes voltam para a caixa. Forme o deck central e posicione-o na mesa.</li>
+                    <li><strong>Main Deck (Baralho de Ação):</strong> O jogo possui 126 cartas de ação totais. A fórmula de distribuição universal é: <strong>126 = 120 no deck de compra + N na mão (1 Bypass por jogador) + (6 − N) na caixa</strong>. Antes de embaralhar, separe 1 Bypass para a mão de cada jogador. Embaralhe no Main Deck <strong>80 Vulnerability Cards</strong>, <strong>36 Tool Cards</strong> (12 tipos × 3 cópias) e <strong>4 Safeguards</strong> (2 Bypass + 2 CVE Assignment Protection) — total exato de <strong>120 cartas no deck de compra</strong>. As Bypass restantes voltam para a caixa. Forme o deck central.</li>
                     <li><strong>Event Deck:</strong> embaralhe as <strong>23 Event Cards</strong> e coloque o baralho
                         fechado no slot indicado do Tabuleiro Central.</li>
                     <li><strong>Program Market:</strong> revele <strong>3 Program Cards</strong> nas 3 posições do
@@ -1301,11 +1301,8 @@
                 <p>Realize a entrega formal de todas as Vulnerability Cards alocadas na sua Zona de Exploits. O
                     processamento ocorre por <strong>Adição Simples (Zero Calculadora)</strong>:</p>
                 <ol>
-                    <li><strong>Mínimo de Escopo (e Alerta Global):</strong> Programas de Tier Alto/Crítico exigem um
-                        combo mínimo de <strong>2 cartas válidas</strong>. <em>Atenção: A partir da Rodada 5, entra em
-                            vigor o Alerta Global, e TODOS os programas passam a exigir no mínimo 2 cartas válidas.</em>
-                        Cartas descidas fora do escopo são <strong>descartadas compulsoriamente</strong> junto com o
-                        Report.</li>
+                    <li><strong>Mínimo de Escopo:</strong> A quantidade mínima de falhas válidas para poder executar a ação de Report varia por Tier do programa: Low/Medium exigem no mínimo <strong>1 falha válida</strong>; High/Critical exigem no mínimo <strong>2 falhas válidas</strong>. Cartas descidas fora do escopo são descartadas antes da contagem e não contam para o mínimo. Se você estiver abaixo do mínimo exigido, a ação de Report <strong>não está disponível</strong> (você deve usar Recon para trocar de alvo ou Exploit para descer novas falhas). <em>Nota (Bug Hunter): o mínimo de 2 falhas em programas Alto/Crítico se aplica ao TOTAL do Report, e nunca por lote.</em></li>
+                    <li><strong>Alerta Global:</strong> <em>Atenção: A partir da Rodada 5, entra em vigor o Alerta Global, e TODOS os programas passam a exigir no mínimo 2 cartas válidas.</em></li>
                     <li><strong>Cálculo do Payout (Modelo A — Soma Direta):</strong>
                         $$\text{Bounty Total} = \sum \text{Valor das Falhas} + \text{Bônus do Programa} + \sum
                         \text{Bônus das Tools}$$
@@ -1871,6 +1868,7 @@
                                 <th>Tier</th>
                                 <th>Escopo Autorizado</th>
                                 <th>Patch Speed</th>
+                                <th>Mín. de Falhas</th>
                                 <th>Bônus Fixo (Programa)</th>
                             </tr>
                         </thead>
@@ -1880,6 +1878,7 @@
                                 <td>Medium</td>
                                 <td>Escopo Amplo (todas as classes)</td>
                                 <td>Moderada (7-8)</td>
+                                <td>1</td>
                                 <td>+$1.000</td>
                             </tr>
                             <tr>
@@ -1887,6 +1886,7 @@
                                 <td>High</td>
                                 <td>APIs, Autenticação e Criptografia</td>
                                 <td>Rápida (6-8)</td>
+                                <td>2</td>
                                 <td>+$2.500</td>
                             </tr>
                             <tr>
@@ -1894,6 +1894,7 @@
                                 <td>Low</td>
                                 <td>Broken Access Control</td>
                                 <td>Lenta (8)</td>
+                                <td>1</td>
                                 <td>+$0</td>
                             </tr>
                             <tr>
@@ -1901,6 +1902,7 @@
                                 <td>High</td>
                                 <td>Criptografia e Autenticação</td>
                                 <td>Rápida (6-8)</td>
+                                <td>2</td>
                                 <td>+$2.500</td>
                             </tr>
                             <tr>
@@ -1908,6 +1910,7 @@
                                 <td>Medium</td>
                                 <td>Escopo Amplo (todas as classes)</td>
                                 <td>Moderada (7-8)</td>
+                                <td>1</td>
                                 <td>+$1.000</td>
                             </tr>
                             <tr>
@@ -1915,6 +1918,7 @@
                                 <td>Critical</td>
                                 <td>Infraestrutura, RCE e SSRF</td>
                                 <td>Extrema (5-8)</td>
+                                <td>2</td>
                                 <td>+$4.000</td>
                             </tr>
                             <tr>
@@ -1922,6 +1926,7 @@
                                 <td>Medium</td>
                                 <td>WebSockets e Lógica de Negócios</td>
                                 <td>Moderada (7-8)</td>
+                                <td>1</td>
                                 <td>+$1.000</td>
                             </tr>
                             <tr>
@@ -1929,6 +1934,7 @@
                                 <td>Low</td>
                                 <td>Escopo Amplo (todas as classes)</td>
                                 <td>Lenta (8)</td>
+                                <td>1</td>
                                 <td>+$0</td>
                             </tr>
                         </tbody>
@@ -2250,7 +2256,7 @@
                     <dd>Regra de distribuição de Safeguards: cada jogador (N) começa com 1 Bypass na mão. No Main Deck ficam embaralhadas 2 Bypass + 2 CVE Assignment Protection. Total em jogo = N + 4 Safeguards (as CVE sempre entram no deck).</dd>
 
                     <dt>Main Deck</dt>
-                    <dd>Baralho central compartilhado composto por 80 Vulnerability Cards, 36 Tool Cards (12 tipos × 3 cópias) e 4 Safeguards (2 Bypass + 2 CVE Assignment Protection) — total de 120 cartas.</dd>
+                    <dd>Baralho central compartilhado composto por 80 Vulnerability Cards, 36 Tool Cards (12 tipos × 3 cópias) e 4 Safeguards (2 Bypass + 2 CVE Assignment Protection) — total exato de 120 cartas no deck de compra. (A caixa contém 126 componentes físicos = 120 no deck + N na mão (1 Bypass por jogador) + (6 − N) na caixa).</dd>
 
                     <dt>Out of Scope</dt>
                     <dd>Falha técnica cuja classe de ataque não consta no escopo autorizado do programa ativo do
@@ -2306,7 +2312,7 @@
     <!-- ================= FOOTER ================= -->
     <footer>
         <span class="sig">FIND IT. REPORT IT. GET PAID.</span>
-        PWND! — Bug Bounty Chaos · Manual de Regras Oficial v1.0<br>
+        PWND! - Bug Bounty Chaos — Manual de Regras Oficial V1.1 · 05/09<br>
         Documento oficial · PWND! Game Development Studio · 2026<br>
         <span style="font-size:.7rem;letter-spacing:.08em;margin-top:.4rem;display:block;">Todas as corporações,
             domínios e sistemas descritos neste manual são 100% fictícios. Este jogo celebra o hacking ético e a
