@@ -24,10 +24,11 @@ export const GameBoard: React.FC = () => {
   const totalCVSS = playerActiveVulns.reduce((sum, v) => sum + (v.cvss || 5.0), 0);
   const vulnValue = playerActiveVulns.reduce((sum, v) => {
     let base = 1500;
-    if (v.cvss >= 10.0) base = 6000;
-    else if (v.cvss >= 9.0) base = 5000;
-    else if (v.cvss >= 7.0) base = 4000;
-    else if (v.cvss >= 4.0) base = 2500;
+    const cvss = v.cvss || 5.0;
+    if (cvss >= 10.0) base = 6000;
+    else if (cvss >= 9.0) base = 5000;
+    else if (cvss >= 7.0) base = 4000;
+    else if (cvss >= 4.0) base = 2500;
     return sum + base;
   }, 0);
   const estimatedBounty = vulnValue + (currentProgram.flatBountyBonus || 0);

@@ -365,7 +365,8 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
         if (rand > 0.6) {
           // Bot faz Report
-          const reportValue = Math.round((bot.activeVulns.length * 1500 + 800) * bot.currentProgram.baseBountyMultiplier);
+          const totalRarityValue = bot.activeVulns.reduce((sum, v) => sum + ((v.cvss || 5.0) * 200), 0);
+          const reportValue = Math.round(totalRarityValue + bot.currentProgram.flatBountyBonus);
           newBounty += reportValue;
           newVulns = [];
           addLog(`[OPONENTE] ${bot.name} submeteu relatório em ${bot.currentProgram.name} e faturou +$${reportValue}!`, 'warning');

@@ -269,9 +269,9 @@ export const ProgramCardView: React.FC<ProgramCardViewProps> = ({ program, isSel
             <span style={{ fontSize: '11px', color: 'var(--terminal-green)', fontWeight: '700', fontFamily: 'var(--font-mono)' }}>
               {program.bountyRange}
             </span>
-            <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-              Mult: {program.baseBountyMultiplier}x
-            </span>
+            <div style={{ marginTop: '4px', fontSize: '11px', color: 'var(--amber-glow)', fontFamily: 'var(--font-mono)' }}>
+              Bounty Multiplier: +{(program as ProgramCard).flatBountyBonus?.toLocaleString('pt-BR') || '0'}
+            </div>
           </div>
         </>
       ) : (

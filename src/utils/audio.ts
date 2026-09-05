@@ -90,6 +90,37 @@ class SoundManager {
     } catch {}
   }
 
+  // Som de Vitória (Fanfarra / Conquista Hall of Fame)
+  playVictory() {
+    try {
+      this.initCtx();
+      if (!this.ctx) return;
+
+      const now = this.ctx.currentTime;
+      const notes = [523.25, 523.25, 523.25, 698.46, 523.25, 698.46, 880.00]; 
+      const times = [0, 0.15, 0.3, 0.45, 0.8, 0.95, 1.1];
+      const durations = [0.1, 0.1, 0.1, 0.3, 0.1, 0.1, 0.6];
+
+      notes.forEach((freq, idx) => {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, now + times[idx]);
+
+        gain.gain.setValueAtTime(0.1, now + times[idx]);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + times[idx] + durations[idx]);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(now + times[idx]);
+        osc.stop(now + times[idx] + durations[idx]);
+      });
+    } catch {}
+  }
+
   // Sequência Audiovisual do "PATCH DEPLOYED!"
   playPatchDeployedAlarm() {
     try {

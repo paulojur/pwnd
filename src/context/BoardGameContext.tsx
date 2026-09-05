@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { CardV2, CARDS_V2 } from '../data/cardsDataV2';
-import { BoardGameBot, DeployedExploit, ServerRegion, SERVERS_DATA, ALL_BOARD_NODES } from '../data/boardData';
+import { ServerRegion, SERVERS_DATA, ALL_BOARD_NODES } from '../data/boardData';
 import { getZoneByBalance } from '../utils/gameRules';
 import { ProgramCard, PROGRAM_CARDS, Archetype, ARCHETYPES } from '../data/cardsData';
 import { EVENT_CARDS_LIST, EventCardData } from '../components/EventCardModal';
@@ -357,7 +357,7 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
       return;
     }
 
-    if (currentTurn >= 5 || (playerActiveProgram && playerActiveProgram.baseBountyMultiplier >= 2.0)) {
+    if (currentTurn >= 5 || (playerActiveProgram && playerActiveProgram.flatBountyBonus >= 2000)) {
       if (myExploitsInTable.length < 2) {
         alert('MÍNIMO DE ESCOPO: A partir da Rodada 5 (Alerta Global) OU em programas de Tier Alto/Crítico, é exigido um combo de no mínimo 2 falhas na mesa para submeter o Report!');
         addLog(`Report em ${playerActiveProgram?.name} bloqueado: Faltou complexidade (Min. 2 cartas válidas exigidas).`);

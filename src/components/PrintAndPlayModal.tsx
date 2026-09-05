@@ -22,11 +22,7 @@ const chunkArray = <T,>(arr: T[], size: number): T[][] => {
 
 export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, onClose }) => {
   const getFlatValueLabel = (card: CardV2) => {
-    if (card.type === 'tool') {
-      if (card.rarity === 'Epic') return '+$2.0k';
-      if (card.rarity === 'Rare') return '+$1.5k';
-      return '2 CARGAS (+$1k / +$500)';
-    }
+    if (card.type === 'tool') return 'FERRAMENTA';
     if (card.type === 'defuse') return 'SAFEGUARD';
     if ((card as any).type === 'event') return 'EVENTO';
 
@@ -52,9 +48,9 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
     : 'A4 portrait';
 
   const displayedCards: CardV2[] =
-    cardFilter === 'exploits' ? FULL_80_VULNERABILITIES :
-      cardFilter === 'tools' ? FULL_12_TOOLS :
-        cardFilter === 'defuse' ? FULL_3_DEFUSES : CARDS_V2;
+    cardFilter === 'exploits' ? CARDS_V2.filter(c => c.type === 'exploit') :
+      cardFilter === 'tools' ? CARDS_V2.filter(c => c.type === 'tool') :
+        cardFilter === 'defuse' ? CARDS_V2.filter(c => c.type === 'defuse') : CARDS_V2;
 
   // CHUNKING EM GRUPOS DE EXATAMENTE 9 CARTAS POR FOLHA A4 (3 COLUNAS x 3 LINHAS - RETRATO 63x88mm)
   const cardPages = chunkArray(displayedCards, 9);
@@ -251,13 +247,13 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
               onClick={() => setCardFilter('tools')}
               style={{ padding: '4px 10px', background: cardFilter === 'tools' ? 'var(--cyber-blue)' : 'rgba(255,255,255,0.08)', color: cardFilter === 'tools' ? '#000' : '#fff', border: 'none', borderRadius: '4px', fontSize: '10.5px', fontFamily: 'var(--font-mono)', fontWeight: 'bold', cursor: 'pointer' }}
             >
-              🧰 Ferramentas ({FULL_12_TOOLS.length})
+              🧰 Ferramentas ({36})
             </button>
             <button
               onClick={() => setCardFilter('defuse')}
               style={{ padding: '4px 10px', background: cardFilter === 'defuse' ? 'var(--electric-purple-light)' : 'rgba(255,255,255,0.08)', color: cardFilter === 'defuse' ? '#000' : '#fff', border: 'none', borderRadius: '4px', fontSize: '10.5px', fontFamily: 'var(--font-mono)', fontWeight: 'bold', cursor: 'pointer' }}
             >
-              🛡️ Safeguards ({FULL_3_DEFUSES.length})
+              🛡️ Safeguards ({10})
             </button>
           </div>
         )}
@@ -640,7 +636,7 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
                       <span>ACTIVE PROGRAM</span>
                     </div>
                     <div style={{ ...getSlotStyle(), border: '2px dashed #000', borderRadius: '8px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 'bold', background: '#fafafa' }}>
-                      <span>SLOT SAFEGUARD (BYPASS)</span>
+                      <span>SLOT SAFEGUARD</span>
                     </div>
                   </div>
 
