@@ -1,0 +1,2337 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-i18n-root="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manual de Regras v1.0 — PWND! Bug Bounty Chaos. Find it. Report it. Get paid.">
+    <title>PWND! — Bug Bounty Chaos · Manual de Regras v1.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0D0F1A;
+            --bg-2: #12162B;
+            --bg-3: #1A1F3D;
+            --green: #39D353;
+            --green-dim: #1E7A3A;
+            --amber: #FFB347;
+            --amber-2: #E8962E;
+            --red: #FF4D4D;
+            --red-glow: #FF2E2E;
+            --cyan: #4DD0E1;
+            --white: #F2F4F8;
+            --gray: #9AA3B5;
+            --gray-2: #6B7280;
+            --border: #2A3154;
+            --border-green: #39D35355;
+            --mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: var(--sans);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== COVER ===== */
+        header.cover {
+            min-height: 30vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 50% 120%, #1A1F3D 0%, transparent 60%),
+                repeating-linear-gradient(0deg, transparent 0 2px, #39D35308 2px 4px),
+                var(--bg);
+        }
+
+        header.cover::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(#39D35322 1px, transparent 1px),
+                linear-gradient(90deg, #39D35322 1px, transparent 1px);
+            background-size: 44px 44px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+            pointer-events: none;
+        }
+
+        .cover .tag {
+            font-family: var(--mono);
+            color: var(--green);
+            letter-spacing: .35em;
+            font-size: .8rem;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .cover h1 {
+            font-size: clamp(3rem, 10vw, 6.5rem);
+            font-weight: 900;
+            letter-spacing: .02em;
+            line-height: 1;
+            position: relative;
+        }
+
+        .cover h1 .cursor {
+            display: inline-block;
+            width: .6em;
+            height: 1em;
+            background: var(--green);
+            margin-left: .1em;
+            animation: blink 1s steps(1) infinite;
+            vertical-align: baseline;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .cover h2 {
+            font-family: var(--mono);
+            color: var(--amber);
+            font-size: clamp(1rem, 3vw, 1.6rem);
+            letter-spacing: .25em;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .cover .tagline {
+            font-family: var(--mono);
+            color: var(--gray);
+            margin-top: 2.5rem;
+            font-size: .95rem;
+            letter-spacing: .15em;
+            position: relative;
+        }
+
+        .cover .version {
+            position: absolute;
+            bottom: 2rem;
+            font-family: var(--mono);
+            color: var(--gray-2);
+            font-size: .75rem;
+            letter-spacing: .2em;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        /* ===== LAYOUT WITH SIDEBAR ===== */
+        .doc-layout {
+            display: flex;
+            align-items: flex-start;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* ===== SIDEBAR TOC ===== */
+        nav.toc {
+            position: sticky;
+            top: 0;
+            width: 270px;
+            min-width: 270px;
+            height: 100vh;
+            overflow-y: auto;
+            background: var(--bg-2);
+            border-right: 1px solid var(--border);
+            padding: 0;
+            flex-shrink: 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        nav.toc::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        nav.toc::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        nav.toc::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .toc-header {
+            padding: 1.4rem 1.2rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-header .toc-title {
+            font-family: var(--mono);
+            font-size: .68rem;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--green);
+            display: block;
+            margin-bottom: .3rem;
+        }
+
+        .toc-header .toc-game {
+            font-family: var(--mono);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .05em;
+        }
+
+        .toc-header .toc-sub {
+            font-size: .75rem;
+            color: var(--gray-2);
+            margin-top: .15rem;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: .8rem 0 2rem;
+            margin: 0;
+        }
+
+        .toc-list li {
+            margin: 0;
+        }
+
+        .toc-list a {
+            display: flex;
+            align-items: baseline;
+            gap: .6rem;
+            padding: .4rem 1.2rem;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: .82rem;
+            line-height: 1.4;
+            transition: background .15s, color .15s;
+            border-left: 2px solid transparent;
+        }
+
+        .toc-list a:hover {
+            background: rgba(57, 211, 83, .06);
+            color: var(--white);
+            border-left-color: var(--green);
+        }
+
+        .toc-list a.active {
+            background: rgba(57, 211, 83, .1);
+            color: var(--green);
+            border-left-color: var(--green);
+        }
+
+        .toc-list .toc-num {
+            font-family: var(--mono);
+            font-size: .7rem;
+            color: var(--amber);
+            min-width: 22px;
+            flex-shrink: 0;
+        }
+
+        .toc-list .toc-label {
+            flex: 1;
+        }
+
+        .toc-divider {
+            height: 1px;
+            background: var(--border);
+            margin: .5rem 1.2rem;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        main {
+            flex: 1;
+            min-width: 0;
+            padding: 2.5rem 3rem 5rem 3.5rem;
+            max-width: 900px;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 70px;
+        }
+
+        h2.sec {
+            font-family: var(--mono);
+            font-size: 1.1rem;
+            color: var(--green);
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            margin-bottom: 1.4rem;
+            padding-bottom: .5rem;
+            border-bottom: 1px solid var(--border-green);
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            flex-wrap: wrap;
+        }
+
+        h2.sec .num {
+            color: var(--amber);
+            font-weight: 700;
+        }
+
+        h3 {
+            color: var(--amber);
+            font-size: 1rem;
+            margin: 1.6rem 0 .6rem;
+            font-weight: 700;
+        }
+
+        h4 {
+            color: var(--white);
+            font-size: .92rem;
+            margin: 1rem 0 .4rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: .85rem;
+            color: var(--gray);
+        }
+
+        p strong,
+        li strong {
+            color: var(--white);
+        }
+
+        ul,
+        ol {
+            margin: 0 0 1rem 1.4rem;
+            color: var(--gray);
+        }
+
+        li {
+            margin-bottom: .45rem;
+        }
+
+        em {
+            color: var(--amber);
+            font-style: normal;
+            font-family: var(--mono);
+            font-size: .9em;
+        }
+
+        code {
+            font-family: var(--mono);
+            color: var(--green);
+            background: var(--bg-3);
+            padding: .1em .4em;
+            border-radius: 4px;
+            font-size: .86em;
+        }
+
+        /* ===== CALLOUTS ===== */
+        .callout {
+            border: 1px solid var(--border-green);
+            border-left: 4px solid var(--green);
+            background: var(--bg-2);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1.25rem 0;
+        }
+
+        .callout.warn {
+            border-color: #FF4D4D44;
+            border-left-color: var(--red);
+        }
+
+        .callout.warn strong {
+            color: var(--red);
+        }
+
+        .callout.amber {
+            border-color: #FFB34744;
+            border-left-color: var(--amber);
+        }
+
+        .callout.cyan {
+            border-color: #4DD0E144;
+            border-left-color: var(--cyan);
+        }
+
+        .callout .label {
+            font-family: var(--mono);
+            font-size: .68rem;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--green);
+            display: block;
+            margin-bottom: .4rem;
+        }
+
+        .callout.warn .label {
+            color: var(--red);
+        }
+
+        .callout.amber .label {
+            color: var(--amber);
+        }
+
+        .callout.cyan .label {
+            color: var(--cyan);
+        }
+
+        .callout p {
+            margin: 0;
+        }
+
+        /* ===== TABLES ===== */
+        .table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1rem 0 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .86rem;
+            min-width: 480px;
+        }
+
+        th {
+            background: var(--bg-3);
+            color: var(--green);
+            font-family: var(--mono);
+            text-align: left;
+            padding: .65rem .9rem;
+            font-size: .73rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: .55rem .9rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--gray);
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, .02);
+        }
+
+        /* ===== CARD GRID ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .card-type {
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-type::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .card-type.vuln::before {
+            background: var(--red);
+        }
+
+        .card-type.tool::before {
+            background: var(--green);
+        }
+
+        .card-type.program::before {
+            background: var(--amber);
+        }
+
+        .card-type.event::before {
+            background: #FF6B9D;
+        }
+
+        .card-type.defuse::before {
+            background: var(--cyan);
+        }
+
+        .card-type.archetype::before {
+            background: #A78BFA;
+        }
+
+        .card-type h4 {
+            font-family: var(--mono);
+            font-size: .82rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: .4rem;
+        }
+
+        .card-type p {
+            font-size: .83rem;
+            color: var(--gray);
+            margin: 0;
+        }
+
+        .card-type .count {
+            font-family: var(--mono);
+            color: var(--amber);
+            font-size: .75rem;
+            display: block;
+            margin-top: .5rem;
+        }
+
+        /* ===== BOUNTY TIERS ===== */
+        .tier {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            padding: .55rem .9rem;
+            border-radius: 6px;
+            margin-bottom: .4rem;
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .tier .dot {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .tier .name {
+            font-family: var(--mono);
+            font-size: .78rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            min-width: 80px;
+        }
+
+        .tier .range {
+            color: var(--gray);
+            font-size: .85rem;
+            flex: 1;
+        }
+
+        .tier .mult {
+            font-family: var(--mono);
+            color: var(--amber);
+            font-size: .8rem;
+            white-space: nowrap;
+        }
+
+        /* ===== BOUNTY TRACK STEPS ===== */
+        .track-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .track-step {
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            padding: .3rem .7rem;
+            border-radius: 4px;
+            font-family: var(--mono);
+            font-size: .78rem;
+        }
+
+        .track-step .val {
+            min-width: 70px;
+            font-weight: 700;
+        }
+
+        .track-step.green {
+            background: rgba(57, 211, 83, .08);
+            color: #39D353;
+            border-left: 3px solid #39D353;
+        }
+
+        .track-step.yellow {
+            background: rgba(255, 215, 0, .08);
+            color: #FFD700;
+            border-left: 3px solid #FFD700;
+        }
+
+        .track-step.orange {
+            background: rgba(255, 140, 0, .08);
+            color: #FF8C00;
+            border-left: 3px solid #FF8C00;
+        }
+
+        .track-step.red {
+            background: rgba(255, 77, 77, .08);
+            color: #FF4D4D;
+            border-left: 3px solid #FF4D4D;
+        }
+
+        /* ===== ARCHETYPE CARDS ===== */
+        .archetype-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .archetype-card {
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.1rem;
+            border-top: 3px solid #A78BFA;
+        }
+
+        .archetype-card h4 {
+            font-family: var(--mono);
+            font-size: .85rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: #A78BFA;
+            margin-bottom: .2rem;
+        }
+
+        .archetype-card .role {
+            font-size: .78rem;
+            color: var(--amber);
+            font-family: var(--mono);
+            margin-bottom: .6rem;
+        }
+
+        .archetype-card p {
+            font-size: .84rem;
+            color: var(--gray);
+            margin: 0;
+        }
+
+        /* ===== GLOSSARY ===== */
+        dl.glossary dt {
+            font-family: var(--mono);
+            color: var(--green);
+            font-size: .84rem;
+            margin-top: 1rem;
+            letter-spacing: .05em;
+        }
+
+        dl.glossary dd {
+            color: var(--gray);
+            font-size: .88rem;
+            margin: .2rem 0 0 0;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 1rem 3rem;
+            text-align: center;
+            font-family: var(--mono);
+            color: var(--gray-2);
+            font-size: .8rem;
+            letter-spacing: .15em;
+        }
+
+        footer .sig {
+            color: var(--green);
+            margin-bottom: .5rem;
+            display: block;
+            font-size: .9rem;
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 15mm;
+            }
+
+            body {
+                background: #fff;
+                color: #111;
+                font-size: 10.5pt;
+                line-height: 1.4;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            nav.toc {
+                display: block;
+                page-break-after: always;
+                border: none;
+                margin-top: 2rem;
+            }
+
+            .toc-list {
+                display: block !important;
+            }
+
+            .toc-list li {
+                display: block !important;
+                margin-bottom: 0.5rem;
+            }
+
+            .toc-list a {
+                color: #111 !important;
+            }
+
+            .doc-layout {
+                display: block;
+            }
+
+            header.cover {
+                min-height: 100vh;
+                padding: 3rem 1rem;
+                page-break-after: always;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+            }
+
+            header.cover .version {
+                position: absolute;
+                bottom: 2rem;
+                width: 100%;
+                left: 0;
+                text-align: center;
+            }
+
+            header.cover::before {
+                display: none;
+            }
+
+            main {
+                max-width: 100%;
+                padding: 1rem;
+            }
+
+            section {
+                page-break-inside: auto;
+            }
+
+            h2,
+            h3,
+            h4 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            .card-type,
+            .callout,
+            table {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            h2.sec {
+                color: #1E7A3A;
+                border-color: #1E7A3A;
+            }
+
+            h3 {
+                color: #B45309;
+            }
+
+            td,
+            th {
+                color: #111;
+                border-color: #ccc;
+            }
+
+            .card-type p,
+            .tier .range,
+            dl.glossary dd {
+                color: #333;
+            }
+
+            .table-wrap {
+                border-color: #ccc;
+            }
+
+            th {
+                background: #eee;
+                color: #1E7A3A;
+            }
+
+            .card-type {
+                background: #fafafa;
+                border-color: #ccc;
+            }
+
+            .tier {
+                background: #fafafa;
+                border-color: #ccc;
+            }
+
+            .callout {
+                background: #f5f5f5;
+                border-color: #999;
+            }
+
+            code {
+                background: #eee;
+                color: #1E7A3A;
+            }
+
+            p,
+            li {
+                color: #333;
+            }
+
+            .track-step {
+                border-left-color: #666;
+                background: #f0f0f0;
+                color: #111;
+            }
+        }
+
+        /* ===== MOBILE: hide sidebar, show compact header ===== */
+        @media screen and (max-width: 900px) {
+            .doc-layout {
+                display: block;
+            }
+
+            nav.toc {
+                position: static;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                overflow-y: visible;
+            }
+
+            .toc-list {
+                display: flex;
+                flex-wrap: wrap;
+                padding: .5rem .8rem .8rem;
+                gap: .1rem;
+            }
+
+            .toc-list li {
+                flex-shrink: 0;
+            }
+
+            .toc-list a {
+                padding: .3rem .6rem;
+                border-left: none;
+                border-bottom: 2px solid transparent;
+                font-size: .76rem;
+                white-space: nowrap;
+            }
+
+            .toc-list a:hover,
+            .toc-list a.active {
+                border-left: none;
+                border-bottom-color: var(--green);
+            }
+
+            .toc-divider {
+                display: none;
+            }
+
+            main {
+                padding: 1.5rem 1.2rem 3rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .archetype-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tier {
+                flex-wrap: wrap;
+                gap: .4rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                font-size: 15px;
+            }
+
+            .cover .version {
+                font-size: .62rem;
+                letter-spacing: .07em;
+            }
+
+            table {
+                font-size: .78rem;
+            }
+
+            th,
+            td {
+                padding: .42rem .55rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= COVER ================= -->
+    <header class="cover">
+        <div class="tag">Manual de Regras · v1.0 · Edição Tabletop</div>
+        <h1>PWND!<span class="cursor"></span></h1>
+        <h2>Bug Bounty Chaos</h2>
+        <p class="tagline">The Ultimate Corporate Hacking Board Game</p>
+        <div
+            style="margin-top: 2rem; font-family: var(--mono); color: var(--green); font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase;">
+            Por Paulo Ricardo de Oliveira (HackEthos)
+        </div>
+        <button class="no-print" onclick="window.print()"
+            style="margin-top:20px; padding: 10px 20px; background: var(--green); color: #000; border: none; font-weight: bold; font-family: var(--mono); cursor: pointer; border-radius: 4px;">🖨️
+            IMPRIMIR MANUAL</button>
+        <div class="version">DOC-REF: PWND-MAN-001 · 01/09/2026 · Para 2 a 6 jogadores · 8 Rodadas</div>
+    </header>
+
+    <!-- ================= SUMÁRIO LATERAL ================= -->
+    <div class="doc-layout">
+        <nav class="toc" aria-label="Sumário">
+            <div class="toc-header">
+                <span class="toc-title">Manual de Regras · v1.0</span>
+                <div class="toc-game">PWND!</div>
+                <div class="toc-sub">Bug Bounty Chaos · Tabletop Edition</div>
+            </div>
+            <ul class="toc-list">
+                <li><a href="#introducao" class="toc-link"><span class="toc-num">01</span><span
+                            class="toc-label">Introdução</span></a></li>
+                <li><a href="#componentes" class="toc-link"><span class="toc-num">02</span><span
+                            class="toc-label">Componentes</span></a></li>
+                <li><a href="#objetivo" class="toc-link"><span class="toc-num">03</span><span class="toc-label">Objetivo
+                            do Jogo</span></a></li>
+                <li><a href="#setup" class="toc-link"><span class="toc-num">04</span><span class="toc-label">Setup —
+                            Preparação</span></a></li>
+                <li><a href="#estrutura" class="toc-link"><span class="toc-num">05</span><span
+                            class="toc-label">Estrutura da Partida</span></a></li>
+                <li><a href="#acoes" class="toc-link"><span class="toc-num">06</span><span class="toc-label">Ações do
+                            Turno</span></a></li>
+                <div class="toc-divider"></div>
+                <li><a href="#patch" class="toc-link"><span class="toc-num">07</span><span class="toc-label">Patch Speed
+                            Check</span></a></li>
+                <li><a href="#patchdeployed" class="toc-link"><span class="toc-num">08</span><span
+                            class="toc-label">PATCH DEPLOYED!</span></a></li>
+                <li><a href="#eventos" class="toc-link"><span class="toc-num">09</span><span class="toc-label">Event
+                            Cards — Caos</span></a></li>
+                <div class="toc-divider"></div>
+                <li><a href="#arquetipos" class="toc-link"><span class="toc-num">10</span><span
+                            class="toc-label">Arquétipos (6 Classes)</span></a></li>
+                <li><a href="#ferramentas" class="toc-link"><span class="toc-num">11</span><span class="toc-label">Tool
+                            Cards</span></a></li>
+                <li><a href="#programas" class="toc-link"><span class="toc-num">12</span><span class="toc-label">Program
+                            Cards</span></a></li>
+                <div class="toc-divider"></div>
+                <li><a href="#bountytrack" class="toc-link"><span class="toc-num">13</span><span
+                            class="toc-label">Bounty Track (28 Degraus)</span></a></li>
+                <li><a href="#fim" class="toc-link"><span class="toc-num">14</span><span class="toc-label">Fim de Jogo &
+                            Vitória</span></a></li>
+                <li><a href="#rodadasfinais" class="toc-link"><span class="toc-num">15</span><span
+                            class="toc-label">Rodadas Finais (7 e 8)</span></a></li>
+                <div class="toc-divider"></div>
+                <li><a href="#guiavisual" class="toc-link"><span class="toc-num">16</span><span class="toc-label">Guia
+                            Visual & Slots</span></a></li>
+                <li><a href="#glossario" class="toc-link"><span class="toc-num">17</span><span
+                            class="toc-label">Glossário</span></a></li>
+            </ul>
+        </nav>
+
+        <main>
+
+            <!-- ================= 01 INTRODUÇÃO ================= -->
+            <section id="introducao">
+                <h2 class="sec"><span class="num">01</span> Introdução</h2>
+                <p><strong>PWND! — Bug Bounty Chaos</strong> é um jogo de cartas estratégico em que você assume o papel
+                    de um pesquisador de segurança independente. Sua missão: encontrar vulnerabilidades em programas de
+                    recompensa patrocinados por corporações fictícias, encadear falhas, validar relatórios e
+                    <strong>receber o pagamento antes que a equipe de engenharia do alvo publique a correção</strong>.
+                </p>
+                <p>O jogo combina duas forças clássicas do design moderno: a <strong>construção de motores de
+                        recursos</strong> (engine-building) — você monta sua bancada de ferramentas e gera vantagens a
+                    cada turno — e o <strong>risco calculado</strong> (push-your-luck) — cada reconhecimento pode
+                    revelar uma recompensa… ou o temido <em>PATCH DEPLOYED!</em>.</p>
+                <div class="callout">
+                    <span class="label">Assinatura do jogo</span>
+                    <p><strong>Find it. Report it. Get paid.</strong> — Encontre. Reporte. Receba.</p>
+                </div>
+                <p>Nenhum conhecimento técnico real é necessário para jogar: tudo é operado por cartas com ícones
+                    universais e texto explicativo. O tema de hacking ético é o pano de fundo narrativo — os
+                    pesquisadores do jogo trabalham <strong>de forma legal e autorizada</strong>, dentro de escopos
+                    definidos pelas corporações.</p>
+            </section>
+
+            <!-- ================= 02 COMPONENTES ================= -->
+            <section id="componentes">
+                <h2 class="sec"><span class="num">02</span> Componentes</h2>
+
+                <div class="card-grid">
+                    <div class="card-type vuln">
+                        <h4>Vulnerability Cards</h4>
+                        <p>As falhas que você explora e reporta. Cada uma exibe classe técnica, pontuação CVSS
+                            (severidade), raridade e habilidade operacional. Geram recompensa na Bounty Track ao serem
+                            reportadas.</p>
+                        <span class="count">80 cartas · 8 classes técnicas · 5 raridades</span>
+                    </div>
+                    <div class="card-type tool">
+                        <h4>Tool Cards</h4>
+                        <p>Ferramentas do ecossistema ofensivo (Burp Suite Pro, SQLMap, Nmap, etc.) que concedem bônus
+                            passivos permanentes ou efeitos ativos ao serem descartadas.</p>
+                        <span class="count">12 tipos de ferramentas (3 cópias de cada = 36 cartas no Main Deck)</span>
+                    </div>
+                    <div class="card-type program">
+                        <h4>Program Cards</h4>
+                        <p>Corporações fictícias (ShopAll, BankSafe, CloudNine...) com escopo autorizado, faixa de
+                            recompensa (Tier) e velocidade de correção (Patch Speed). Cada empresa aparece em 2 cópias,
+                            permitindo a disputa por <em>Duplicate Report!</em>.</p>
+                        <span class="count">16 cartas · 8 empresas × 2 cópias cada</span>
+                    </div>
+                    <div class="card-type event">
+                        <h4>Event Cards</h4>
+                        <p>Interrupções, sabotagens burocráticas e oscilações do mercado de segurança. Sacadas obrigatoriamente como <strong>Custo do Sucesso</strong> após um Report bem-sucedido, ou jogadas durante a <strong>Janela de Caos (Opcional)</strong> do próprio turno. Acesso direto ao Event Deck via Recon é poder exclusivo do Social Engineer.</p>
+                        <span class="count">23 cartas de Caos</span>
+                    </div>
+                    <div class="card-type defuse">
+                        <h4>Safeguards (Bypass + CVE)</h4>
+                        <p>Duas categorias de proteção:
+                            <strong>Bypass</strong> — anula 100% as penalidades do PATCH DEPLOYED! (financeiras e descarte de exploits).
+                            <strong>CVE Assignment Protection</strong> — proteção de escopo reativa e de uso único: descarta ao ser usada. Anula <em>Duplicate Report!</em>, <em>Out of Scope</em> e <em>DNS Hijack</em> quando acionados contra o seu programa ativo. O jogador pode segurar na mão ou jogar imediatamente (custa 1 slot de mão).
+                        </p>
+                        <span class="count">10 cartas — 8 Bypass + 2 CVE Assignment Protection</span>
+                    </div>
+                    <div class="card-type archetype">
+                        <h4>Researcher Archetypes</h4>
+                        <p>Classes assimétricas de pesquisador que definem sua especialidade e poderes únicos durante
+                            toda a partida. A escolha é pública e estratégica.</p>
+                        <span class="count">6 arquétipos distintos</span>
+                    </div>
+                </div>
+
+                <h3>Componentes de Mesa</h3>
+                <ul>
+                    <li><strong>1 Tabuleiro Central (Board, 30×20cm):</strong> contém o Slot do Event Deck, o Program
+                        Market (3 slots), a Discard Pile compartilhada e o Round Tracker (1 a 8 rodadas).</li>
+                    <li><strong>6 Player Mats (25×35cm):</strong> cada tapete individual possui Slot de Researcher, Slot de Active Program, Slot de Bypass, Tools Rack (3 slots), <strong>Área de Eventos Guardados (limite de 2 cartas)</strong>, Zona de Exploits (area limpa) e Bounty Track lateral.</li>
+                    <li><strong>6 Bounty Tokens:</strong> marcadores hexagonais acrílicos, 1 por jogador (cores
+                        exclusivas).</li>
+                    <li><strong>1 Round Token:</strong> rastreador de turnos de acrílico vermelho.</li>
+                    <li><strong>2 Dados D8:</strong> utilizados para os testes de Patch Speed Check e triagens.</li>
+                </ul>
+
+                <h3>Sistema de Raridade das Cartas de Vulnerabilidade</h3>
+                <p>As cartas de vulnerabilidade possuem 5 níveis de raridade indicados pela cor da borda lateral:</p>
+                <ul>
+                    <li><strong>Cinza — Comum:</strong> falhas de baixa a média severidade, frequentes no baralho.</li>
+                    <li><strong>Verde — Incomum:</strong> falhas de média severidade com habilidades operacionais.</li>
+                    <li><strong>Azul — Rara:</strong> falhas de alta severidade com efeitos especiais de deploy.</li>
+                    <li><strong>Roxa — Épica:</strong> falhas críticas com habilidades poderosas de combinação.</li>
+                    <li><strong>Dourada — Lendária:</strong> vulnerabilidades de nível máximo (RCE, Zero-Day global), as
+                        mais valiosas do jogo.</li>
+                </ul>
+            </section>
+
+            <!-- ================= 03 OBJETIVO ================= -->
+            <section id="objetivo">
+                <h2 class="sec"><span class="num">03</span> Objetivo do Jogo</h2>
+                <p>Em <strong>PWND!</strong>, cada participante assume o papel de um pesquisador independente de
+                    segurança ofensiva competindo em plataformas abertas de caça a falhas. Ao longo de rodadas
+                    estruturadas, os participantes realizam varreduras, estruturam cadeias de ataque e emitem relatórios
+                    técnicos antes que as equipes defensivas corrijam as vulnerabilidades em produção.</p>
+                <div class="callout">
+                    <span class="label">Condição de Vitória</span>
+                    <p>O objetivo é acumular a maior quantia em dólares na Bounty Track. O primeiro pesquisador a atingir <strong>$40.000</strong> vence a partida instantaneamente. Se nenhum jogador atingir $40.000 até o encerramento da última rodada (8ª ou 10ª), quem tiver o maior saldo é declarado vencedor.</p>
+                </div>
+                <p>Para acumular Bounty, você precisa:</p>
+                <ol>
+                    <li><strong>Escolher um programa</strong> corporativo com boa relação entre recompensa e risco de
+                        patch;</li>
+                    <li><strong>Equipar ferramentas</strong> que concedam bônus às suas vulnerabilidades;</li>
+                    <li><strong>Explorar</strong> e alocar vulnerabilidades na sua Zona de Exploits, respeitando o
+                        escopo do programa ativo;</li>
+                    <li><strong>Reportar</strong> antes que o alvo acione o patch — e antes que outro pesquisador
+                        reporte o mesmo título no mesmo programa.</li>
+                </ol>
+                <div class="callout warn">
+                    <span class="label">Atenção</span>
+                    <p>Se o <em>PATCH DEPLOYED!</em> for ativado, todas as vulnerabilidades <strong>não
+                            submetidas</strong> da sua Zona de Exploits são descartadas sem pontuar. Reporte no momento
+                        certo.</p>
+                </div>
+            </section>
+
+            <!-- ================= 04 SETUP ================= -->
+            <section id="setup">
+                <h2 class="sec"><span class="num">04</span> Setup — Preparação da Mesa</h2>
+
+                <h3>4.1 · Montagem do Tabuleiro Central</h3>
+                <p>Posicione o Tabuleiro Central no meio da mesa. Coloque o Round Token no espaço <strong>1</strong> do
+                    Round Tracker.</p>
+
+                <h3>4.2 · Preparação dos Baralhos</h3>
+                <ol>
+                    <li><strong>Main Deck (Baralho de Ação):</strong> antes de embaralhar, separe 1 Bypass para a mão de cada jogador. Embaralhe no Main Deck <strong>80 Vulnerability Cards</strong>, <strong>36 Tool Cards</strong> (12 tipos × 3 cópias cada) e <strong>4 Safeguards</strong> (2 Bypass + 2 CVE Assignment Protection) — total de <strong>120 cartas</strong>. Bypass restantes voltam para a caixa. Forme o deck central e posicione-o na mesa.</li>
+                    <li><strong>Event Deck:</strong> embaralhe as <strong>23 Event Cards</strong> e coloque o baralho
+                        fechado no slot indicado do Tabuleiro Central.</li>
+                    <li><strong>Program Market:</strong> revele <strong>3 Program Cards</strong> nas 3 posições do
+                        mercado, com a face voltada para cima.</li>
+                </ol>
+
+                <h3>4.3 · Distribuição Aleatória de Arquétipos</h3>
+                <p>Embaralhe as <strong>6 cartas de Researcher Archetype</strong> com a face para baixo e distribua
+                    <strong>1 aleatoriamente</strong> para cada participante. O jogador posiciona a carta recebida no
+                    slot <code>SLOT RESEARCHER</code> do seu Player Mat. A distribuição por sorteio força os jogadores a
+                    adaptarem suas estratégias e experimentarem novas dinâmicas a cada partida.
+                </p>
+
+                <h3>4.4 · Distribuição da Mão Inicial (Regra N+4)</h3>
+                <p>A distribuição de Safeguards segue a <strong>Fórmula N+4</strong>: cada jogador começa com
+                    <strong>1 carta Bypass garantida na mão</strong>. No Main Deck ficam embaralhadas <strong>2 Bypass + 2 CVE Assignment Protection</strong>.
+                </p>
+                <div class="callout cyan">
+                    <span class="label">Mão Inicial</span>
+                    <p>Cada jogador recebe <strong>5 cartas aleatórias do Main Deck + 1 carta Bypass
+                            garantida</strong> = <strong>6 cartas no total</strong>. <em>Todos iniciam com o mesmo
+                            volume de cartas (incluindo The Old Guard, que usará seu limite de 9 apenas durante o
+                            jogo)</em>.</p>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nº de Jogadores</th>
+                                <th>Bypass na Mão</th>
+                                <th>Safeguards no Main Deck</th>
+                                <th>Total Safeguards</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2 jogadores</td>
+                                <td>2 × 1 = 2 Bypass</td>
+                                <td>2 Bypass + 2 CVE</td>
+                                <td><strong>6</strong></td>
+                            </tr>
+                            <tr>
+                                <td>3 jogadores</td>
+                                <td>3 × 1 = 3 Bypass</td>
+                                <td>2 Bypass + 2 CVE</td>
+                                <td><strong>7</strong></td>
+                            </tr>
+                            <tr>
+                                <td>4 jogadores</td>
+                                <td>4 × 1 = 4 Bypass</td>
+                                <td>2 Bypass + 2 CVE</td>
+                                <td><strong>8</strong></td>
+                            </tr>
+                            <tr>
+                                <td>5 jogadores</td>
+                                <td>5 × 1 = 5 Bypass</td>
+                                <td>2 Bypass + 2 CVE</td>
+                                <td><strong>9</strong></td>
+                            </tr>
+                            <tr>
+                                <td>6 jogadores</td>
+                                <td>6 × 1 = 6 Bypass</td>
+                                <td>2 Bypass + 2 CVE</td>
+                                <td><strong>10</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-top: 15px; font-size: 0.95rem; color: var(--text-muted);">
+                    <em>*Nota: O baralho físico de PWND! possui 8 Bypass + 2 CVE = 10 Safeguards. Em partidas com menos de 6 jogadores, sobrarão Bypasses. Estas sobras <strong>devem ser devolvidas à caixa</strong> e não participam do jogo. As 2 CVE Assignment Protection <strong>sempre</strong> ficam embaralhadas no Main Deck.</em>
+                </p>
+
+                <h3>4.5 · Seleção do Alvo Inicial</h3>
+                <p>Seguindo a ordem de turno, cada pesquisador seleciona <strong>1 Program Card</strong> do Program
+                    Market e posiciona-a no slot <code>ACTIVE PROGRAM</code> do seu mat. Imediatamente após a retirada,
+                    puxe uma nova carta do baralho de programas para manter o mercado com 3 opções.</p>
+
+                <h3>4.6 · Determinação do Primeiro Jogador</h3>
+                <p>O primeiro jogador é aquele que <strong>tomou café expresso mais recentemente</strong>. Em caso de
+                    empate, o privilégio de começar vai para <strong>quem tomou café coado por último</strong>. O turno
+                    então transcorre normalmente no sentido horário.</p>
+
+                <div class="callout">
+                    <span class="label">Dica de primeira partida</span>
+                    <p>Na primeira partida, recomendamos que todos escolham programas com <strong>Patch Speed
+                            lento</strong> (como GovPortal) para aprender o ritmo do jogo sem pressão de patch a cada
+                        rodada.</p>
+                </div>
+            </section>
+
+            <!-- ================= 05 ESTRUTURA ================= -->
+            <section id="estrutura">
+                <h2 class="sec"><span class="num">05</span> Estrutura da Partida</h2>
+
+                <h3>5.1 · Escala por Número de Jogadores</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nº de Jogadores</th>
+                                <th>Número de Rodadas</th>
+                                <th>Duração Estimada</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2 jogadores</td>
+                                <td>10 rodadas</td>
+                                <td>~40 minutos</td>
+                            </tr>
+                            <tr>
+                                <td>3 a 4 jogadores</td>
+                                <td>8 rodadas</td>
+                                <td>~45 minutos</td>
+                            </tr>
+                            <tr>
+                                <td>5 a 6 jogadores</td>
+                                <td>8 rodadas</td>
+                                <td>~60 minutos</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>5.2 · Fluxo Geral de uma Rodada</h3>
+                <ol>
+                    <li><strong>Fase de Ações dos Jogadores (Sentido Horário):</strong> cada jogador executa exatamente
+                        <strong>1 ação principal</strong> — Recon, Exploit ou Report — e depois pode opcionalmente
+                        executar a <strong>Janela de Caos (Opcional)</strong> (jogar 1 carta de Evento da mão).
+                    </li>
+                    <li><strong>Fase de Patch Speed Check (final do turno do jogador):</strong> após todas as ações,
+                        todo jogador
+                        que tiver vulnerabilidades na Zona de Exploits rola os dados D8. Se o resultado acionar o patch
+                        do
+                        seu programa, o <em>PATCH DEPLOYED!</em> é ativado.</li>
+                    <li><strong>Avanço do Round Token:</strong> o marcador avança 1 casa no Round Tracker. O mercado de
+                        programas é reabastecido se houver slots vazios.</li>
+                </ol>
+
+                <div class="callout">
+                    <span class="label">Loop Central do Jogo</span>
+                    <p><strong>RECON → EXPLOIT → REPORT → (CAOS) → BOUNTY.</strong> Adquira cartas, arme falhas na sua
+                        bancada, submeta o relatório antes do patch e converta o CVSS em dólares.</p>
+                </div>
+            </section>
+
+            <!-- ================= 06 AÇÕES ================= -->
+
+
+            <section id="acoes">
+                <h2 class="sec"><span class="num">06</span> Ações do Turno</h2>
+                <p>No seu turno, você deve executar <strong>exatamente 1 ação principal</strong> dentre as três opções.
+                    Após sua ação principal, pode (opcionalmente) executar a <strong>Janela de Caos (Opcional)</strong>.
+                </p>
+
+                <h3>Ação 1 — Recon (Reconhecimento)</h3>
+                <p>Escolha <strong>UMA</strong> das duas alternativas operacionais:</p>
+                <ul>
+                    <li><strong>(A) Sacar 2 cartas do Main Deck:</strong> compre 2 cartas do topo do Main Deck e
+                        adicione à
+                        sua mão.</li>
+                    <li><strong>(B) Trocar de Alvo (Programa):</strong> abandone o programa ativo no seu mat e escolha
+                        uma nova empresa disponível no Program Market. Todas as vulnerabilidades já alocadas em sua Zona
+                        de Exploits são descartadas sem pontuar.</li>
+                </ul>
+                <p><strong>Limite de mão:</strong> ao final do turno, o máximo estrutural é <strong>6 cartas</strong> (9
+                    para o arquétipo <em>The Old Guard</em>). Se exceder, descarte o excedente para a Discard Pile.</p>
+                <div class="callout">
+                    <span class="label">Nota Tática</span>
+                    <p>A ação Recon não aciona testes de segurança nem riscos defensivos — é uma manobra estratégica de
+                        recomposição de mão e troca de alvos.</p>
+                </div>
+
+                <h3>Ação 2 — Exploit (Exploração / Armagem)</h3>
+                <p>Jogue <strong>1 Vulnerability Card</strong> da sua mão para a <strong>Zona de Exploits</strong> do
+                    seu Player Mat. Além disso, a qualquer momento desta ação, você pode descer Cartas de Ferramenta
+                    (Tools) para o seu <strong>Tools Rack</strong> (máximo de 3), <strong>desde que descarte 1 carta da
+                        sua mão para cada Tool instalada</strong>.</p>
+                <div class="callout">
+                    <span class="label">Nota sobre Ferramentas e Cargas</span>
+                    <p>As Ferramentas ficam alocadas no seu <strong>Tools Rack (máx. 3)</strong> com um <strong>Sistema
+                            de Cargas Degradáveis</strong>. Ferramentas comuns possuem 2 cargas (1ª carga dá +$1.000
+                        bônus, 2ª carga degrada para +$500). Ferramentas Raras/Épicas possuem 1 carga única (+$2.000
+                        bônus). Cada Report consome 1 carga das ferramentas usadas no Rack.</p>
+                </div>
+
+                <h3>Ação 3 — Report (Submissão Formal — Modelo A: Soma Direta)</h3>
+                <p>Realize a entrega formal de todas as Vulnerability Cards alocadas na sua Zona de Exploits. O
+                    processamento ocorre por <strong>Adição Simples (Zero Calculadora)</strong>:</p>
+                <ol>
+                    <li><strong>Mínimo de Escopo (e Alerta Global):</strong> Programas de Tier Alto/Crítico exigem um
+                        combo mínimo de <strong>2 cartas válidas</strong>. <em>Atenção: A partir da Rodada 5, entra em
+                            vigor o Alerta Global, e TODOS os programas passam a exigir no mínimo 2 cartas válidas.</em>
+                        Cartas descidas fora do escopo são <strong>descartadas compulsoriamente</strong> junto com o
+                        Report.</li>
+                    <li><strong>Cálculo do Payout (Modelo A — Soma Direta):</strong>
+                        $$\text{Bounty Total} = \sum \text{Valor das Falhas} + \text{Bônus do Programa} + \sum
+                        \text{Bônus das Tools}$$
+                        <div class="callout" style="margin-top:.7rem">
+                            <span class="label">Tabela de Bônus Fixos do Modelo A</span>
+                            <p>
+                                <strong>• Falhas:</strong> Comum (+$1.500) | Incomum (+$2.500) | Rara (+$4.000) | Épica (+$5.000) | Lendária (+$6.000)<br>
+                                <strong>• Programas:</strong> Baixo (+$0) | Médio (+$1.000) | Alto (+$2.500) | Crítico
+                                (+$4.000)<br>
+                                <strong>• Tools:</strong> Épicas/Raras (+$2.000) | Comuns (1ª carga: +$1.000 / 2ª carga:
+                                +$500)
+                            </p>
+                        </div>
+                        <div class="callout cyan" style="margin-top:.7rem">
+                            <span class="label">Exemplo de Cálculo Aditivo na Mesa</span>
+                            <p>1 Falha Rara ($4.000) + 1 Incomum ($2.500) na BankSafe (Alto +$2.500) com 1 Tool (1ª
+                                carga +$1.000):<br>
+                                $$\$4.000 + \$2.500 + \$2.500 + \$1.000 = \mathbf{\$10.000\text{ Payout Total}}$$
+                                → Se o saldo do jogador era <strong>$1.500</strong>, o novo saldo é <strong>$11.500</strong>.<br>
+                                → O peão avança e assenta no degrau <strong>$11.000</strong> da Bounty Track (o degrau imediatamente abaixo).<br>
+                                → A Tool consome 1 carga (passa a ter 1 carga de +$500 restante).</p>
+                        </div>
+                    </li>
+                    <li><strong>O Custo do Sucesso (Evento Obrigatório):</strong> Imediatamente após receber seu
+                        dinheiro, você deve obrigatoriamente <strong>comprar e resolver 1 Carta de Evento</strong>. O
+                        barulho do seu report atraiu as autoridades e o caos corporativo!</li>
+                    <li><strong>Descarte e Reposição:</strong> descarte as vulnerabilidades submetidas. O programa ativo
+                        é concluído e enviado ao descarte. Escolha imediatamente uma nova empresa do Program Market.
+                    </li>
+                </ol>
+                <div class="callout warn">
+                    <span class="label">Risco</span>
+                    <p>Se outro pesquisador já reportou o mesmo título exato no mesmo programa nesta partida, você
+                        recebe <em>Duplicate Report!</em> — e a recompensa cai para apenas 10% do valor calculado.</p>
+                </div>
+            </section>
+
+            <!-- ================= 07 PATCH SPEED ================= -->
+            <section id="patch">
+                <h2 class="sec"><span class="num">07</span> Patch Speed — O Relógio do Patch</h2>
+                <p>No final do seu turno, se você mantiver uma ou mais Vulnerability Cards na sua Zona de Exploits (ou
+                    seja, você desceu cartas mas não reportou ainda), a equipe de engenharia executa varreduras e você é
+                    <strong>obrigado</strong> a realizar um <strong>Patch Speed Check</strong>. <em>Se você não tiver
+                        Vulnerability Cards na Zona de Exploits ao final do turno, nenhum Check é necessário.</em></p>
+
+                <h3>A Mecânica de Vantagem (Stealth Mode vs Noisy Report)</h3>
+                <p>O risco de ser pego varia dependendo da sua atitude no turno:</p>
+                <ul>
+                    <li><strong>Stealth Mode (Ao passar o turno):</strong> Se você apenas usou a ação de Exploit (baixou
+                        carta) e está encerrando o turno silenciosamente, você joga com <strong>VANTAGEM</strong>. Role
+                        <strong>2 dados D8</strong> e escolha o menor resultado (o mais seguro para você).</li>
+                    <li><strong>Noisy Report (Após Reportar):</strong> Se você ativou o Report e fez barulho (ou se o
+                        jogo exigir em outra ocasião), você rola apenas <strong>1 dado D8</strong>, enfrentando o risco
+                        total da empresa.</li>
+                </ul>
+
+                <h3>Como Avaliar o Teste</h3>
+                <p>Compare o resultado do seu dado (ou do menor dado no Stealth Mode) com o índice de velocidade de
+                    correção impresso no programa corporativo ativo:</p>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Patch Speed do Programa</th>
+                                <th>Resultado Crítico no D8</th>
+                                <th>Probabilidade de Patch</th>
+                                <th>Exemplos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Lenta</strong></td>
+                                <td>Apenas resultado <strong>8</strong></td>
+                                <td>12,5% (1 em 8)</td>
+                                <td>GovPortal, EduConnect</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Moderada</strong></td>
+                                <td>Resultados <strong>7 ou 8</strong></td>
+                                <td>25,0% (2 em 8)</td>
+                                <td>ShopAll, SocialBee, GameVerse</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rápida</strong></td>
+                                <td>Resultados <strong>6, 7 ou 8</strong></td>
+                                <td>37,5% (3 em 8)</td>
+                                <td>BankSafe, HealthLock</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Extrema</strong></td>
+                                <td>Resultados <strong>5, 6, 7 ou 8</strong></td>
+                                <td>50,0% (4 em 8)</td>
+                                <td>CloudNine Systems</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>Caso o dado atinja ou supere o limiar de alerta indicado, o sistema entra em colapso defensivo
+                    imediato e o <strong>PATCH DEPLOYED!</strong> é ativado. Se o resultado for inferior ao limiar, sua
+                    infraestrutura permanece vulnerável e suas cartas continuam na mesa para a próxima rodada.</p>
+            </section>
+
+            <!-- ================= 08 PATCH DEPLOYED ================= -->
+            <section id="patchdeployed">
+                <h2 class="sec"><span class="num">08</span> PATCH DEPLOYED!</h2>
+                <div class="callout warn">
+                    <span class="label">Evento Destrutivo</span>
+                    <p><strong>PATCH DEPLOYED!</strong> representa a correção de emergência dos sistemas em produção,
+                        neutralizando todo o trabalho exposto que não foi submetido a tempo.</p>
+                </div>
+
+                <h3>8.1 · Penalidades Imediatas</h3>
+                <ol>
+                    <li><strong>Perda Integral de Exploits:</strong> todas as Vulnerability Cards presentes na sua Zona
+                        de Exploits são descartadas para a Discard Pile sem direito a pontos ou recompensas.</li>
+                    <li><strong>Recuo por Patch:</strong> o jogador sofre um prejuízo financeiro fixo conforme sua zona de riqueza (Verde $1.500, Amarela $3.000, Laranja $4.500, Vermelha $6.000). Deduza o valor do saldo acumulado atual; o marcador recua na Bounty Track até refletir o novo saldo, travando no mínimo de $0. A zona é determinada pelo saldo antes da dedução.</li>
+                    <li><strong>Fechamento Compulsório do Programa:</strong> o programa ativo no seu mat é encerrado e
+                        descartado. No seu próximo turno, antes de sua ação, você deve selecionar um novo programa do
+                        mercado.</li>
+                </ol>
+
+                <h3>8.2 · Elementos Blindados Contra o Patch</h3>
+                <ul>
+                    <li>Cartas retidas na mão permanecem intocadas.</li>
+                    <li>Ferramentas na Zona de Tools (Tools Rack) permanecem preservadas.</li>
+                    <li>Cartas de Defesa (Bypass) não são consumidas involuntariamente.</li>
+                    <li>Pontuação já consolidada antes da penalidade do patch permanece garantida.</li>
+                </ul>
+
+                <h3>8.3 · Mecanismo de Defesa — Bypass</h3>
+                <p>Se o jogador possuir a carta <em>Bypass</em> na mão no momento do patch, ele pode descartá-la para
+                    <strong>anular 100% dos efeitos danosos</strong>.</p>
+            </section>
+
+            <!-- ================= 09 EVENTOS ================= -->
+            <section id="eventos">
+                <h2 class="sec"><span class="num">09</span> Event Cards — O Baralho de Caos</h2>
+                <p>O Event Deck introduz volatilidade, interferência tática e reviravoltas. Diferente do baralho
+                    principal, as cartas de evento <strong>não possuem cartas de Patch Deployed</strong> (o Patch
+                    acontece exclusivamente pelos dados D8).</p>
+
+                <h3>Quando comprar Eventos?</h3>
+                <p>Você compra cartas de Evento obrigatoriamente logo após concluir com sucesso uma ação de
+                    <strong>Report</strong> ("O Custo do Sucesso"). Compre a carta do topo do deck e <strong>resolva o
+                        efeito imediatamente</strong> contra você mesmo ou contra o jogador indicado na carta.</p>
+                <div class="callout" style="margin-top:1rem;">
+                    <span class="label">Nota de Design (O Fator "Kingmaking")</span>
+                    <p>Hackear é sujo. Usar eventos de Caos para travar o líder deliberadamente é tão legítimo e
+                        temático quanto qualquer outra estratégia corporativa do jogo. Não há regras contra formar
+                        alianças temporárias ou focar o ataque no jogador com maior Bounty.</p>
+                </div>
+
+                <h3>Classificação de Eventos</h3>
+                <p>Os Event Cards agora possuem duas classificações: <strong>Imediato</strong> (ativa no momento da compra, não vai para a mão) e <strong>Guardável</strong> (o jogador pode executar na hora ou guardar, com limite máximo de 2 eventos guardados na sua área de jogo). Eventos guardados só podem ser jogados durante a <strong>Janela de Caos</strong> do próprio turno do jogador, nunca no turno de adversários.</p>
+
+                <h3>Cartas de Reação (Bypass)</h3>
+                <p>Cartas de Defesa (<em>Bypass</em>) podem ser compradas no Main Deck e jogadas <strong>fora do seu
+                        turno</strong>, como resposta imediata ao <em>PATCH DEPLOYED!</em> forçado pelos dados ou a
+                    ataques de adversários. Elas são a sua salvação final.</p>
+
+                <h3>Diretrizes de Resolução</h3>
+                <ul>
+                    <li><strong>Cartas IMEDIATAS</strong> são resolvidas no momento em que são sacadas, antes do próximo jogador assumir o turno.</li>
+                    <li><strong>Cartas GUARDÁVEIS</strong> podem ser resolvidas imediatamente ou guardadas na área <em>Eventos Guardados</em> (limite de 2 por jogador), para serem jogadas apenas na <strong>Janela de Caos (Opcional)</strong> do próprio turno do jogador.</li>
+                    <li>Cartas que afetam "Escolha 1 Oponente" permitem ao jogador ativo selecionar qualquer adversário como alvo.</li>
+                    <li>Eventos globais aplicam seus efeitos a todos os participantes simultaneamente.</li>
+                </ul>
+
+                <h3>Relação dos 23 Eventos de Caos</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Nome do Evento</th>
+                                <th>Alvo / Sujeito</th>
+                                <th>Efeito Completo e Regra</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td><strong>Blue Team Hunt!</strong> 🕵️</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>O time de defesa entra em ação proativa! Todos os jogadores ativos devem descartar a
+                                    vulnerabilidade de maior CVSS que possuírem exposta na mesa.</td>
+                            </tr>
+                            <tr>
+                                <td>02</td>
+                                <td><strong>Duplicate Report!</strong> 📝</td>
+                                <td><span class="alert-red">Escolha 1 Oponente</span></td>
+                                <td>Alguém reportou a falha minutos antes! Escolha 1 oponente com falhas na mesa: ele
+                                    descarta a vulnerabilidade de maior CVSS exposta.</td>
+                            </tr>
+                            <tr>
+                                <td>03</td>
+                                <td><strong>Out of Scope!</strong> ❌</td>
+                                <td><span class="alert-green">Você (Autor)</span></td>
+                                <td>Seu reporte gerou alerta no comitê de escopo! Você fica impedido de realizar a ação
+                                    Exploit (baixar falhas) no seu próximo turno.</td>
+                            </tr>
+                            <tr>
+                                <td>04</td>
+                                <td><strong>Legal Threat!</strong> ⚖️</td>
+                                <td><span class="alert-red">Escolha 1 Oponente</span></td>
+                                <td>Notificação jurídica de Cease & Desist! Escolha 1 oponente: ele fica impedido de
+                                    realizar a ação Report pela próxima rodada.</td>
+                            </tr>
+                            <tr>
+                                <td>05</td>
+                                <td><strong>Triage Delay!</strong> ⏳</td>
+                                <td><span class="alert-green">Você (Autor)</span></td>
+                                <td>Equipe corporativa em backlog! As cartas da sua mão devem jogar expostas (reveladas
+                                    para a mesa) até o seu próximo turno.</td>
+                            </tr>
+                            <tr>
+                                <td>06</td>
+                                <td><strong>Bug Bounty Mediation</strong> 🤝</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>Acordo de mediação global! Todos os jogadores ativos recebem $1.500 imediatamente na
+                                    Bounty Track.</td>
+                            </tr>
+                            <tr>
+                                <td>07</td>
+                                <td><strong>Zero Day Disclosure</strong> 🔓</td>
+                                <td><span class="highlight">Último Colocado</span></td>
+                                <td>Vazamento oportuno! O jogador com o menor saldo na Bounty Track resgata 1 carta de
+                                    vulnerabilidade da pilha de descarte para a mão.</td>
+                            </tr>
+                            <tr>
+                                <td>08</td>
+                                <td><strong>Scope Expansion!</strong> 🌐</td>
+                                <td><span class="alert-green">Você (Autor)</span></td>
+                                <td>A empresa expandiu o programa! No seu próximo turno, você pode jogar qualquer
+                                    vulnerabilidade na mesa ignorando as restrições de escopo.</td>
+                            </tr>
+                            <tr>
+                                <td>09</td>
+                                <td><strong>Public Disclosure!</strong> 📢</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>Vazamento público! Todos os jogadores descartam suas falhas expostas na mesa, mas
+                                    recebem $1.000 de compensação imediata.</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td><strong>Bounty Increase!</strong> 💰</td>
+                                <td><span class="alert-green">Você (Autor)</span></td>
+                                <td>Verba de emergência liberada! O seu próximo Report aprovado terá um bônus financeiro
+                                    adicional de +50%.</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td><strong>WAF Deployed!</strong> 🛡️</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>Filtro de WAF ativado! Vulnerabilidades da classe Injection não podem ser baixadas
+                                    na mesa por 1 rodada completa.</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td><strong>DNS Hijack!</strong> 🌐</td>
+                                <td><span class="alert-red">Escolha 1 Oponente</span></td>
+                                <td>Sequestro de tráfego! Escolha 1 oponente: o programa ativo dele é descartado e
+                                    substituído por uma carta do topo do mercado.</td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td><strong>Responsible Disclosure!</strong> 📄</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>Janela de divulgação responsável! Todos os jogadores que tiverem falhas válidas na
+                                    mesa podem fazer 1 Report gratuito imediatamente.</td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td><strong>Honeypot Triggered!</strong> 🍯</td>
+                                <td><span class="alert-red">Escolha 1 Oponente</span></td>
+                                <td>Armadilha de servidor honeypot! Escolha 1 oponente: ele é forçado a descartar 2
+                                    cartas aleatórias da própria mão.</td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td><strong>CVE Assignment Delayed!</strong> ⏳</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>Burocracia na atribuição de CVE! Cartas de Safeguard (Bypass e CVE Assignment Protection) ficam bloqueadas de serem
+                                    jogadas por 1 rodada completa.</td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td><strong>Bug Collision!</strong> 💥</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>Colisão de relatórios no mercado! Todos os jogadores descartam a vulnerabilidade de
+                                    menor CVSS exposta em suas mesas.</td>
+                            </tr>
+                            <tr>
+                                <td>17</td>
+                                <td><strong>Hall of Fame Update!</strong> 🏆</td>
+                                <td><span class="highlight">Último Colocado</span></td>
+                                <td>Reconhecimento na comunidade! O jogador em último lugar na Bounty Track compra 2
+                                    Tool Cards do Main Deck.</td>
+                            </tr>
+                            <tr>
+                                <td>18</td>
+                                <td><strong>Rate Limited!</strong> 🛑</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>Restrição de tráfego na rede! Todos os jogadores ficam impedidos de realizar a ação
+                                    Recon (comprar cartas) no seu próximo turno.</td>
+                            </tr>
+                            <tr>
+                                <td>19</td>
+                                <td><strong>2FA Enforced!</strong> 🔐</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>Autenticação em dois fatores ativada! Vulnerabilidades da classe Authentication
+                                    ficam bloqueadas de serem baixadas por 1 rodada.</td>
+                            </tr>
+                            <tr>
+                                <td>20</td>
+                                <td><strong>Bug Bounty Conference!</strong> 🎪</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>Confraternização da comunidade! Todos os jogadores compram 2 cartas do Main Deck
+                                    imediatamente.</td>
+                            </tr>
+                            <tr>
+                                <td>21</td>
+                                <td><strong>Data Breach!</strong> 🔓</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>Auditoria de dados! Todos revelam a mão. Quem tiver mais vulnerabilidades de
+                                    severidade Critical descarta metade delas.</td>
+                            </tr>
+                            <tr>
+                                <td>22</td>
+                                <td><strong>Security Audit!</strong> 📅</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>Varredura geral de conformidade! Todos os jogadores revelam a mão e descartam a
+                                    carta de maior CVSS.</td>
+                            </tr>
+                            <tr>
+                                <td>23</td>
+                                <td><strong>Swag Drop!</strong> 🎁</td>
+                                <td><span class="highlight">Todos os Jogadores</span></td>
+                                <td>Brindes e mimos do patrocinador! Cada jogador compra 1 carta de ferramenta (Tool
+                                    Card) do Main Deck.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Invasão de Eventos nas Rodadas Finais (Rodada 7)</h3>
+                <p>No início da <strong>Rodada 7</strong>, todo o remanescente do Event Deck é recolhido e embaralhado
+                    diretamente no Main Deck. A partir desse momento, qualquer compra de Recon (Opção A) que puxe uma
+                    carta de evento força a sua <strong>execução e resolução imediata</strong> antes da continuidade do
+                    turno do jogador — sem que ele possa escolher guardá-la.</p>
+            </section>
+
+            <!-- ================= 10 ARQUÉTIPOS ================= -->
+            <section id="arquetipos">
+                <h2 class="sec"><span class="num">10</span> Researcher Archetypes — As 6 Classes</h2>
+                <p>Os 6 arquétipos oferecem estilos de jogo complementares e assimétricos. A escolha é feita na fase de
+                    setup, é <strong>pública e permanente</strong> até o desfecho da partida.</p>
+
+                <div class="archetype-grid">
+                    <div class="archetype-card">
+                        <h4>n00b</h4>
+                        <div class="role">O Aprendiz Evolutivo</div>
+                        <p><strong>Evolução Progressiva:</strong> a cada ação de Report concluída com sucesso, escolhe
+                            permanentemente 1 nova habilidade passiva da sua árvore operacional (+1 compra em Recon,
+                            redução permanente de custo de ferramentas em classes específicas, ou expansão do limite de
+                            mão).</p>
+                        <p style="margin-top:.6rem">Começa frágil na rodada 1 e atinge pico de dominância nas rodadas 6
+                            a 8.</p>
+                    </div>
+                    <div class="archetype-card">
+                        <h4>The Old Guard</h4>
+                        <div class="role">O Veterano Metódico</div>
+                        <p><strong>Mão Expandida:</strong> mantém limite de <strong>9 cartas</strong> na mão ao longo de
+                            todo o jogo (vs. 6 dos demais).</p>
+                        <p style="margin-top:.6rem"><strong>Cadência Controlada:</strong> pode realizar a ação de Report
+                            no máximo <strong>1 vez por rodada</strong>, mas monta relatórios monumentais com CVSS
+                            acumulado altíssimo.</p>
+                    </div>
+                    <div class="archetype-card">
+                        <h4>Bug Hunter</h4>
+                        <div class="role">O Especialista em Escala</div>
+                        <p><strong>Submissão em Dois Lotes:</strong> ao executar uma ação de Report, o Bug Hunter
+                            divide as vulnerabilidades da Zona de Exploits em <strong>2 lotes separados</strong>, ambos
+                            dentro do <em>mesmo Active Program</em>. Cada lote passa pelo Duplicate Check e pelo cálculo
+                            de bônus de ferramentas independentemente. O programa fecha apenas após ambos os lotes serem
+                            processados.</p>
+                        <p style="margin-top:.6rem"><strong>Restrição de Severidade:</strong> só pode exploitar
+                            vulnerabilidades com CVSS ≤ 6.0 (Low e Medium). Não pode alocar cartas High ou Critical na
+                            Zona de Exploits.</p>
+                        <p style="margin-top:.6rem"><strong>Bônus de Volume:</strong> se a soma dos dois lotes contiver
+                            5 ou mais cartas no total, o valor combinado recebe <strong>+50% de bônus</strong> antes de
+                            avançar na Bounty Track.</p>
+                    </div>
+                    <div class="archetype-card">
+                        <h4>Social Engineer</h4>
+                        <div class="role">O Manipulador da Mesa</div>
+                        <p><strong>Controle de Alvo:</strong> ao acionar qualquer Event Card (seja como Custo do Sucesso ou durante a <strong>Janela de Caos (Opcional)</strong>), decide livremente qual participante é afetado, ignorando os alvos automáticos impressos na carta.</p>
+                        <p style="margin-top:.6rem"><strong>Acesso Privilegiado ao Event Deck:</strong> pode comprar 1 carta do Event Deck como terceira opção de Recon — poder exclusivo desta classe.</p>
+                    </div>
+                    <div class="archetype-card">
+                        <h4>Red Teamer</h4>
+                        <div class="role">O Agente Irrestrito</div>
+                        <p><strong>Quebra de Escopo:</strong> totalmente imune a restrições de escopo. Pode alocar
+                            qualquer classe de vulnerabilidade em qualquer empresa corporativa.</p>
+                        <p style="margin-top:.6rem"><strong>Taxa Operacional:</strong> todos os Reports sofrem
+                            abatimento compulsório de <strong>-30% no valor total de payout</strong> (multiplicador
+                            final × 0.7).</p>
+                        <p style="margin-top:.6rem">Se a sua empresa atual sofrer <em>PATCH DEPLOYED!</em>, você só
+                            recua o seu progresso se tirar o <strong>número 8 no D8</strong>, independentemente da
+                            velocidade real do programa auditado.</p>
+                    </div>
+                    <div class="archetype-card">
+                        <h4>The Pentester</h4>
+                        <div class="role">O Auditor Estruturado</div>
+                        <p><strong>Imunidade Burocrática:</strong> totalmente imune às penalidades de <em>Duplicate
+                                Report!</em> e <em>Triage Delay!</em>.</p>
+                        <p style="margin-top:.6rem"><strong>Controle de Risco de Patch:</strong> em
+                            <strong>todos</strong> os testes de Patch Speed Check, só é afetado caso tire o
+                            <strong>número 8 no D8</strong>, independentemente da velocidade real do programa auditado.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= 11 FERRAMENTAS ================= -->
+            <section id="ferramentas">
+                <h2 class="sec"><span class="num">11</span> Tool Cards — Ferramentas</h2>
+
+                <h3>Como Instalar Ferramentas (Sub-ação Livre)</h3>
+                <p>Ferramentas no Tools Rack concedem efeitos passivos permanentes. A instalação é uma
+                    <strong>sub-ação livre</strong> — não gasta sua ação principal do turno. Você pode instalar
+                    ferramentas a qualquer momento <em>antes ou depois</em> da sua ação principal, desde que haja slot
+                    disponível no rack.
+                </p>
+                <div class="callout cyan">
+                    <span class="label">Regra de Instalação</span>
+                    <p><strong>Para instalar:</strong> retire a Tool Card da sua mão e coloque-a face-up em um slot
+                        vazio do Tools Rack (máximo 3 slots). A ferramenta passa a gerar seu efeito passivo
+                        imediatamente. Ferramentas passivas <em>nunca são descartadas</em> — permanecem até o fim da
+                        partida (exceto se forçadas por efeito de cartas adversárias).<br><br>
+                        <strong>Para usar ferramentas ativas:</strong> ferramentas marcadas como "Ativa" podem ser
+                        usadas tanto da mão (descarte imediato) quanto do rack (remova do rack e descarte para ativar o
+                        efeito). Uma ferramenta ativa usada do rack libera um slot para nova instalação.
+                    </p>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ferramenta</th>
+                                <th>Efeito Técnico</th>
+                                <th>Modo de Uso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Burp Suite Pro</strong></td>
+                                <td>Coringa universal — substitui qualquer exigência de ferramenta ao baixar
+                                    vulnerabilidades.</td>
+                                <td>🔴 Ativa (da mão ou do rack; descarte após uso)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nmap + ffuf</strong></td>
+                                <td>Concede +1 carta adicional na ação de Recon (compra 3 cartas em vez de 2).</td>
+                                <td>🟢 Passiva (instale no rack; efeito automático e permanente)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>OWASP ZAP</strong></td>
+                                <td>Vulnerabilidades de severidade Low e Medium têm custo de ferramentas zerado.</td>
+                                <td>🔴 Ativa (da mão ou do rack; descarte após uso)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Postman</strong></td>
+                                <td>Reduz em 1 unidade o custo de ferramentas para vulnerabilidades da classe Broken
+                                    Access Control.</td>
+                                <td>🔴 Ativa (da mão ou do rack; descarte após uso)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Browser DevTools</strong></td>
+                                <td>Vulnerabilidades de classe XSS e DOM agregam +50% de valor no momento do Report.
+                                </td>
+                                <td>🟢 Passiva (instale no rack; aplica automaticamente em todo Report)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Burp Collaborator</strong></td>
+                                <td>Toda vez que um adversário reportar uma falha SSRF, resgata 1 Tool Card do descarte.
+                                </td>
+                                <td>🟢 Passiva (instale no rack; dispara automaticamente)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SQLMap</strong></td>
+                                <td>Vulnerabilidades da classe Injection têm custo de ferramentas zerado. Inclui SQLi,
+                                    NoSQLi e Command Injection.</td>
+                                <td>🔴 Ativa (da mão ou do rack; descarte após uso)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gobuster / DirBuster</strong></td>
+                                <td>Permite revelar imediatamente 2 Program Cards adicionais do baralho e escolher 1
+                                    para o mercado.</td>
+                                <td>🔴 Ativa (da mão ou do rack; descarte após uso)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Wireshark</strong></td>
+                                <td>Permite inspecionar (ver sem revelar ao dono) a última carta comprada por cada
+                                    adversário.</td>
+                                <td>🟢 Passiva (instale no rack; efeito automático e permanente)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CyberChef</strong></td>
+                                <td>Permite converter 2 ferramentas quaisquer do descarte em 1 ferramenta de sua escolha
+                                    do baralho.</td>
+                                <td>🔴 Ativa (da mão ou do rack; descarte após uso)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>JWT Tool</strong></td>
+                                <td>Vulnerabilidades de autenticação (AUTH) recebem +50% de pontuação no Report.</td>
+                                <td>🟢 Passiva (instale no rack; aplica automaticamente em todo Report)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Commix</strong></td>
+                                <td>Vulnerabilidades de Command Injection ou RCE recebem <strong>+30% de bônus
+                                        adicional</strong> de bounty no Report (acumula com outros bônus).</td>
+                                <td>🟢 Passiva (instale no rack; aplica automaticamente no Report)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ================= 12 PROGRAMAS ================= -->
+            <section id="programas">
+                <h2 class="sec"><span class="num">12</span> Program Cards — Empresas Corporativas</h2>
+                <p>As empresas corporativas determinam os limites operacionais, bônus fixos de remuneração (Soma Direta) e a
+                    volatilidade do Patch Speed Check. Cada empresa existe em <strong>2 cópias no baralho</strong> — é
+                    possível que dois pesquisadores auditem a mesma empresa simultaneamente, criando a disputa de
+                    <em>Duplicate Report!</em>.
+                </p>
+
+                <h3>Regra de Mercado Vazio (Program Market Rotation)</h3>
+                <p>Programas corporativos <strong>nunca saem definitivamente do jogo</strong>. Após serem encerrados
+                    por um Report ou por um Patch, as Program Cards vão para a <strong>Program Discard Pile</strong>
+                    (pilha de descarte de programas, ao lado do mercado).</p>
+                <div class="callout">
+                    <span class="label">Reposição do Mercado</span>
+                    <p>Sempre que um slot do Program Market ficar vazio, puxe a próxima carta do <em>Program Deck</em>
+                        para reabastecê-lo. Se o Program Deck se esgotar, embaralhe a Program Discard Pile para formar
+                        um novo deck e continue. O mercado <strong>sempre terá 3 opções disponíveis</strong>.<br><br>
+                        <strong>Situação especial:</strong> se um jogador precisar trocar de programa (após Report ou
+                        Patch) e <em>momentaneamente</em> não houver cartas no mercado (ex.: todos os slots estão sendo
+                        reabastecidos ao mesmo tempo), esse jogador fica sem Active Program <strong>apenas até o início
+                            do seu próximo turno</strong>. Durante esse intervalo ele pode fazer Recon normalmente, mas
+                        não pode Exploitar até selecionar um programa.
+                    </p>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>Tier</th>
+                                <th>Escopo Autorizado</th>
+                                <th>Patch Speed</th>
+                                <th>Bônus Fixo (Programa)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ShopAll Global</strong></td>
+                                <td>Medium</td>
+                                <td>Escopo Amplo (todas as classes)</td>
+                                <td>Moderada (7-8)</td>
+                                <td>+$1.000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>BankSafe Financial</strong></td>
+                                <td>High</td>
+                                <td>APIs, Autenticação e Criptografia</td>
+                                <td>Rápida (6-8)</td>
+                                <td>+$2.500</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GovPortal Nacional</strong></td>
+                                <td>Low</td>
+                                <td>Broken Access Control</td>
+                                <td>Lenta (8)</td>
+                                <td>+$0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>HealthLock Medical</strong></td>
+                                <td>High</td>
+                                <td>Criptografia e Autenticação</td>
+                                <td>Rápida (6-8)</td>
+                                <td>+$2.500</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SocialBee Network</strong></td>
+                                <td>Medium</td>
+                                <td>Escopo Amplo (todas as classes)</td>
+                                <td>Moderada (7-8)</td>
+                                <td>+$1.000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CloudNine Systems</strong></td>
+                                <td>Critical</td>
+                                <td>Infraestrutura, RCE e SSRF</td>
+                                <td>Extrema (5-8)</td>
+                                <td>+$4.000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GameVerse Studios</strong></td>
+                                <td>Medium</td>
+                                <td>WebSockets e Lógica de Negócios</td>
+                                <td>Moderada (7-8)</td>
+                                <td>+$1.000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>EduConnect Tech</strong></td>
+                                <td>Low</td>
+                                <td>Escopo Amplo (todas as classes)</td>
+                                <td>Lenta (8)</td>
+                                <td>+$0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ================= 13 BOUNTY TRACK ================= -->
+            <section id="bountytrack">
+                <h2 class="sec"><span class="num">13</span> Bounty Track — Os 28 Degraus</h2>
+                <p>A Bounty Track utiliza uma régua <strong>não-linear de 28 degraus monotônicos</strong> para garantir
+                    que relatórios simples progridam suavemente no início do jogo, exigindo combos avançados de
+                    ferramentas e vulnerabilidades de alta severidade para alcançar o clímax financeiro.</p>
+
+                <h3>Mecanismo de Avanço</h3>
+                <p>Ao processar uma ação de Report, calcule o valor total em dólares (Valor base da Falha (CVSS) + Bônus
+                    do Programa + Bônus de Tools). O Bounty Track é um acumulador de patrimônio. Ao concluir um Report,
+                    some o valor pago ao seu saldo atual. Avance o seu token para o degrau que corresponda ao seu novo
+                    saldo total (ou o degrau imediatamente abaixo dele, caso o valor quebrado não tenha um degrau
+                    exato). O jogo termina imediatamente quando um jogador alcança ou ultrapassa $40.000. O primeiro
+                    jogador a fazê-lo vence a partida. O marcador nunca recua voluntariamente; só regride com o <em>PATCH DEPLOYED!</em>, deduzindo valor fixo conforme a zona de riqueza (ver Seção 08).</p>
+
+                <h3>Piso Inviolável</h3>
+                <p>A pontuação nunca atinge valores negativos. Se uma penalidade exigir recuo maior que o saldo atual, o
+                    marcador é fixado no piso mínimo de <strong>$0</strong>.</p>
+
+                <h3>Auditoria de Status</h3>
+                <p>A Bounty Track é mantida no tapete individual. Por regra de protocolo, sempre que um jogador atingir
+                    o limiar de uma nova Zona de cor, ele deve anunciar em voz alta o seu novo Tier para a mesa. O saldo
+                    exato é privado e só pode ser solicitado quando uma carta ou efeito exigir (por exemplo, um Event
+                    Card que mira no líder).</p>
+                <h3>Os 28 Degraus Completos</h3>
+
+                <p><strong style="color:#39D353">🟩 Zona Baixa — "Entry Level"</strong> (9 degraus)</p>
+                <div class="track-wrap">
+                    <div class="track-step green"><span class="val">$0</span><span>Ponto de partida</span></div>
+                    <div class="track-step green"><span class="val">$1.500</span></div>
+                    <div class="track-step green"><span class="val">$3.000</span></div>
+                    <div class="track-step green"><span class="val">$4.500</span></div>
+                    <div class="track-step green"><span class="val">$6.000</span></div>
+                    <div class="track-step green"><span class="val">$7.500</span></div>
+                    <div class="track-step green"><span class="val">$9.000</span></div>
+                    <div class="track-step green"><span class="val">$10.500</span></div>
+                    <div class="track-step green"><span class="val">$11.000</span><span>Limite da zona</span></div>
+                </div>
+
+                <p><strong style="color:#FFD700">🟨 Zona Média — "Junior Bug Hunter"</strong> (5 degraus)</p>
+                <div class="track-wrap">
+                    <div class="track-step yellow"><span class="val">$12.000</span></div>
+                    <div class="track-step yellow"><span class="val">$14.000</span></div>
+                    <div class="track-step yellow"><span class="val">$16.000</span></div>
+                    <div class="track-step yellow"><span class="val">$18.000</span></div>
+                    <div class="track-step yellow"><span class="val">$20.000</span><span>Limite da zona</span></div>
+                </div>
+
+                <p><strong style="color:#FF8C00">🟧 Zona Alta — "Senior Researcher"</strong> (7 degraus)</p>
+                <div class="track-wrap">
+                    <div class="track-step orange"><span class="val">$22.000</span></div>
+                    <div class="track-step orange"><span class="val">$24.000</span></div>
+                    <div class="track-step orange"><span class="val">$26.000</span></div>
+                    <div class="track-step orange"><span class="val">$28.000</span></div>
+                    <div class="track-step orange"><span class="val">$30.000</span></div>
+                    <div class="track-step orange"><span class="val">$32.000</span></div>
+                    <div class="track-step orange"><span class="val">$33.000</span><span>Limite da zona</span></div>
+                </div>
+
+                <p><strong style="color:#FF4D4D">🟥 Zona Crítica — "Elite Hacker"</strong> (7 degraus)</p>
+                <div class="track-wrap">
+                    <div class="track-step red"><span class="val">$34.000</span></div>
+                    <div class="track-step red"><span class="val">$35.000</span></div>
+                    <div class="track-step red"><span class="val">$36.000</span></div>
+                    <div class="track-step red"><span class="val">$37.000</span></div>
+                    <div class="track-step red"><span class="val">$38.000</span></div>
+                    <div class="track-step red"><span class="val">$39.000</span></div>
+                    <div class="track-step red"><span class="val">$40.000</span><span>🏆 VITÓRIA INSTANTÂNEA</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= 14 FIM DE JOGO ================= -->
+            <section id="fim">
+                <h2 class="sec"><span class="num">14</span> Fim de Jogo e Vitória</h2>
+                <p>O jogo termina imediatamente quando um jogador alcança ou ultrapassa $40.000. O primeiro jogador a
+                    fazê-lo vence a partida. O vencedor é o pesquisador que possuir o maior saldo acumulado na Bounty
+                    Track.</p>
+
+                <h3>Critérios Oficiais de Desempate</h3>
+                <ol>
+                    <li><strong>1º Critério:</strong> maior número total de Reports concluídos com sucesso na partida.
+                    </li>
+                    <li><strong>2º Critério:</strong> maior número de falhas de severidade Critical submetidas (CVSS ≥
+                        9.0).</li>
+                    <li><strong>3º Critério:</strong> rolagem de morte súbita — cada jogador empatado rola 1 D8; quem
+                        obter o maior resultado vence. Em caso de novo empate, repita.</li>
+                </ol>
+
+                <p>Em partidas com 2+ jogadores, o segundo colocado recebe o título honorário de <em>Runner-Up</em> e o
+                    último colocado ganha o troféu irônico de <em>Most Duplicated Researcher</em>.</p>
+            </section>
+
+            <!-- ================= 15 RODADAS FINAIS ================= -->
+            <section id="rodadasfinais">
+                <h2 class="sec"><span class="num">15</span> Rodadas Finais — O Caos Total</h2>
+                <p>As rodadas finais representam o encerramento do trimestre fiscal das corporações, provocando
+                    aceleração massiva de triagens e deploys de correção. O jogo escala dramaticamente.</p>
+
+                <h3>Modificadores da Rodada 7</h3>
+                <ul>
+                    <li><strong>1. Risco Iminente:</strong> o <em>Patch Speed Check</em> do final do turno do jogador
+                        exige
+                        a rolagem com <strong>DESVANTAGEM EXTREMA (2D8)</strong>. O pesquisador rola dois dados e é
+                        obrigado a escolher o <strong>maior resultado</strong> (o pior). Se o dado escolhido acionar o
+                        limite
+                        de <em>Patch Speed</em> do seu <em>Active Program</em>, o sistema desaba e o jogador sofre
+                        <em>PATCH DEPLOYED!</em>.
+                    </li>
+                    <li><strong>Fusão do Event Deck:</strong> todo o remanescente do Event Deck é recolhido e
+                        embaralhado
+                        diretamente no Main Deck. Qualquer compra de Recon (Opção A) que puxe
+                        uma carta de evento a partir daí força a sua <strong>execução e resolução imediata</strong>
+                        antes da continuidade do turno.</li>
+                    <li><strong>Expansão do Mercado:</strong> o Program Market central expande-se de 3 para <strong>5
+                            slots</strong>, revelando 2 cartas adicionais de programa para escolha simultânea.</li>
+                </ul>
+
+                <h3>Modificadores da Rodada 8</h3>
+                <ul>
+                    <li><strong>2. Duplo Dado no Patch Speed Check:</strong> todos os testes de Patch Speed passam a
+                        exigir
+                        a rolagem obrigatória de <strong>2 dados (2D8)</strong>. O pesquisador deve atingir sucesso em
+                        <strong>ambos os dados individualmente</strong> (cada dado é comparado ao limiar do programa
+                        separadamente) para escapar da anulação de vulnerabilidades.
+                    </li>
+                    <li><strong>3. Estratégia Final:</strong> se um pesquisador possuir cartas valiosas e não submetidas
+                        acumuladas na mesa, considere reportar antes de sofrer a Desvantagem Extrema do D8. Uma carta
+                        Bypass pode ser
+                        a única salvação no fim da partida.</li>
+                    <li><strong>Main Deck sem reembaralhamento:</strong> se o Main Deck se esgotar durante a Rodada 8,
+                        ele <strong>não é reembaralhado</strong>. O jogo termina ao final do turno do jogador.</li>
+                </ul>
+
+                <div class="callout warn">
+                    <span class="label">Estratégia nas Rodadas Finais</span>
+                    <p>Nas rodadas 7 e 8, o risco de Patch Speed dobra dramaticamente. Se você tiver vulnerabilidades
+                        acumuladas na mesa, considere reportar antes de sofrer o duplo teste D8. Uma Bypass pode ser
+                        decisiva.</p>
+                </div>
+            </section>
+
+            <!-- ================= 16 GUIA VISUAL ================= -->
+            <section id="guiavisual">
+                <h2 class="sec"><span class="num">16</span> Guia Visual — Molduras, Selos e Slots</h2>
+                <p>Para facilitar a identificação visual rápida durante a partida e garantir o encaixe correto de cada
+                    carta no Player Mat, o jogo usa um sistema padronizado de molduras cromáticas e selos técnicos de
+                    escopo.</p>
+
+                <h3>Molduras por Tipo de Carta (63×88mm, Retrato Padrão Poker)</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Cor da Moldura</th>
+                                <th>Hex</th>
+                                <th>Onde Posicionar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Vulnerabilidade (Exploit)</strong></td>
+                                <td>Laranja Âmbar</td>
+                                <td><code>#f0883e</code></td>
+                                <td>Zona de Exploits</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ferramenta (Tool)</strong></td>
+                                <td>Azul Cyber</td>
+                                <td><code>#38bdf8</code></td>
+                                <td>Tools Rack (até 3 slots)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Safeguard (Bypass e CVE)</strong></td>
+                                <td>Verde Esmeralda</td>
+                                <td><code>#39d353</code></td>
+                                <td>Slot Safeguard (para Bypass inicial) ou mão (para CVE)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Evento de Caos (Event)</strong></td>
+                                <td>Vermelho Alerta</td>
+                                <td><code>#f85149</code></td>
+                                <td>Event Deck ou mão do jogador</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Arquétipo (Archetype)</strong></td>
+                                <td>Violeta</td>
+                                <td><code>#a78bfa</code></td>
+                                <td>Slot Researcher</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Programa Corporativo (Program)</strong></td>
+                                <td>Âmbar Dourado</td>
+                                <td><code>#ffb347</code></td>
+                                <td>Slot Active Program</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Badges de Escopo Técnico (Selos de Classe)</h3>
+                <p>As cartas de vulnerabilidade e os programas corporativos exibem selos coloridos no topo para
+                    identificação rápida de compatibilidade de escopo:</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Badge</th>
+                                <th>Classe Técnica</th>
+                                <th>Cor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>INJ</code></td>
+                                <td>Injection (SQLi, Command, SSTI, RCE)</td>
+                                <td>Laranja Âmbar</td>
+                            </tr>
+                            <tr>
+                                <td><code>BAC</code></td>
+                                <td>Broken Access Control (IDOR, BOLA, Priv Esc)</td>
+                                <td>Roxo</td>
+                            </tr>
+                            <tr>
+                                <td><code>XSS</code></td>
+                                <td>Cross-Site Scripting (Reflected, Stored, DOM)</td>
+                                <td>Rosa</td>
+                            </tr>
+                            <tr>
+                                <td><code>AUTH</code></td>
+                                <td>Authentication Failures (JWT, 2FA Bypass, Token)</td>
+                                <td>Amarelo</td>
+                            </tr>
+                            <tr>
+                                <td><code>SSRF</code></td>
+                                <td>Server-Side Request Forgery (Blind SSRF, DNS Rebind)</td>
+                                <td>Azul Cyber</td>
+                            </tr>
+                            <tr>
+                                <td><code>LOGIC</code></td>
+                                <td>Business Logic Flaws (Race Condition, Coupon Abuse)</td>
+                                <td>Teal</td>
+                            </tr>
+                            <tr>
+                                <td><code>CRYPTO</code></td>
+                                <td>Cryptographic Failures (Weak Keys, Padding Oracle)</td>
+                                <td>Verde</td>
+                            </tr>
+                            <tr>
+                                <td><code>LEGENDARY</code></td>
+                                <td>Zero-Day / RCE de impacto global (CVSS 9.5–10.0)</td>
+                                <td>Violeta</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Mapeamento dos Slots do Player Mat</h3>
+                <p>Todos os slots do Player Mat possuem <strong>altura uniforme de 160px (88mm físico)</strong> para
+                    encaixe simétrico das cartas 63×88mm:</p>
+                <ul>
+                    <li><strong>SLOT RESEARCHER (155×115px):</strong> recebe a Carta de Arquétipo escolhida no setup.
+                    </li>
+                    <li><strong>ACTIVE PROGRAM (155×115px):</strong> recebe a Carta de Programa Corporativo que você
+                        está auditando.</li>
+                    <li><strong>SLOT Safeguard (155×115px):</strong> recebe a carta de Safeguard <em>Bypass</em>
+                        ativa.</li>
+                    <li><strong>TOOLS RACK (3 slots de 155×115px cada):</strong> recebe até 3 Ferramentas ativas com
+                        efeito passivo.</li>
+                    <li><strong>ZONA DE EXPLOITS (área limpa de 160px):</strong> recebe as Vulnerability Cards alocadas
+                        aguardando o Report.</li>
+                </ul>
+            </section>
+
+            <!-- ================= 17 GLOSSÁRIO ================= -->
+            <section id="glossario">
+                <h2 class="sec"><span class="num">17</span> Glossário</h2>
+                <dl class="glossary">
+                    <dt>Bounty Token</dt>
+                    <dd>Marcador hexagonal acrílico que representa o progresso financeiro do pesquisador na Bounty Track
+                        lateral do Player Mat.</dd>
+
+                    <dt>Bounty Track</dt>
+                    <dd>Régua de pontuação progressiva de 28 degraus monotônicos ($0 a $40.000) presente no Player Mat
+                        de cada jogador. Estruturada em 4 zonas cromáticas.</dd>
+
+                    <dt>CVSS (Common Vulnerability Scoring System)</dt>
+                    <dd>Índice numérico internacional de severidade de vulnerabilidades, variando de 1.0 a 10.0. No
+                        jogo, determina o valor base de Bounty de cada carta de falha.</dd>
+
+                    <dt>Bypass</dt>
+                    <dd>Safeguard de <strong>proteção financeira</strong>: anula 100% os efeitos do PATCH DEPLOYED!, impedindo o descarte de exploits e o recuo na Bounty Track. Jogada como reação fora do turno. Não protege contra eventos de escopo (Duplicate, Out of Scope, DNS Hijack).</dd>
+
+                    <dt>CVE Assignment Protection</dt>
+                    <dd>Safeguard de <strong>proteção de escopo</strong>: reativa e de uso único (descartada ao ser usada). Anula a penalidade de 10% do <em>Duplicate Report!</em> aplicada ao seu próprio Report, bem como os Eventos <em>Duplicate Report!</em>, <em>Out of Scope</em> e <em>DNS Hijack</em> direcionados a você. O jogador pode guardar na mão (custa 1 slot) ou jogar imediatamente. Não protege contra PATCH DEPLOYED!.</dd>
+
+                    <dt>Duplicate Report!</dt>
+                    <dd>Penalidade aplicada quando um pesquisador tenta reportar uma vulnerabilidade com o mesmo título
+                        exato no mesmo programa já reportado por outro pesquisador. O segundo a submeter recebe apenas
+                        10% da recompensa calculada.</dd>
+
+                    <dt>Event Deck</dt>
+                    <dd>Baralho central de 23 cartas de Caos que introduzem eventos táticos e reviravoltas na partida.
+                        Na Rodada 7, é fundido ao Main Deck.</dd>
+
+                    <dt>Exploit</dt>
+                    <dd>Ação de alocar uma vulnerabilidade na Zona de Exploits do Player Mat, pagando os custos de
+                        ferramentas requeridos e respeitando o escopo do programa ativo.</dd>
+
+                    <dt>Fórmula N+4 (Distribuição de Safeguards)</dt>
+                    <dd>Regra de distribuição de Safeguards: cada jogador (N) começa com 1 Bypass na mão. No Main Deck ficam embaralhadas 2 Bypass + 2 CVE Assignment Protection. Total em jogo = N + 4 Safeguards (as CVE sempre entram no deck).</dd>
+
+                    <dt>Main Deck</dt>
+                    <dd>Baralho central compartilhado composto por 80 Vulnerability Cards, 36 Tool Cards (12 tipos × 3 cópias) e 4 Safeguards (2 Bypass + 2 CVE Assignment Protection) — total de 120 cartas.</dd>
+
+                    <dt>Out of Scope</dt>
+                    <dd>Falha técnica cuja classe de ataque não consta no escopo autorizado do programa ativo do
+                        pesquisador. Não pode ser alocada na Zona de Exploits (exceto pelo Red Teamer).</dd>
+
+                    <dt>PATCH DEPLOYED!</dt>
+                    <dd>Evento destrutivo acionado quando o Patch Speed Check falha. O jogador que sofre o PATCH DEPLOYED! perde o valor fixo conforme sua zona de riqueza (Verde $1.500, Amarela $3.000, Laranja $4.500, Vermelha $6.000), recua na Bounty Track até refletir o novo saldo (mínimo $0) e encerra o programa ativo.</dd>
+
+                    <dt>Patch Speed Check</dt>
+                    <dd>Teste obrigatório de dado D8 realizado no final do turno do jogador por jogadores com
+                        vulnerabilidades expostas. O resultado determina se o programa corporativo emite o patch ou
+                        permanece vulnerável.</dd>
+
+                    <dt>Player Mat</dt>
+                    <dd>Tapete individual (25×35cm) de cada pesquisador, contendo todos os slots de cartas e a Bounty
+                        Track lateral.</dd>
+
+                    <dt>Program Market</dt>
+                    <dd>Área no Tabuleiro Central com 3 (expandido para 5 na Rodada 7) empresas corporativas disponíveis
+                        para os pesquisadores escolherem como alvo ativo.</dd>
+
+                    <dt>RCE (Remote Code Execution)</dt>
+                    <dd>Execução Remota de Código — a classe de vulnerabilidade mais severa e valiosa do jogo (CVSS
+                        9.5–10.0, raridade Lendária).</dd>
+
+                    <dt>Recon</dt>
+                    <dd>Ação primária de reconhecimento: comprar 2 cartas do Main Deck (opção A) ou trocar de programa ativo (opção B). Acesso ao Event Deck via Recon é poder exclusivo do Social Engineer.</dd>
+
+                    <dt>Report</dt>
+                    <dd>Ação formal de submissão: calcula o payout somando o Valor base da Falha (CVSS) + Bônus do Programa + Bônus de Tools, soma ao saldo acumulado e avança na Bounty Track conforme o Acumulador. Em seguida descarta as vulnerabilidades e encerra o programa ativo.</dd>
+
+                    <dt>Round Tracker</dt>
+                    <dd>Trilha numerada no Tabuleiro Central que registra o avanço das rodadas da partida (1 a 8, ou 1 a
+                        10 para 2 jogadores).</dd>
+
+                    <dt>Scope (Escopo)</dt>
+                    <dd>Conjunto de classes de vulnerabilidade que um programa corporativo aceita para recompensa.
+                        Vulnerabilidades fora do escopo não podem ser alocadas (exceto pelo Red Teamer).</dd>
+
+                    <dt>Tools Rack</dt>
+                    <dd>Área no Player Mat com 3 slots para ferramentas ativas com efeito passivo permanente durante
+                        toda a partida.</dd>
+
+                    <dt>Zona de Exploits</dt>
+                    <dd>Área aberta e visível no Player Mat onde as Vulnerability Cards ficam alocadas aguardando o
+                        Report formal ou o descarte pelo PATCH DEPLOYED!.</dd>
+                </dl>
+            </section>
+
+        </main>
+    </div><!-- /.doc-layout -->
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <span class="sig">FIND IT. REPORT IT. GET PAID.</span>
+        PWND! — Bug Bounty Chaos · Manual de Regras Oficial v1.0<br>
+        Documento oficial · PWND! Game Development Studio · 2026<br>
+        <span style="font-size:.7rem;letter-spacing:.08em;margin-top:.4rem;display:block;">Todas as corporações,
+            domínios e sistemas descritos neste manual são 100% fictícios. Este jogo celebra o hacking ético e a
+            divulgação responsável de vulnerabilidades.</span>
+    </footer>
+
+    <script>
+        // Active TOC link highlighting via IntersectionObserver
+        const sections = document.querySelectorAll('section[id]');
+        const tocLinks = document.querySelectorAll('.toc-link');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    tocLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+        sections.forEach(s => observer.observe(s));
+    </script>
+
+</body>
+
+</html>

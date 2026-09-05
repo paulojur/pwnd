@@ -1,0 +1,550 @@
+PWND! — BUG BOUNTY CHAOS
+
+MANUAL DE REGRAS v1.0
+
+"Find it. Report it. Get paid."
+
+01 de setembro de 2026
+
+---
+
+### SUMÁRIO
+
+1. Componentes do Jogo
+2. Objetivo do Jogo
+3. Preparação da Mesa
+4. Estrutura da Partida
+5. Ações do Turno
+6. Patch Speed: O Relógio do Patch
+7. PATCH DEPLOYED!
+8. Event Cards
+9. Researcher Archetypes
+10. Tool Cards
+11. Program Cards
+12. Bounty Track
+13. Fim da Partida e Condições de Vitória
+14. Rodadas Finais (7 e 8): Caos
+15. Guia de Referência Rápida
+16. Glossário Geral
+
+---
+
+### 1. COMPONENTES DO JOGO
+
+O jogo PWND! — Bug Bounty Chaos é composto por elementos modulares de alta precisão técnica e componentes analógicos projetados para suportar partidas de 2 a 6 jogadores com máxima legibilidade em mesa.
+
+#### 1.1 Board Central Compartilhado (30x20cm)
+- **1 Slot para Event Deck:** compartimento para o baralho central de eventos de segurança.
+- **1 Program Market:** 3 slots abertos com cartas de programas empresariais disponíveis para alocação imediata.
+- **1 Discard Pile Compartilhada:** área para descarte coletivo de vulnerabilidades, ferramentas e eventos executados.
+- **1 Round Tracker:** trilha numerada de 8 espaços para controle de rodadas globais.
+- **1 Bounty Tier Legend:** guia cromático de consulta rápida de faixas de pagamento e severidades.
+
+#### 1.2 Mats Individuais de Jogador (25x35cm, 6 unidades)
+- **1 Slot de Researcher:** área superior dedicada à carta de arquétipo de pesquisador ativa.
+- **1 Slot de Active Program:** área para a empresa que o pesquisador está auditando atualmente.
+- **1 Slot de Defuse:** área reservada para Safeguards e cartas de contenção ativas (0-Day Reserve).
+- **1 Zona de Tools:** 3 compartimentos operacionais para ferramentas de apoio ativas.
+- **1 Zona de Exploits:** área aberta de mesa onde vulnerabilidades encadeadas aguardam submissão.
+- **1 Bounty Track Lateral:** trilha de recompensa linear e acumulativa graduada de $0 a $50.000.
+- **1 Zona de Hand:** área privativa de gerenciamento da mão de cartas do jogador.
+
+#### 1.3 Baralhos e Cartas
+- **80 Vulnerability Cards:** acervo balanceado distribuído em 8 classes táticas e 5 níveis de raridade (Common, Uncommon, Rare, Epic, Legendary).
+- **12 Tool Cards:** ferramentas de automação, inspeção e injeção com efeitos passivos e ativos.
+- **8 Program Cards:** alvos institucionais com escopos técnicos e velocidades de correção distintas.
+- **6 Researcher Archetype Cards:** classes assimétricas com poderes operacionais únicos.
+- **26 Event Cards Centrais:** composto por 23 eventos globais/direcionados de caos e 3 cartas 0-Day Reserve (Defuse).
+
+#### 1.4 Componentes Auxiliares
+- **6 Bounty Tokens:** marcadores hexagonais acrílicos em cores exclusivas por jogador.
+- **1 Round Token:** marcador esférico verde-neon para avanço no Round Tracker central.
+- **2 Dados de 6 faces (D6):** dados de precisão utilizados exclusivamente para os testes de Patch Speed.
+
+---
+
+### 2. OBJETIVO DO JOGO
+
+Em PWND!, cada participante assume o papel de um pesquisador independente de segurança ofensiva competindo em plataformas abertas de caça a falhas. Ao longo de 8 rodadas estruturadas, os participantes devem realizar varreduras, estruturar cadeias de ataque (exploits) e emitir relatórios técnicos validados antes que as equipes defensivas corrijam as vulnerabilidades em produção.
+
+
+"O pesquisador que acumular o maior volume financeiro na Bounty Track ao final da 8ª rodada é declarado o vencedor absoluto da competição."
+
+
+Em caso de empate na pontuação máxima acumulada, o critério de desempate segue a contagem do maior número de relatórios técnicos (Reports) concluídos com sucesso. Persistindo o empate, vence quem tiver aprovado a vulnerabilidade individual de maior pontuação CVSS.
+
+---
+
+### 3. PREPARAÇÃO DA MESA
+
+#### 3.1 Montagem do Espaço Central e Pessoal
+Posicione o Board Central no centro exato da mesa de jogo. Cada participante recebe um Mat Individual correspondente à cor de sua preferência e o posiciona à sua frente, orientado verticalmente. Os Bounty Tokens iniciam alocados na posição $0 da trilha lateral de cada jogador.
+
+#### 3.2 Determinação do Primeiro Jogador
+O primeiro jogador a agir na partida é aquele que jogou uma partida de jogo de tabuleiro mais recentemente. Em caso de empate absoluto, o privilégio de abertura pertence a quem visitou Portugal por último. Se todos os envolvidos residirem em território português ou houver persistência no empate, a prioridade é concedida a quem ingeriu a última xícara de café. O turno transcorre no sentido horário a partir do participante selecionado.
+
+#### 3.3 Escolha Pública de Arquétipos
+Iniciando pelo primeiro jogador e procedendo no sentido horário, cada participante escolhe abertamente (sem sorteio) 1 carta de Researcher Archetype entre as disponíveis na mesa, acoplando-a imediatamente no slot de Researcher do seu mat. A escolha transparente permite leitura antecipada das composições adversárias.
+
+#### 3.4 Preparação dos Baralhos
+1. **Main Deck:** embaralhe rigorosamente as **80 Vulnerability Cards** juntamente com as **12 Tool Cards**. Posicione o maço formado no compartimento do deck central.
+2. **Event Deck:** embaralhe as **23 Event Cards** e as **3 cartas 0-Day Reserve (Defuse)**. Coloque este baralho fechado no slot específico de eventos no Board Central.
+3. **Program Market:** retire do topo do baralho de programas 3 cartas e coloque-as com a face voltada para cima nos 3 compartimentos do mercado.
+
+#### 3.5 Distribuição da Mão Inicial
+Compre 6 cartas do Main Deck e adicione-as à sua mão de forma secreta (o arquétipo The Old Guard possui o benefício inicial de comprar 9 cartas). A mão pode conter qualquer combinação de vulnerabilidades e ferramentas.
+
+#### 3.6 Seleção do Alvo Inicial
+Seguindo a ordem do turno, cada pesquisador seleciona 1 Program Card do Program Market e posiciona-a em seu slot de Active Program. Imediatamente após a retirada de uma carta, puxe uma nova do baralho de programas para manter o mercado com 3 opções ativas.
+
+#### 3.7 Alocação do Marcador de Rodadas
+Posicione o Round Token esférico no número 1 do Round Tracker central para iniciar a partida.
+
+---
+
+### 4. ESTRUTURA DA PARTIDA
+
+Uma partida oficial de PWND! desenvolve-se ao longo de 8 rodadas fixas (com exceção de partidas para 2 jogadores). Durante uma rodada, cada participante realiza exatamente 1 ação operacional na sua respectiva vez.
+
+#### 4.1 Escala e Duração por Número de Jogadores
+- **2 Jogadores:** 10 rodadas de jogo (calibragem para compensar o fluxo tático), duração estimada de 40 minutos.
+- **3 a 4 Jogadores:** 8 rodadas oficiais, duração estimada de 45 minutos.
+- **5 a 6 Jogadores:** 8 rodadas oficiais, duração estimada de 60 minutos.
+
+```
+++
+|                        FLUXO GERAL DA RODADA                      |
+++
+| |
+|   1. FASE DE AÇÃO DOS JOGADORES (Sentido Horário)                 |
+|      - Cada jogador escolhe EXATAMENTE UMA ação:                  |
+|        [ RECON ]  ou  [ EXPLOIT ]  ou  [ REPORT ]                 |
+| |
+|   2. FASE DE VERIFICAÇÃO DE FINAL DE RODADA                       |
+|      - Patch Speed Check (para jogadores com vulns na mesa)       |
+|      - Resolução de penalidades de PATCH DEPLOYED!                |
+|      - Avanço do Round Token (+1 rodada no Board Central)         |
+| |
+++
+```
+
+---
+
+### 5. AÇÕES DO TURNO
+
+No seu turno de jogo, você é obrigado a selecionar e executar uma única ação dentre as três opções abaixo descritas.
+
+#### 5.1 Ação 1: RECON (Reconhecimento e Aquisição de Recursos)
+Compre 2 cartas do topo do Main Deck e adicione-as à sua mão. Caso o jogador possua a ferramenta passiva Nmap + ffuf ativa em sua zona de Tools, compre 3 cartas em vez de 2.
+O limite máximo estrutural de cartas mantidas em mão ao final do turno é de 6 cartas (limite expandido para 9 cartas para o arquétipo The Old Guard). Caso a compra exceda esse teto, descarte cartas excedentes para a Discard Pile compartilhada.
+
+
+Nota tática: A ação de Recon não aciona testes de segurança nem riscos defensivos, funcionando como uma manobra estratégica de recomposição de mão.
+
+
+#### 5.2 Ação 2: EXPLOIT (Execução de Falha na Mesa)
+Jogue 1 Vulnerability Card da sua mão para a zona de Exploits do seu Mat Individual. A colocação da carta exige o cumprimento rigoroso de três etapas obrigatórias:
+
+1. **Validação de Scope Técnico:** A classe descrita na Vulnerability Card precisa constar expressamente na lista de escopo permitido (Scope) do seu Active Program. É estritamente proibido baixar uma vulnerabilidade fora de escopo, salvo se você estiver operando como o arquétipo **Red Teamer**.
+2. **Pagamento de Custo de Ferramental:** Cada vulnerabilidade exige tipos específicos de ferramentas para ser armada. Descarte da sua mão ou da sua zona de Tools as **Tool Cards** requeridas. Se possuir ferramentas de redução ativas, aplique os seguintes abatimentos:
+   - **SQLMap:** Custo de ferramentas para vulnerabilidades da classe *Injection* é reduzido a zero.
+   - **Postman:** Custo de ferramentas para *Broken Access Control* é reduzido em 1 unidade.
+   - **OWASP ZAP:** Custo para armar vulnerabilidades de severidade *Low* ou *Medium* é reduzido a zero.
+   - **Burp Suite Pro:** Atua como ferramenta coringa universal, substituindo qualquer exigência.
+3. **Disparo de Efeitos Imediatos:** Se a Vulnerability Card jogada contiver uma habilidade com o texto *"No deploy:"*, resolva o texto da habilidade imediatamente. Habilidades sinalizadas com *"Quando reportada:"* permanecem dormentes até a ação de submissão formal.
+
+A vulnerabilidade armada permanece na sua zona de Exploits aberta e visível para todos os oponentes na mesa até que ocorra uma ação de Report ou uma correção forçada pelo sistema.
+
+#### 5.3 Ação 3: REPORT (Submissão Formal e Coleta de Recompensa)
+Realize a entrega formal de todas as Vulnerability Cards alocadas na sua zona de Exploits. O processamento da pontuação ocorre na seguinte sequência:
+
+1. **Verificação de Duplicação (Duplicate Check):** Caso qualquer oponente já tenha reportado formalmente uma vulnerabilidade com o **mesmo título exato** no **mesmo programa empresarial** durante a partida, o seu achado é considerado duplicado (*Duplicate*). Descarte a carta duplicada para a lixeira sem pontuar.
+2. **Cálculo da Severidade Base:** Some o valor nominal de pontuação **CVSS (1.0 a 10.0)** de todas as cartas válidas remanescentes na sua mesa.
+3. **Aplicação do Multiplicador de Programa:** Multiplique o somatório dos pontos CVSS pelo índice do seu programa corporativo ativo:
+   - **Low Bounty Program:** Pontos = $$\text{CVSS Total} \times 1$$
+   - **Medium Bounty Program:** Pontos = $$\text{CVSS Total} \times 2$$
+   - **High Bounty Program:** Pontos = $$\text{CVSS Total} \times 5$$
+   - **Critical Bounty Program:** Pontos = $$\text{CVSS Total} \times 10$$
+4. **Progressão na Trilha de Recompensas:** Avance seu **Bounty Token** na Bounty Track o número de casas correspondente ao valor obtido (cada casa representa `R$ 1.000,00` em premiação virtual).
+5. **Efeitos de Conclusão:** Dispare as habilidades secundárias rotuladas como *"Quando reportada:"*.
+6. **Descarte e Reposição de Alvo:** Mova todas as vulnerabilidades submetidas para a Discard Pile. Seu programa ativo é concluído e enviado ao descarte. Escolha imediatamente uma nova carta de alvo disponível no **Program Market** central e reponha o mercado com a carta do topo do baralho de alvos.
+
+---
+
+### 6. PATCH SPEED: O RELÓGIO DO PATCH
+
+No final de cada rodada (imediatamente após o término das ações de todos os pesquisadores), a equipe de engenharia dos sistemas executa varreduras defensivas. Cada jogador que mantiver uma ou mais Vulnerability Cards na sua zona de Exploits é obrigado a realizar um Patch Speed Check individual.
+
+Role 1 dado de 6 faces (D6). O resultado deve ser comparado com o índice de velocidade de correção impresso no seu programa ativo:
+
+
+
+
+Patch Speed do Programa
+Resultado Crítico no Dado (D6)
+Probabilidade Estatística de Correção
+
+
+
+
+Lenta
+Apenas resultado 6
+16,6% (1 em 6)
+
+
+Moderada
+Resultados 5 ou 6
+33,3% (2 em 6)
+
+
+Rápida
+Resultados 4, 5 ou 6
+50,0% (3 em 6)
+
+
+Extrema
+Resultados 3, 4, 5 ou 6
+66,6% (4 em 6)
+
+
+
+
+Caso o dado atinja ou supere o limiar de alerta indicado, o sistema entra em colapso defensivo imediato, ativando a rotina PATCH DEPLOYED!. Se o resultado for estritamente inferior ao limiar, a infraestrutura permanece vulnerável e suas cartas permanecem na mesa para a rodada seguinte.
+
+---
+
+### 7. PATCH DEPLOYED!
+
+
+Atenção: O evento PATCH DEPLOYED! representa a correção de emergência dos sistemas em produção, neutralizando todo o trabalho exposto que não foi submetido a tempo.
+
+
+#### 7.1 Penalidades Imediatas Aplicadas
+1. **Perda Integral de Exploits em Mesa:** Todas as Vulnerability Cards presentes na sua zona de Exploits são imediatamente descartadas para a Discard Pile sem direito a cálculo de pontos ou recompensas.
+2. **Recuo na Bounty Track:** Mova o seu Bounty Token **3 casas para trás** na Bounty Track (perda líquida de `R$ 3.000,00` em reputação e caixa). Se o jogador estiver localizado entre as casas $0 e $2.000, o marcador é ajustado para o piso mínimo de **$0**.
+3. **Fechamento Compulsório de Programa:** O programa ativo no seu mat é encerrado e descartado. Na abertura do seu próximo turno, antes de realizar sua ação, você deve selecionar um novo programa aberto no mercado central.
+
+#### 7.2 Elementos Blindados Contra o Patch
+- **Cartas retidas na mão:** permanecem intocadas.
+- **Ferramentas na zona de Tools:** permanecem preservadas.
+- **Cartas de Defuse:** não são consumidas involuntariamente.
+- **Pontuação consolidada:** pontos acima das 3 casas de penalidade permanecem garantidos na trilha.
+
+#### 7.3 Mecanismo de Safeguard (0-Day Reserve)
+Se o jogador possuir a carta 0-Day Reserve (Defuse) alocada em seu slot de Defuse no momento em que o patch for acionado, ele pode descartá-la imediatamente para anular 100% dos efeitos danosos. As vulnerabilidades são salvas, a pontuação na trilha não recua e o programa permanece aberto. O risco de teste de correção retorna normalmente na rodada seguinte.
+
+---
+
+### 8. EVENT CARDS
+
+As Event Cards introduzem volatilidade, interferência tática e reviravoltas no cenário da segurança da informação.
+
+#### 8.1 Injeção por Habilidades Especiais
+Certos arquétipos e vulnerabilidades avançadas permitem aos pesquisadores pescar ou deflagrar cartas diretamente do Event Deck durante o andamento da partida.
+
+#### 8.2 Invasão de Eventos nas Rodadas Finais
+No início da Rodada 7, todo o remanescente do Event Deck é recolhido e embaralhado diretamente no Main Deck. A partir desse momento, qualquer compra de Recon que puxe uma carta de evento força a sua execução e resolução imediata antes da continuidade do turno do jogador.
+
+#### 8.3 Diretrizes Operacionais de Resolução
+- Cartas de evento com alvos automáticos (ex.: *"o líder da Bounty Track"* ou *"o último a comprar cartas"*) executam suas penalidades obrigatoriamente sobre o alvo indicado.
+- O arquétipo **Social Engineer** pode redirecionar livremente o alvo de qualquer carta de evento por ele disparada.
+- Eventos de ordem coletiva aplicam seus efeitos a todos os participantes de forma simultânea.
+
+#### 8.4 Relação de Eventos Críticos do Baralho
+- **Duplicate Report!:** O jogador alvo é obrigado a escolher e descartar a sua vulnerabilidade de maior valor CVSS presente na zona de Exploits.
+- **Out of Scope!:** A última vulnerabilidade baixada pelo jogador alvo é declarada inválida pela triagem e descartada para o lixo.
+- **Patch Tuesday!:** Todos os participantes com vulnerabilidades expostas na mesa realizam imediatamente um Patch Speed Check de surpresa.
+- **Scope Expansion!:** O escopo de todos os programas ativos na mesa torna-se irrestrito por 2 rodadas completas, aceitando qualquer classe técnica.
+- **Bounty Increase!:** Todos os multiplicadores de programas sobem 1 nível de recompensa (Low $\rightarrow$ Medium $\rightarrow$ High $\rightarrow$ Critical) por 2 rodadas.
+- **Hall of Fame Update!:** O participante posicionado na última colocação da Bounty Track recebe imediatamente 2 Tool Cards do topo do baralho.
+- **Data Breach!:** Todos os jogadores mostram suas mãos; o participante com maior número de falhas críticas descarta metade da sua mão.
+- **Swag Drop!:** Cada pesquisador presente na mesa compra 1 carta de ferramenta imediatamente do deck principal.
+
+---
+
+### 9. RESEARCHER ARCHETYPES
+
+Os 6 arquétipos disponíveis oferecem estilos de jogo complementares e totalmente balanceados. A escolha ocorre na fase de preparação e permanece vinculada ao jogador até o desfecho da partida.
+
+```
++-------------------++
+| ARQUÉTIPO         | PERFIL DE JOGABILIDADE E ESPECIALIZAÇÃO           |
++-------------------++
+| n00b              | Construtor progressivo de engine de longo prazo   |
+| The Old Guard     | Combos massivos, mão ampla e ritmo controlado     |
+| Bug Hunter        | Alta frequência de submissões e bônus por volume  |
+| Social Engineer   | Manipulação do baralho de eventos e sabotagem     |
+| Red Teamer        | Ignora restrições de escopo com taxa reduzida     |
+| The Pentester     | Resiliência defensiva e blindagem contra azares   |
++-------------------++
+```
+
+#### 9.1 n00b — O Aprendiz Evolutivo
+- **Condição Inicial:** Inicia a partida sem modificadores ou poderes passivos.
+- **Habilidade de Evolução:** A cada ação de *Report* concluída com sucesso, escolhe permanentemente **1 nova habilidade passiva** de sua árvore operacional (+1 compra em Recon, redução permanente de ferramentas em classes específicas ou expansão do tamanho de mão).
+- **Estilo:** Começa frágil na rodada 1 e atinge pico de dominância nas rodadas 6 a 8.
+
+#### 9.2 The Old Guard — O Veterano Metódico
+- **Expansão de Recursos:** Mantém uma mão limite de **9 cartas** ao longo de todo o jogo.
+- **Cadência Controlada:** Pode realizar a ação de *Report* no máximo **1 vez por rodada**.
+- **Estilo:** Foco na retenção de cartas raras para estruturação de relatórios monumentais.
+
+#### 9.3 Bug Hunter — O Especialista em Escala
+- **Dupla Submissão:** Pode processar **2 Reports completos em uma única ação** de submissão.
+- **Restrição de Severidade:** Só pode coletar pontuações de falhas com CVSS **igual ou inferior a 6.0** (severidades Low e Medium).
+- **Bônus de Volume:** Se submeter 5 ou mais cartas em um único Report, recebe um **acréscimo de +50% no bounty total** da jogada.
+
+#### 9.4 Social Engineer — O Manipulador da Mesa
+- **Controle de Alvo:** Ao acionar qualquer Event Card, decide livremente o participante afetado.
+- **Manobra Tática:** Pode optar por **comprar 1 carta do Event Deck** como sua ação principal do turno no lugar de Recon, Exploit ou Report.
+- **Estilo:** Desestabiliza estratégias consolidadas através de perturbação externa contínua.
+
+#### 9.5 Red Teamer — O Agente Irrestrito
+- **Quebra de Escopo:** Totalmente imune a restrições de escopo. Pode jogar qualquer classe de vulnerabilidade em qualquer alvo corporativo.
+- **Desconto de Mercenário:** Todos os seus Reports sofrem um abatimento compulsório de **-30% no valor total do payout** obtido ($$\text{Multiplicador} \times 0.7$$).
+- **Estilo:** Adaptabilidade completa sem travamento de alvos no mercado.
+
+#### 9.6 The Pentester — O Auditor Estruturado
+- **Imunidade Burocrática:** Totalmente imune às cartas e penalidades de *"Duplicate Report!"* e *"Triage Delay!"*.
+- **Controle de Risco:** Em todos os testes de Patch Speed Check, só é afetado caso tire o número **6 no dado**, independentemente da severidade real do programa auditado.
+- **Estilo:** Operação analítica imune a falhas aleatórias e duplicatas.
+
+---
+
+### 10. TOOL CARDS
+
+As ferramentas são insumos técnicos mantidos na sua zona de Tools ou descartados da mão para subsidiar a execução de vulnerabilidades.
+
+
+
+
+Ferramenta Operacional
+Efeito Técnico Concedido
+Modo de Ativação
+
+
+
+
+Burp Suite Pro
+Atua como coringa universal, substituindo qualquer exigência de ferramenta
+Ativa (descarte no uso)
+
+
+Nmap + ffuf
+Concede +1 carta adicional na execução da ação de Recon (3 cartas)
+Passiva (permanente)
+
+
+OWASP ZAP
+Vulnerabilidades Low e Medium têm seu custo de ferramentas zerado
+Ativa (descarte no uso)
+
+
+Postman
+Reduz em 1 unidade o custo de falhas da classe Broken Access Control
+Ativa (descarte no uso)
+
+
+Browser DevTools
+Vulnerabilidades XSS e DOM agregam +50% de valor no momento do Report
+Passiva (permanente)
+
+
+Burp Collaborator
+Resgata 1 Tool Card do descarte toda vez que um oponente reportar falha SSRF
+Passiva (permanente)
+
+
+SQLMap
+Vulnerabilidades da classe Injection têm seu custo reduzido a zero
+Ativa (descarte no uso)
+
+
+Gobuster / DirBuster
+Permite revelar imediatamente 2 Program Cards adicionais do baralho
+Ativa (descarte no uso)
+
+
+Wireshark
+Permite inspecionar a última carta pescada da mesa por cada adversário
+Passiva (permanente)
+
+
+CyberChef
+Permite converter 2 ferramentas do descarte em 1 ferramenta de sua escolha
+Ativa (descarte no uso)
+
+
+JWT Tool
+Vulnerabilidades de autenticação recebem +50% de pontuação no Report
+Passiva (permanente)
+
+
+Commix
+Vulnerabilidades de Command Injection têm seu custo reduzido a zero
+Ativa (descarte no uso)
+
+
+
+
+---
+
+### 11. PROGRAM CARDS
+
+Os programas corporativos determinam os limites operacionais, multiplicadores de remuneração e a volatilidade de correção técnica de cada alvo.
+
+
+
+
+Empresa / Alvo
+Bounty Tier
+Escopo Autorizado (Scope)
+Patch Speed
+Multiplicador
+
+
+
+
+ShopAll
+Medium
+Escopo Amplo (aceita todas as classes técnicas)
+Moderada (5+)
+$$\times 2$$
+
+
+BankSafe
+High
+Restrito exclusivamente a APIs e Autenticação
+Rápida (4+)
+$$\times 5$$
+
+
+GovPortal
+Low
+Restrito a Broken Access Control
+Lenta (6)
+$$\times 1$$
+
+
+HealthLock
+High
+Restrito a Criptografia e Autenticação
+Rápida (4+)
+$$\times 5$$
+
+
+SocialBee
+Medium
+Escopo Amplo (aceita todas as classes técnicas)
+Moderada (5+)
+$$\times 2$$
+
+
+CloudNine
+Critical
+Infraestrutura, RCE e SSRF
+Extrema (3+)
+$$\times 10$$
+
+
+GameVerse
+Medium
+WebSockets e Lógica de Negócios
+Moderada (5+)
+$$\times 2$$
+
+
+EduConnect
+Low
+Escopo Amplo (aceita todas as classes técnicas)
+Muito Lenta (apenas 6)
+$$\times 1$$
+
+
+
+
+---
+
+### 12. BOUNTY TRACK
+
+A Bounty Track disposta na lateral de cada mat individual gerencia o montante financeiro conquistado. A escala é fracionada em unidades lineares de $1.000 a $50.000.
+
+#### 12.1 Mecanismo de Avanço
+Ao processar uma ação de Report, converta o montante final obtido em casas de avanço na proporção de 1 casa para cada $1.000 conquistados.
+
+#### 12.2 Penalização e Recuo
+Quando um jogador sofrer a penalidade de PATCH DEPLOYED! ou for alvo de eventos sabotadores severos (ex.: Data Breach!), o marcador deve retroceder as casas indicadas imediatamente.
+
+#### 12.3 Piso Inviolável
+A pontuação acumulada na Bounty Track nunca atinge valores negativos. Caso uma penalização exija recuo maior que o saldo atual do participante, o marcador permanece fixado na casa $0.
+
+---
+
+### 13. FIM DA PARTIDA E CONDIÇÕES DE VITÓRIA
+
+A partida é encerrada imediatamente após a finalização da 8ª rodada (ou 10ª rodada em partidas de 2 jogadores). O participante que tiver alcançado a posição mais avançada na Bounty Track é declarado o vencedor.
+
+```
+++
+|                   CRITÉRIOS OFICIAIS DE DESEMPATE                 |
+++
+| |
+|   1º Critério: Maior número total de Reports concluídos           |
+|   2º Critério: Maior número de falhas Critical (CVSS >= 9.0)      |
+|   3º Critério: Rolagem de morte súbita (maior resultado em 1 D6)  |
+| |
+++
+```
+
+---
+
+### 14. RODADAS FINAIS (7 E 8): CAOS
+
+As rodadas finais representam o encerramento do trimestre fiscal das empresas, provocando aceleração massiva de triagens e deploys de correção.
+
+#### 14.1 Modificadores da Rodada 7
+- O remanescente do **Event Deck é integrado e embaralhado ao Main Deck**, forçando ativações automáticas de eventos durante compras normais de Recon.
+- O Program Market central expande-se, recebendo **2 cartas adicionais** (totalizando 5 programas abertos para escolha simultânea).
+
+#### 14.2 Modificadores da Rodada 8
+- Todos os testes de Patch Speed Check passam a exigir **a rolagem obrigatória de 2 dados (2D6)**. O pesquisador deve atingir sucesso em ambos os dados individualmente para escapar da anulação de suas vulnerabilidades.
+- O Main Deck **não é reembaralhado** caso se esgote durante esta rodada.
+
+---
+
+### 15. GUIA DE REFERÊNCIA RÁPIDA
+
+Consulte este resumo sintético durante o andamento da partida para sanar dúvidas imediatas de jogabilidade:
+
+- **Opções no seu turno:** Realize apenas 1 ação: **Recon** (compra recursos), **Exploit** (arma falhas pagando ferramentas) ou **Report** (submete e pontua).
+- **Final de rodada:** Todos os jogadores com vulnerabilidades na mesa rolam o dado de **Patch Speed Check**. O Round Token avança 1 casa.
+- **Penalidade de PATCH DEPLOYED!:** Descarta todas as vulnerabilidades armadas na mesa, recua 3 casas na Bounty Track e encerra o programa ativo.
+- **Proteção:** A carta **0-Day Reserve** anula completamente o Patch Deployed.
+- **Quem vence:** Quem somar mais recompensas na Bounty Track ao fim da 8ª rodada.
+
+---
+
+### 16. GLOSSÁRIO GERAL
+
+- **Bounty Token:** Marcador acrílico hexagonal utilizado para apontar o progresso na trilha financeira do mat individual.
+- **Bounty Track:** Trilha de pontuação graduada de $0 a $50.000 presente no mat de cada jogador.
+- **CVSS (Common Vulnerability Scoring System):** Índice numérico internacional de severidade da falha técnica, variando de 1.0 a 10.0.
+- **Defuse Card (0-Day Reserve):** Carta especial de segurança que neutraliza os efeitos destrutivos de uma correção em produção.
+- **Duplicate Report:** Condição de anulação que ocorre quando dois pesquisadores tentam pontuar o mesmo achado no mesmo programa corporativo.
+- **Event Card:** Carta de perturbação e impacto tático imediato sobre o ambiente da partida.
+- **Exploit:** Ação tática de colocar uma vulnerabilidade na mesa pagando os devidos insumos de ferramentas.
+- **Main Deck:** Baralho central compartilhado composto por Vulnerability Cards e Tool Cards misturadas.
+- **Out of Scope:** Falha técnica cuja classe de ataque não é aceita pelas diretrizes do programa ativo do pesquisador.
+- **Patch Speed Check:** Teste obrigatório de dado realizado no fechamento da rodada para checar se a empresa corrigiu as falhas abertas.
+- **Program Market:** Espaço central no tabuleiro com cartas de empresas disponíveis para alocação de pesquisa.
+- **Recon:** Ação primária de compra de recursos operacionais do baralho central.
+- **Report:** Ação formal de validação, entrega e cobrança das recompensas acumuladas na mesa.
+- **Scope:** Conjunto formal de regras técnicas que delimitam quais falhas são aceitas por uma empresa.
+- **Tool Card:** Insumo técnico consumível ou permanente utilizado para viabilizar ataques cibernéticos.
+- **Vulnerability Card:** Carta principal de pontuação contendo classe técnica, requisitos, habilidades e valor CVSS.
+
+---
+
+FIND IT. REPORT IT. GET PAID.
+
+Local e data: _________________________, 01 de setembro de 2026

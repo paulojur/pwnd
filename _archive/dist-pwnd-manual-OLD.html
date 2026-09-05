@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-i18n-root="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manual de Regras v1.0 — PWND! Bug Bounty Chaos. Find it. Report it. Get paid.">
+    <title>PWND! — Bug Bounty Chaos · Manual de Regras v1.0</title>
+    <style>
+        :root {
+            --bg: #0D0F1A;
+            --bg-2: #12162B;
+            --bg-3: #1A1F3D;
+            --green: #39D353;
+            --green-dim: #1E7A3A;
+            --amber: #FFB347;
+            --amber-2: #E8962E;
+            --red: #FF4D4D;
+            --red-glow: #FF2E2E;
+            --white: #F2F4F8;
+            --gray: #9AA3B5;
+            --gray-2: #6B7280;
+            --border: #2A3154;
+            --border-green: #39D35355;
+            --mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: var(--sans);
+            line-height: 1.65;
+            font-size: 16px;
+        }
+
+        /* ===== COVER ===== */
+        header.cover {
+            min-height: 30vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 50% 120%, #1A1F3D 0%, transparent 60%),
+                repeating-linear-gradient(0deg, transparent 0 2px, #39D35308 2px 4px),
+                var(--bg);
+        }
+
+        header.cover::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(#39D35322 1px, transparent 1px),
+                linear-gradient(90deg, #39D35322 1px, transparent 1px);
+            background-size: 44px 44px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+        }
+
+        .cover .tag {
+            font-family: var(--mono);
+            color: var(--green);
+            letter-spacing: .35em;
+            font-size: .8rem;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem
+        }
+
+        .cover h1 {
+            font-size: clamp(3rem, 10vw, 6.5rem);
+            font-weight: 900;
+            letter-spacing: .02em;
+            line-height: 1
+        }
+
+        .cover h1 .cursor {
+            display: inline-block;
+            width: .6em;
+            height: 1em;
+            background: var(--green);
+            margin-left: .1em;
+            animation: blink 1s steps(1) infinite;
+            vertical-align: baseline
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0
+            }
+        }
+
+        .cover h2 {
+            font-family: var(--mono);
+            color: var(--amber);
+            font-size: clamp(1rem, 3vw, 1.6rem);
+            letter-spacing: .25em;
+            margin-top: 1rem;
+            text-transform: uppercase
+        }
+
+        .cover .tagline {
+            font-family: var(--mono);
+            color: var(--gray);
+            margin-top: 2.5rem;
+            font-size: .95rem;
+            letter-spacing: .15em
+        }
+
+        .cover .version {
+            position: absolute;
+            bottom: 2rem;
+            font-family: var(--mono);
+            color: var(--gray-2);
+            font-size: .75rem;
+            letter-spacing: .2em
+        }
+
+        /* ===== NAV ===== */
+        nav.toc {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--bg-2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: .6rem 1rem;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        nav.toc a {
+            color: var(--gray);
+            text-decoration: none;
+            font-family: var(--mono);
+            font-size: .78rem;
+            margin-right: 1.2rem;
+            letter-spacing: .05em;
+            transition: color .2s;
+        }
+
+        nav.toc a:hover {
+            color: var(--green)
+        }
+
+        /* ===== LAYOUT ===== */
+        main {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 2rem 1.25rem 4rem
+        }
+
+        section {
+            margin-bottom: 3.5rem;
+            scroll-margin-top: 70px
+        }
+
+        h2.sec {
+            font-family: var(--mono);
+            font-size: 1.15rem;
+            color: var(--green);
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+            padding-bottom: .5rem;
+            border-bottom: 1px solid var(--border-green);
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+        }
+
+        h2.sec .num {
+            color: var(--amber);
+            font-weight: 700
+        }
+
+        h3 {
+            color: var(--amber);
+            font-size: 1.05rem;
+            margin: 1.5rem 0 .6rem
+        }
+
+        h4 {
+            color: var(--white);
+            font-size: .95rem;
+            margin: 1rem 0 .4rem
+        }
+
+        p {
+            margin-bottom: .8rem
+        }
+
+        ul,
+        ol {
+            margin: 0 0 1rem 1.4rem
+        }
+
+        li {
+            margin-bottom: .4rem
+        }
+
+        strong {
+            color: var(--white)
+        }
+
+        em {
+            color: var(--amber);
+            font-style: normal;
+            font-family: var(--mono);
+            font-size: .9em
+        }
+
+        code {
+            font-family: var(--mono);
+            color: var(--green);
+            background: var(--bg-3);
+            padding: .1em .4em;
+            border-radius: 4px;
+            font-size: .88em
+        }
+
+        /* ===== COMPONENTS ===== */
+        .callout {
+            border: 1px solid var(--border-green);
+            border-left: 4px solid var(--green);
+            background: var(--bg-2);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1.25rem 0;
+        }
+
+        .callout.warn {
+            border-color: #FF4D4D66;
+            border-left-color: var(--red)
+        }
+
+        .callout.warn strong {
+            color: var(--red)
+        }
+
+        .callout .label {
+            font-family: var(--mono);
+            font-size: .7rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--green);
+            display: block;
+            margin-bottom: .4rem
+        }
+
+        .callout.warn .label {
+            color: var(--red)
+        }
+
+        /* ===== TABLES ===== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1rem 0 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .88rem;
+            min-width: 560px
+        }
+
+        th {
+            background: var(--bg-3);
+            color: var(--green);
+            font-family: var(--mono);
+            text-align: left;
+            padding: .6rem .8rem;
+            font-size: .75rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: .55rem .8rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--gray)
+        }
+
+        tr:last-child td {
+            border-bottom: none
+        }
+
+        tr:hover td {
+            background: var(--bg-2)
+        }
+
+        /* ===== CARDS ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0 1.5rem
+        }
+
+        .card-type {
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-type::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px
+        }
+
+        .card-type.vuln::before {
+            background: var(--red)
+        }
+
+        .card-type.tool::before {
+            background: var(--green)
+        }
+
+        .card-type.program::before {
+            background: var(--amber)
+        }
+
+        .card-type.event::before {
+            background: #FF6B9D
+        }
+
+        .card-type.defuse::before {
+            background: #4DD0E1
+        }
+
+        .card-type h4 {
+            font-family: var(--mono);
+            font-size: .85rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: .4rem
+        }
+
+        .card-type p {
+            font-size: .85rem;
+            color: var(--gray);
+            margin: 0
+        }
+
+        .card-type .count {
+            font-family: var(--mono);
+            color: var(--amber);
+            font-size: .75rem;
+            display: block;
+            margin-top: .5rem
+        }
+
+        /* ===== TIERS ===== */
+        .tier {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            padding: .5rem .8rem;
+            border-radius: 6px;
+            margin-bottom: .4rem;
+            background: var(--bg-2);
+            border: 1px solid var(--border)
+        }
+
+        .tier .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .tier .name {
+            font-family: var(--mono);
+            font-size: .8rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            width: 90px
+        }
+
+        .tier .range {
+            color: var(--gray);
+            font-size: .85rem
+        }
+
+        .tier .mult {
+            font-family: var(--mono);
+            color: var(--amber);
+            font-size: .8rem;
+            margin-left: auto
+        }
+
+        /* ===== GLOSSARY ===== */
+        dl.glossary dt {
+            font-family: var(--mono);
+            color: var(--green);
+            font-size: .85rem;
+            margin-top: 1rem
+        }
+
+        dl.glossary dd {
+            color: var(--gray);
+            font-size: .9rem;
+            margin: .2rem 0 0 0
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 1rem 3rem;
+            text-align: center;
+            font-family: var(--mono);
+            color: var(--gray-2);
+            font-size: .8rem;
+            letter-spacing: .15em;
+        }
+
+        footer .sig {
+            color: var(--green);
+            margin-bottom: .5rem;
+            display: block;
+            font-size: .9rem
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            body {
+                background: #fff;
+                color: #111
+            }
+
+            nav.toc {
+                display: none
+            }
+
+            header.cover {
+                min-height: auto;
+                padding: 3rem 1rem;
+                page-break-after: always
+            }
+
+            main {
+                max-width: 100%;
+                padding: 1rem
+            }
+
+            section {
+                page-break-inside: avoid
+            }
+
+            .card-type,
+            .callout,
+            table {
+                break-inside: avoid
+            }
+
+            h2.sec {
+                color: #1E7A3A
+            }
+
+            h3 {
+                color: #B45309
+            }
+
+            td,
+            th {
+                color: #111
+            }
+
+            .card-type p,
+            .tier .range,
+            dl.glossary dd {
+                color: #333
+            }
+
+            .table-wrap {
+                border-color: #ccc
+            }
+
+            th {
+                background: #eee;
+                color: #1E7A3A
+            }
+
+            td {
+                border-color: #ccc
+            }
+
+            .card-type {
+                background: #fafafa;
+                border-color: #ccc
+            }
+
+            .tier {
+                background: #fafafa;
+                border-color: #ccc
+            }
+
+            .callout {
+                background: #f5f5f5;
+                border-color: #999
+            }
+
+            code {
+                background: #eee;
+                color: #1E7A3A
+            }
+        }
+
+        @media (max-width:600px) {
+            main {
+                padding: 1.5rem .9rem 3rem
+            }
+
+            h2.sec {
+                font-size: 1rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= COVER ================= -->
+    <header class="cover">
+        <div class="tag">Manual de Regras · v1.0</div>
+        <h1>PWND!<span class="cursor"></span></h1>
+        <h2>Bug Bounty Chaos</h2>
+        <p class="tagline">FIND IT. REPORT IT. GET PAID.</p>
+        <div class="version">DOC-REF: PWND-MAN-001 · 02/09/2026 · i18n-ready · Secure by Design</div>
+    </header>
+
+    <!-- ================= SUMÁRIO ================= -->
+    <nav class="toc" aria-label="Sumário">
+        <a href="#introducao">01 · Introdução</a>
+        <a href="#componentes">02 · Componentes</a>
+        <a href="#objetivo">03 · Objetivo</a>
+        <a href="#setup">04 · Setup</a>
+        <a href="#conceitos">05 · Conceitos</a>
+        <a href="#turno">06 · Turno</a>
+        <a href="#acoes">07 · Ações</a>
+        <a href="#cartas">08 · Cartas</a>
+        <a href="#pontuacao">09 · Pontuação</a>
+        <a href="#eventos">10 · Eventos</a>
+        <a href="#fim">11 · Fim de Jogo</a>
+        <a href="#modos">12 · Modos</a>
+        <a href="#i18n">13 · Internacionalização</a>
+        <a href="#secure">14 · Secure by Design</a>
+        <a href="#glossario">15 · Glossário</a>
+    </nav>
+
+    <main>
+
+        <!-- ================= 01 INTRODUÇÃO ================= -->
+        <section id="introducao">
+            <h2 class="sec"><span class="num">01</span> Introdução</h2>
+            <p><strong>PWND! — Bug Bounty Chaos</strong> é um jogo de cartas estratégico em que você assume o papel de
+                um pesquisador de segurança independente. Sua missão: encontrar vulnerabilidades em programas de
+                recompensa patrocinados por corporações fictícias, encadear falhas, validar relatórios e <strong>receber
+                    o pagamento antes que a equipe de engenharia do alvo publique a correção</strong>.</p>
+            <p>O jogo combina duas forças clássicas do design moderno: a <strong>construção de motores de
+                    recursos</strong> (engine-building) — você monta sua bancada de ferramentas e gera vantagens a cada
+                turno — e o <strong>risco calculado</strong> (push-your-luck) — cada reconhecimento pode revelar uma
+                recompensa… ou o temido <em>PATCH DEPLOYED!</em>.</p>
+            <div class="callout">
+                <span class="label">Assinatura do jogo</span>
+                <p style="margin:0"><strong>Find it. Report it. Get paid.</strong> — Encontre. Reporte. Receba.</p>
+            </div>
+            <p>Nenhum conhecimento técnico é necessário para jogar: tudo é operado por cartas com ícones universais.
+                Partidas rápidas de <strong>8 a 12 minutos</strong>, para 1 a 6 jogadores.</p>
+        </section>
+
+        <!-- ================= 02 COMPONENTES ================= -->
+        <section id="componentes">
+            <h2 class="sec"><span class="num">02</span> Componentes</h2>
+            <div class="card-grid">
+                <div class="card-type vuln">
+                    <h4>Vulnerability Cards</h4>
+                    <p>As falhas que você explora e reporta. Geram severidade (CVSS) e recompensa em Bounty.</p>
+                    <span class="count">147 cartas</span>
+                </div>
+                <div class="card-type tool">
+                    <h4>Tool Cards</h4>
+                    <p>Ferramentas que geram nós de recurso (Tráfego, Fuzzing, etc.) e bônus passivos. Permitem jogar
+                        vulnerabilidades.</p>
+                    <span class="count">35 cartas</span>
+                </div>
+                <div class="card-type program">
+                    <h4>Program Cards</h4>
+                    <p>Corporações fictícias que definem escopo, faixa de recompensa e velocidade de correção (Patch
+                        Speed).</p>
+                    <span class="count">18 corporações</span>
+                </div>
+                <div class="card-type event">
+                    <h4>Event Cards</h4>
+                    <p>Interrupções, sabotagens burocráticas e oscilações do sistema. Inclui o temido <em>PATCH
+                            DEPLOYED!</em>.</p>
+                    <span class="count">23 cartas</span>
+                </div>
+                <div class="card-type defuse">
+                    <h4>Defuse Cards</h4>
+                    <p>Safeguards que neutralizam correções de emergência e protegem seus relatórios.</p>
+                    <span class="count">12 cartas</span>
+                </div>
+                <div class="card-type">
+                    <h4>Tabuleiro &amp; Marcadores</h4>
+                    <p>1 Tabuleiro Central (mercado de programas, deck de eventos, trilha de rodadas), 1 Player Mat por
+                        jogador, tokens de Bounty e marcador de rodada.</p>
+                    <span class="count">1–6 player mats</span>
+                </div>
+            </div>
+            <p>As cartas possuem raridades indicadas pela cor da borda: <strong>cinza</strong> (Comum),
+                <strong>verde</strong> (Incomum), <strong>azul</strong> (Rara), <strong>roxa</strong> (Épica) e
+                <strong>dourada</strong> (Lendária).
+            </p>
+        </section>
+
+        <!-- ================= 03 OBJETIVO ================= -->
+        <section id="objetivo">
+            <h2 class="sec"><span class="num">03</span> Objetivo</h2>
+            <p>Ao final de <strong>8 rodadas</strong>, o jogador com o maior saldo na <strong>Bounty Track</strong>
+                vence a partida e é coroado o pesquisador mais bem pago da temporada.</p>
+            <p>Para acumular Bounty, você precisa:</p>
+            <ol>
+                <li><strong>Escolher um programa</strong> corporativo com boa relação entre recompensa e risco;</li>
+                <li><strong>Equipar ferramentas</strong> que gerem os recursos exigidos pelas vulnerabilidades;</li>
+                <li><strong>Explorar</strong> e alocar vulnerabilidades na sua bancada;</li>
+                <li><strong>Reportar</strong> antes que o alvo publique o patch — e antes que outro pesquisador reporte
+                    a mesma classe de falha.</li>
+            </ol>
+            <div class="callout warn">
+                <span class="label">Atenção</span>
+                <p style="margin:0">Se o <em>PATCH DEPLOYED!</em> for ativado, todas as vulnerabilidades <strong>não
+                        submetidas</strong> da sua bancada são descartadas. Reporte no momento certo.</p>
+            </div>
+        </section>
+
+        <!-- ================= 04 SETUP ================= -->
+        <section id="setup">
+            <h2 class="sec"><span class="num">04</span> Setup</h2>
+            <ol>
+                <li><strong>Tabuleiro Central:</strong> coloque o Tabuleiro Central no meio da mesa. Embaralhe o
+                    <strong>Deck de Eventos</strong> e coloque-o na zona indicada. Deixe a zona de descarte ao lado.
+                </li>
+                <li><strong>Mercado de Programas:</strong> revele <strong>3 Program Cards</strong> nas zonas SLOT 01,
+                    SLOT 02 e SLOT 03.</li>
+                <li><strong>Deck de Vulnerabilidades:</strong> embaralhe as 147 Vulnerability Cards e forme o deck de
+                    compras central.</li>
+                <li><strong>Deck de Ferramentas:</strong> embaralhe as 35 Tool Cards e forme o deck de ferramentas.</li>
+                <li><strong>Player Mats:</strong> cada jogador recebe 1 Player Mat, 1 token de Bounty (posicionado em
+                    <strong>$0</strong>) e 1 carta de Arquétipo de Pesquisador.
+                </li>
+                <li><strong>Mão inicial:</strong> cada jogador compra <strong>5 cartas</strong> do deck de
+                    vulnerabilidades e <strong>2 Tool Cards</strong>.</li>
+                <li><strong>Defuse:</strong> cada jogador recebe 1 carta <em>0-Day Reserve</em> (Defuse) na zona DEFUSE
+                    do seu mat.</li>
+                <li><strong>Primeiro jogador:</strong> o jogador mais novo começa. O marcador de rodada é posicionado no
+                    espaço <strong>1</strong> da Round Track.</li>
+            </ol>
+            <div class="callout">
+                <span class="label">Dica de jogo</span>
+                <p style="margin:0">Na primeira partida, recomendamos começar com o programa de <strong>Patch Speed
+                        lento</strong> (governo) para aprender o ritmo sem pressão.</p>
+            </div>
+        </section>
+
+        <!-- ================= 05 CONCEITOS ================= -->
+        <section id="conceitos">
+            <h2 class="sec"><span class="num">05</span> Conceitos Fundamentais</h2>
+
+            <h3>Pontos de Ação (AP)</h3>
+            <p>Cada jogador tem <strong>3 AP por turno</strong>. As ações custam AP; o gerenciamento eficiente dos
+                pontos define o ritmo do seu motor.</p>
+
+            <h3>Bounty Track</h3>
+            <p>Trilha vertical no Player Mat que registra seu saldo. Os valores são divididos em 4 faixas de severidade:
+            </p>
+            <div class="tier"><span class="dot" style="background:#39D353"></span><span class="name">Low</span><span
+                    class="range">$100 – $500</span><span class="mult">×1</span></div>
+            <div class="tier"><span class="dot" style="background:#FFD93D"></span><span class="name">Medium</span><span
+                    class="range">$500 – $2.500</span><span class="mult">×2</span></div>
+            <div class="tier"><span class="dot" style="background:#FFB347"></span><span class="name">High</span><span
+                    class="range">$2.500 – $15.000</span><span class="mult">×5</span></div>
+            <div class="tier"><span class="dot" style="background:#FF4D4D"></span><span
+                    class="name">Critical</span><span class="range">$15.000 – $50.000</span><span
+                    class="mult">×10</span></div>
+
+            <h3>Severidade CVSS</h3>
+            <p>Cada Vulnerability Card exibe uma pontuação CVSS (de 0.0 a 10.0) representada por pontos coloridos.
+                Quanto maior o CVSS, maior o valor em Bounty — e maior a atenção que a falha atrai dos defensores.</p>
+
+            <h3>Patch Speed</h3>
+            <p>Cada Corporação possui um contador regressivo de turnos. Quando chega a zero, o patch é publicado e o
+                programa é resetado.</p>
+            <ul>
+                <li><strong>Programas governamentais:</strong> recompensas moderadas, Patch Speed lento (6 a 8 turnos).
+                </li>
+                <li><strong>Fintechs e exchanges:</strong> valores expressivos, Patch Speed acelerado (2 a 3 turnos).
+                </li>
+            </ul>
+
+            <h3>Tensão Triangular</h3>
+            <p>Vários pesquisadores compartilham o mesmo alvo. O <strong>primeiro</strong> a reportar uma classe de
+                falha recebe o valor integral; o segundo que tentar submeter a mesma classe recebe a penalidade
+                <em>Duplicate Report!</em> e perde o pagamento do lote.
+            </p>
+        </section>
+
+        <!-- ================= 06 TURNO ================= -->
+        <section id="turno">
+            <h2 class="sec"><span class="num">06</span> Estrutura do Turno</h2>
+            <p>Cada rodada é composta por turnos de todos os jogadores, seguidos da <strong>Fase de Patch</strong>:</p>
+            <ol>
+                <li><strong>Fase de Ações:</strong> o jogador ativo gasta seus 3 AP em qualquer combinação de ações
+                    (Recon, Exploit, Report).</li>
+                <li><strong>Resolução de Eventos:</strong> eventos comprados ou ativados durante o turno são resolvidos
+                    imediatamente na pilha de execução.</li>
+                <li><strong>Fim do turno:</strong> o jogador descarta até o limite de mão (7 cartas) e passa a vez.</li>
+                <li><strong>Fase de Patch (fim da rodada):</strong> todos os contadores de Patch Speed dos programas
+                    ativos diminuem em 1. Se algum chegar a zero, o <em>PATCH DEPLOYED!</em> é ativado para aquele
+                    programa.</li>
+                <li><strong>Nova rodada:</strong> o marcador avança na Round Track. O mercado de programas é
+                    reabastecido se houver slots vazios.</li>
+            </ol>
+            <div class="callout">
+                <span class="label">Loop central</span>
+                <p style="margin:0"><strong>Recon → Exploit → Report → Bounty.</strong> Compre cartas, monte sua
+                    bancada, encadeie falhas e converta em dinheiro antes do patch.</p>
+            </div>
+        </section>
+
+        <!-- ================= 07 AÇÕES ================= -->
+        <section id="acoes">
+            <h2 class="sec"><span class="num">07</span> Ações</h2>
+
+            <h3>Recon — Reconhecimento <em>(1 AP)</em></h3>
+            <p>Compre <strong>1 carta</strong> do Deck Central. Se a carta comprada for um <strong>Evento
+                    Imediato</strong>, resolva-o instantaneamente, sem custo adicional de AP. Se for uma vulnerabilidade
+                ou ferramenta, vá para sua mão.</p>
+
+            <h3>Exploit — Exploração <em>(1 AP + custo em ferramentas)</em></h3>
+            <p>Aloque <strong>1 Vulnerability Card</strong> da sua mão no seu Programa ativo. Para ser válida, você deve
+                ter na mesa ferramentas que forneçam os ícones de recurso exigidos pela vulnerabilidade (ex.: 2 nós de
+                Tráfego HTTP + 1 nó de Fuzzing).</p>
+            <p>O custo de ferramentas está impresso no rodapé da carta (ex.: <em>Custo: Burp + SQLMap</em>).</p>
+
+            <h3>Report — Submissão <em>(2 AP)</em></h3>
+            <p>Feche o ciclo de pesquisa no programa ativo. Todas as vulnerabilidades alocadas são calculadas,
+                convertidas em <strong>Bounty</strong> e enviadas à pilha de descarte corporativo. Esta ação só pode ser
+                realizada <strong>uma vez por programa</strong> antes que o alvo seja resetado.</p>
+            <div class="callout warn">
+                <span class="label">Risco</span>
+                <p style="margin:0">Se outro jogador já reportou a mesma classe de falha neste programa nesta rodada,
+                    você recebe <em>Duplicate Report!</em> e perde o pagamento do lote.</p>
+            </div>
+
+            <h3>Outras ações livres</h3>
+            <ul>
+                <li><strong>Trocar programa</strong> (1 AP): abandone o programa ativo e escolha outro do mercado.</li>
+                <li><strong>Comprar ferramenta</strong> (1 AP): compre 1 Tool Card do deck de ferramentas.</li>
+                <li><strong>Passar:</strong> encerre o turno sem gastar AP restante.</li>
+            </ul>
+        </section>
+
+        <!-- ================= 08 CARTAS ================= -->
+        <section id="cartas">
+            <h2 class="sec"><span class="num">08</span> As Cartas</h2>
+
+            <h3>Vulnerability Cards</h3>
+            <p>Organizadas em classes inspiradas no OWASP Top 10 e em CWEs fictícias. Cada carta indica: nome, classe,
+                CVSS, raridade, custo de ferramentas e habilidade operacional.</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Classe</th>
+                            <th>Exemplos</th>
+                            <th>Faixa CVSS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Injection</td>
+                            <td>SQLi, Blind SQLi, NoSQLi, SSTI, OS Command, RCE</td>
+                            <td>6.8 – 10.0</td>
+                        </tr>
+                        <tr>
+                            <td>Access Control</td>
+                            <td>IDOR, BOLA, Priv Esc, Auth Bypass</td>
+                            <td>5.8 – 8.5</td>
+                        </tr>
+                        <tr>
+                            <td>XSS &amp; Client-Side</td>
+                            <td>Reflected XSS, Stored XSS, DOM XSS, CSP Bypass, Clickjacking</td>
+                            <td>5.4 – 8.6</td>
+                        </tr>
+                        <tr>
+                            <td>SSRF &amp; CSRF</td>
+                            <td>SSRF, Blind SSRF, DNS Rebinding, CSRF, CSRF Bypass</td>
+                            <td>6.5 – 9.3</td>
+                        </tr>
+                        <tr>
+                            <td>Info Disclosure &amp; Crypto</td>
+                            <td>S3 Misconfig, Git Leak, Padding Oracle, Weak Crypto, Hardcoded Secret</td>
+                            <td>5.3 – 8.9</td>
+                        </tr>
+                        <tr>
+                            <td>Logic Flaws</td>
+                            <td>Race Condition, TOCTOU, 2FA Bypass, Account Takeover, Coupon Abuse</td>
+                            <td>6.4 – 9.0</td>
+                        </tr>
+                        <tr>
+                            <td>Deserialization &amp; Upload</td>
+                            <td>Deserialization, File Upload, Zip Slip, GraphQL Abuse, Prototype Pollution</td>
+                            <td>7.5 – 8.9</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Tool Cards</h3>
+            <p>Ferramentas clássicas do ecossistema de segurança, estilizadas e ficcionalizadas: <strong>Burp Suite
+                    Pro</strong>, <strong>SQLMap</strong>, <strong>Browser DevTools</strong>, <strong>Postman</strong>,
+                <strong>Nmap</strong>, <strong>Commix</strong>, <strong>ffuf</strong>, <strong>Hashcat</strong>,
+                <strong>OWASP ZAP</strong> e outras. Cada ferramenta gera nós de recurso e pode ter bônus passivos.
+            </p>
+
+            <h3>Program Cards</h3>
+            <p>Corporações fictícias (ex.: <strong>ShopAll</strong>, <strong>BankSafe</strong>,
+                <strong>CloudNine</strong>) com faixa de recompensa, classes de vulnerabilidade aceitas (escopo) e Patch
+                Speed.
+            </p>
+
+            <h3>Event Cards</h3>
+            <p>Efeitos globais que agitam a partida: <em>WAF Deployed!</em>, <em>Duplicate Report!</em>, <em>Patch Speed
+                    Check</em> e o temido <em>PATCH DEPLOYED!</em> — a carta que limpa bancadas inteiras.</p>
+
+            <h3>Defuse Cards</h3>
+            <p>Safeguards como a <em>0-Day Reserve</em>: neutralize uma correção de emergência ou proteja um lote de
+                relatórios contra descarte.</p>
+        </section>
+
+        <!-- ================= 09 PONTUAÇÃO ================= -->
+        <section id="pontuacao">
+            <h2 class="sec"><span class="num">09</span> Pontuação e Bounty</h2>
+            <p>Ao reportar, some o valor em Bounty de cada vulnerabilidade do lote (CVSS × multiplicador da faixa ×
+                multiplicador do programa). Avance seu token na Bounty Track.</p>
+            <p><strong>Exemplo:</strong> reportar <em>A Injeção da Vovó</em> (CVSS 9.1, High) + <em>O Espelho
+                    Narcisista</em> (CVSS 7.4, High) em um programa ×5 gera um lote de aproximadamente
+                <strong>$19.650</strong>.
+            </p>
+            <div class="callout">
+                <span class="label">Bônus de encadeamento</span>
+                <p style="margin:0">Vulnerabilidades da <strong>mesma classe</strong> reportadas juntas concedem bônus
+                    de sinergia. Vulnerabilidades de classes <strong>diferentes</strong> encadeadas podem ativar
+                    habilidades combinadas.</p>
+            </div>
+        </section>
+
+        <!-- ================= 10 EVENTOS ================= -->
+        <section id="eventos">
+            <h2 class="sec"><span class="num">10</span> Eventos e Patch Deployed!</h2>
+            <p>O Deck de Eventos é o coração do caos. Ao comprar uma carta de evento durante o Recon, resolva-a
+                imediatamente:</p>
+            <ul>
+                <li><strong>PATCH DEPLOYED!:</strong> todas as vulnerabilidades não submetidas da sua bancada são
+                    descartadas — a menos que você use uma Defuse (ex.: <em>0-Day Reserve</em>).</li>
+                <li><strong>WAF Deployed!:</strong> bloqueia a próxima vulnerabilidade de uma classe específica por 1
+                    rodada.</li>
+                <li><strong>Duplicate Report!:</strong> o segundo pesquisador a reportar a mesma classe perde o
+                    pagamento do lote.</li>
+                <li><strong>Patch Speed Check:</strong> acelera o contador de um programa ativo.</li>
+                <li><strong>Burocracia:</strong> eventos cômicos de triagem que forçam descartes, trocas de mão ou
+                    gastos extras de AP.</li>
+            </ul>
+            <div class="callout warn">
+                <span class="label">Regra de ouro</span>
+                <p style="margin:0">Quanto mais você faz Recon, mais cartas ganha — e maior a chance de puxar o
+                    <em>PATCH DEPLOYED!</em>. O risco é a moeda do jogo.
+                </p>
+            </div>
+        </section>
+
+        <!-- ================= 11 FIM DE JOGO ================= -->
+        <section id="fim">
+            <h2 class="sec"><span class="num">11</span> Fim de Jogo e Vitória</h2>
+            <p>A partida termina ao final da <strong>8ª rodada</strong> (ou antes, em modo rápido). O jogador com o
+                maior saldo na Bounty Track vence.</p>
+            <p><strong>Desempates:</strong> maior número de vulnerabilidades reportadas; depois, maior CVSS individual
+                reportado; depois, sorteio.</p>
+            <p>Em partidas com 2+ jogadores, o segundo colocado recebe o título honorário de <em>Runner-Up</em> e o
+                último colocado ganha o troféu irônico de <em>Most Duplicated Researcher</em>.</p>
+        </section>
+
+        <!-- ================= 12 MODOS ================= -->
+        <section id="modos">
+            <h2 class="sec"><span class="num">12</span> Modos de Jogo</h2>
+            <ul>
+                <li><strong>Solo (1 jogador):</strong> enfrente o <em>Patch Bot</em> — um oponente automatizado com
+                    velocidade de patch imprevisível. Alcance uma meta de Bounty por dificuldade.</li>
+                <li><strong>Clássico (2–6 jogadores):</strong> o modo padrão descrito neste manual.</li>
+                <li><strong>Rápido (2–4 jogadores):</strong> 5 rodadas, mão inicial maior, para partidas de 5–8 minutos.
+                </li>
+                <li><strong>Cooperativo (2–4 jogadores):</strong> todos compartilham um único programa de elite contra
+                    um cronômetro de patches; ou todos vencem, ou todos perdem.</li>
+                <li><strong>Tutorial:</strong> partida guiada de 3 rodadas que ensina as ações passo a passo.</li>
+            </ul>
+        </section>
+
+        <!-- ================= 13 I18N ================= -->
+        <section id="i18n">
+            <h2 class="sec"><span class="num">13</span> Internacionalização (i18n)</h2>
+            <p>PWND! é construído <strong>internacionalizado desde o dia zero</strong>. Nenhum texto é embutido no
+                código do jogo; todo conteúdo vive em camadas de localização:</p>
+            <ul>
+                <li><strong>Arquitetura:</strong> arquivos de tradução por idioma (JSON), com chaves estáveis (ex.:
+                    <code>action.recon.name</code>, <code>card.vuln.grandma_injection.title</code>).
+                </li>
+                <li><strong>Idiomas de lançamento:</strong> Português (pt-BR), Inglês (en), Espanhol (es), Francês (fr),
+                    Alemão (de), Italiano (it), Japonês (ja), Coreano (ko), Chinês (zh) e Árabe (ar).</li>
+                <li><strong>RTL:</strong> suporte a idiomas da direita para a esquerda (árabe, hebraico) com
+                    espelhamento de layout.</li>
+                <li><strong>Localização cultural:</strong> nomes de cartas e piadas são adaptados por região —
+                    trocadilhos técnicos são recriados, não traduzidos literalmente.</li>
+                <li><strong>Formatos:</strong> moeda, datas e números seguem o padrão local (ex.: $1.234,56 vs
+                    $1,234.56).</li>
+                <li><strong>Este manual:</strong> o documento HTML usa <code>lang="pt-BR"</code> e atributos
+                    <code>data-i18n</code> para permitir troca de idioma sem duplicação de conteúdo.
+                </li>
+            </ul>
+        </section>
+
+        <!-- ================= 14 SECURE BY DESIGN ================= -->
+        <section id="secure">
+            <h2 class="sec"><span class="num">14</span> Secure by Design</h2>
+            <p>PWND! aplica o framework <strong>Secure by Design</strong> tanto na engenharia do jogo quanto no
+                conteúdo:</p>
+            <h3>No conteúdo</h3>
+            <ul>
+                <li><strong>Nenhum alvo real:</strong> todas as corporações, domínios e sistemas são 100% fictícios.
+                    Nenhuma referência a empresas, URLs ou infraestrutura reais.</li>
+                <li><strong>Educação, não instrução:</strong> as cartas ensinam conceitos de segurança ofensiva de forma
+                    lúdica e abstrata — nunca fornecem comandos, payloads ou procedimentos executáveis.</li>
+                <li><strong>Ética em primeiro plano:</strong> o jogo reforça que bug bounty é uma atividade
+                    <strong>autorizada e legal</strong>, dentro de escopo definido. A carta de abertura do tutorial
+                    apresenta o "Código do Pesquisador".
+                </li>
+                <li><strong>Sem glamour do crime:</strong> a narrativa celebra a descoberta responsável e a divulgação
+                    coordenada, nunca o acesso não autorizado.</li>
+            </ul>
+            <h3>Na engenharia</h3>
+            <ul>
+                <li><strong>Privacidade por padrão:</strong> dados de jogadores são minimizados, criptografados em
+                    trânsito e em repouso, e nunca vendidos.</li>
+                <li><strong>Segurança do cliente:</strong> nenhum segredo ou credencial no código do app; autenticação
+                    via fluxos seguros e revogáveis.</li>
+                <li><strong>Anti-cheat e integridade:</strong> estado de jogo validado no servidor; lógica de pontuação
+                    nunca confia no cliente.</li>
+                <li><strong>Menores:</strong> sem compras predatórias; loja cosmética auditada; conformidade com
+                    políticas de loja (Google Play / App Store).</li>
+                <li><strong>Segurança do servidor:</strong> princípio do menor privilégio, rate limiting, auditoria e
+                    resposta a incidentes documentados.</li>
+            </ul>
+            <div class="callout">
+                <span class="label">Código do Pesquisador</span>
+                <p style="margin:0"><em>Respeite o escopo. Reporte com responsabilidade. Nunca explore além do
+                        autorizado.</em></p>
+            </div>
+        </section>
+
+        <!-- ================= 15 GLOSSÁRIO ================= -->
+        <section id="glossario">
+            <h2 class="sec"><span class="num">15</span> Glossário</h2>
+            <dl class="glossary">
+                <dt>AP (Action Points)</dt>
+                <dd>Pontos de Ação gastos para executar ações no turno. Padrão: 3 por turno.</dd>
+                <dt>BOLA</dt>
+                <dd>Broken Object Level Authorization — falha de autorização ao nível do objeto.</dd>
+                <dt>Bounty</dt>
+                <dd>Recompensa em moeda fictícia recebida por reportar vulnerabilidades.</dd>
+                <dt>Bounty Track</dt>
+                <dd>Trilha de pontuação no Player Mat, de $0 a $50.000.</dd>
+                <dt>CVSS</dt>
+                <dd>Common Vulnerability Scoring System — métrica de severidade (0.0 a 10.0).</dd>
+                <dt>Defuse</dt>
+                <dd>Carta de Safeguard que neutraliza eventos destrutivos.</dd>
+                <dt>Duplicate Report!</dt>
+                <dd>Penalidade aplicada ao segundo pesquisador que reporta a mesma classe de falha.</dd>
+                <dt>Exploit</dt>
+                <dd>Ação de alocar uma vulnerabilidade na bancada, pagando custo de ferramentas.</dd>
+                <dt>IDOR</dt>
+                <dd>Insecure Direct Object Reference — acesso direto a objetos sem autorização.</dd>
+                <dt>Patch Speed</dt>
+                <dd>Velocidade com que a corporação corrige falhas; contador regressivo de turnos.</dd>
+                <dt>PATCH DEPLOYED!</dt>
+                <dd>Evento fatal que descarta vulnerabilidades não submetidas da bancada.</dd>
+                <dt>Program</dt>
+                <dd>Corporação fictícia que patrocina o programa de recompensas.</dd>
+                <dt>Recon</dt>
+                <dd>Ação de reconhecimento: comprar cartas do deck central.</dd>
+                <dt>Report</dt>
+                <dd>Ação de submeter vulnerabilidades e converter em Bounty.</dd>
+                <dt>RCE</dt>
+                <dd>Remote Code Execution — execução remota de código; a classe mais valiosa do jogo.</dd>
+                <dt>Scope</dt>
+                <dd>Escopo do programa: classes de vulnerabilidade aceitas para recompensa.</dd>
+                <dt>WAF Deployed!</dt>
+                <dd>Evento que bloqueia temporariamente uma classe de vulnerabilidade.</dd>
+            </dl>
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <span class="sig">FIND IT. REPORT IT. GET PAID.</span>
+        PWND! — Bug Bounty Chaos · Manual de Regras v1.0<br>
+        Documento oficial · PWND! Game Development Studio · 2026
+    </footer>
+
+</body>
+
+</html>

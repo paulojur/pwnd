@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWND! — Manual de Regras Oficial v1.0 (16 Seções Integrais)</title>
+  <style>
+    :root {
+      --bg-dark: #0a0d14;
+      --card-bg: #121824;
+      --terminal-green: #39d353;
+      --amber-glow: #f0883e;
+      --cyber-blue: #38bdf8;
+      --alert-red: #f85149;
+      --purple-accent: #c084fc;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(180deg, #161b26 0%, #0a0d14 100%);
+      border-bottom: 2px solid var(--amber-glow);
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(240, 136, 62, 0.2);
+    }
+
+    h1 {
+      font-family: 'Courier New', Courier, monospace;
+      color: #fff;
+      font-size: 28px;
+      margin: 0 0 6px 0;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      color: var(--amber-glow);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .nav-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 30px;
+    }
+
+    .nav-box h3 {
+      margin-top: 0;
+      color: var(--cyber-blue);
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .nav-box ul {
+      column-count: 2;
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
+
+    .nav-box a {
+      color: var(--amber-glow);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .nav-box a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      color: var(--amber-glow);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 20px;
+      border-bottom: 1px solid var(--amber-glow);
+      padding-bottom: 8px;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: var(--cyber-blue);
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--amber-glow);
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: bold;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .badge-inj {
+      background: rgba(240, 136, 62, 0.2);
+      color: #f0883e;
+      border: 1px solid #f0883e;
+    }
+
+    .badge-bac {
+      background: rgba(192, 132, 252, 0.2);
+      color: #c084fc;
+      border: 1px solid #c084fc;
+    }
+
+    .badge-xss {
+      background: rgba(244, 114, 182, 0.2);
+      color: #f472b6;
+      border: 1px solid #f472b6;
+    }
+
+    .badge-auth {
+      background: rgba(234, 179, 8, 0.2);
+      color: #eab308;
+      border: 1px solid #eab308;
+    }
+
+    .badge-ssrf {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border: 1px solid #38bdf8;
+    }
+
+    .badge-logic {
+      background: rgba(45, 212, 191, 0.2);
+      color: #2dd4bf;
+      border: 1px solid #2dd4bf;
+    }
+
+    .badge-crypto {
+      background: rgba(57, 211, 83, 0.2);
+      color: #39d353;
+      border: 1px solid #39d353;
+    }
+
+    .badge-legend {
+      background: rgba(168, 85, 247, 0.2);
+      color: #a855f7;
+      border: 1px solid #a855f7;
+    }
+
+    .callout {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 4px solid var(--cyber-blue);
+      padding: 14px 18px;
+      border-radius: 4px;
+      margin: 16px 0;
+    }
+
+    .callout-amber {
+      background: rgba(240, 136, 62, 0.08);
+      border-left: 4px solid var(--amber-glow);
+      padding: 14px 18px;
+      border-radius: 4px;
+      margin: 16px 0;
+    }
+
+    .callout-red {
+      background: rgba(248, 81, 73, 0.08);
+      border-left: 4px solid var(--alert-red);
+      padding: 14px 18px;
+      border-radius: 4px;
+      margin: 16px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="subtitle">DOCUMENTAÇÃO OFICIAL DO SISTEMA V1.0</div>
+    <h1>PWND! — BUG BOUNTY CHAOS</h1>
+    <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Manual de Regras Completo (16 Seções
+      Integrais) • Hacking Ético</div>
+  </header>
+
+  <div class="container">
+
+    <!-- NAV BOX -->
+    <div class="nav-box">
+      <h3>📑 ÍNDICE DE CAPÍTULOS (16 SEÇÕES COMPLETAS)</h3>
+      <ul>
+        <li><a href="#sec1">1. Componentes do Jogo</a></li>
+        <li><a href="#sec2">2. Objetivo do Jogo & Condição de Vitória</a></li>
+        <li><a href="#sec3">3. Preparação da Mesa (Setup Passo a Passo)</a></li>
+        <li><a href="#sec4">4. Estrutura da Partida & Escala</a></li>
+        <li><a href="#sec5">5. Ações do Turno (Recon, Exploit, Report)</a></li>
+        <li><a href="#sec6">6. Patch Speed: O Relógio do Patch (D6)</a></li>
+        <li><a href="#sec7">7. PATCH DEPLOYED! (Penalidades)</a></li>
+        <li><a href="#sec8">8. Event Cards & Mecânica de Caos</a></li>
+        <li><a href="#sec9">9. Researcher Archetypes (6 Classes)</a></li>
+        <li><a href="#sec10">10. Tool Cards (Tabela de Ferramentas)</a></li>
+        <li><a href="#sec11">11. Program Cards (Tabela de Empresas)</a></li>
+        <li><a href="#sec12">12. Bounty Track (28 Degraus)</a></li>
+        <li><a href="#sec13">13. Fim da Partida & Critérios de Desempate</a></li>
+        <li><a href="#sec14">14. Rodadas Finais (7 e 8): O Caos Total</a></li>
+        <li><a href="#sec15">15. Guia Visual: Molduras, Selos & Slots</a></li>
+        <li><a href="#sec16">16. Guia Rápido & Glossário Geral</a></li>
+      </ul>
+    </div>
+
+    <!-- SEÇÃO 1 -->
+    <section id="sec1">
+      <h2>1. COMPONENTES DO JOGO</h2>
+      <p>O jogo <strong>PWND! — Bug Bounty Chaos</strong> é composto por elementos modulares de alta precisão técnica:
+      </p>
+      <ul>
+        <li><strong>Board Central Compartilhado (30x20cm):</strong> Contém 1 Slot de Event Deck, Program Market (3
+          slots), Discard Pile, Round Tracker (1 a 8) e Bounty Tier Legend.</li>
+        <li><strong>Player Mats (6 unidades 25x35cm):</strong> Contém `SLOT RESEARCHER`, `ACTIVE PROGRAM`, `SLOT
+          DEFUSE`, `TOOLS RACK` (3 slots de 155px), `ZONA DE EXPLOITS` (160px limpa) e a Bounty Track lateral.</li>
+        <li><strong>Baralhos:</strong> 80 Vulnerability Cards, 12 Tool Cards, 24 Program Cards (12 empresas x 2 cópias),
+          6 Researcher Archetypes, 23 Event Cards e Safeguards escalares ($N+4$).</li>
+        <li><strong>Auxiliares:</strong> 6 Bounty Tokens acrílicos, 1 Round Token verde-neon e 2 Dados D6.</li>
+      </ul>
+    </section>
+
+    <!-- SEÇÃO 2 -->
+    <section id="sec2">
+      <h2>2. OBJETIVO DO JOGO & CONDIÇÃO DE VITÓRIA</h2>
+      <p>Em PWND!, cada participante assume o papel de um pesquisador independente desegurança ofensiva competindo em
+        plataformas abertas de caça a falhas. Ao longo de 8 rodadas estruturadas, os participantes devem realizar
+        varreduras, estruturar cadeias deataque (exploits) e emitir relatórios técnicos validados antes que as equipes
+        defensivascorrijam as vulnerabilidades em produção.</p>
+      <div class="callout">
+        <strong style="color: var(--cyber-blue);">🏆 CONDIÇÃO DE VITÓRIA:</strong><br>
+        O primeiro pesquisador a atingir a meta de <strong>$50.000 na Bounty Track</strong> vence instantaneamente. Se
+        ninguém atingir $50.000 até o final da <strong>8ª Rodada</strong>, vence quem tiver a maior quantia acumulada.
+      </div>
+      <p>Em caso de empate na pontuação acumulada, o critério de desempate segue a contagem do maior número de
+        relatórios técnicos (Reports) concluídos com sucesso. Persistindo o empate, vence quem tiver aprovado a
+        vulnerabilidade individual de maior pontuação CVSS.</p>
+    </section>
+
+    <!-- SEÇÃO 3 -->
+    <section id="sec3">
+      <h2>3. PREPARAÇÃO DA MESA (SETUP PASSO A PASSO 3.1 A 3.7)</h2>
+      <ol>
+        <li><strong>3.1 Espaço Central:</strong> Posicione o Board Central no meio da mesa e os marcadores de madeira no
+          degrau $0.</li>
+        <li><strong>3.2 Primeiro Jogador (Regra Social):</strong> Vence a prioridade quem jogou board game por último ➔
+          quem visitou Portugal por último ➔ quem tomou o último café!</li>
+        <li><strong>3.3 Escolha Pública de Arquétipos:</strong> No sentido horário, cada participante escolhe
+          abertamente 1 Arquétipo.</li>
+        <li><strong>3.4 Preparação dos Baralhos:</strong> Embaralhe 80 Exploits + 12 Tools + 4 Defuses no Main Deck.
+          Coloque os 23 Eventos no Event Deck. Revele 3 empresas no Program Market.</li>
+        <li><strong>3.5 Mão Inicial Garantida ($N+4$):</strong> Compre 5 cartas de Ação + <strong>1 Safeguard
+            garantida (`Cofre 0-Day`)</strong> (total de 6 cartas iniciais).</li>
+        <li><strong>3.6 Seleção do Alvo Inicial:</strong> Cada jogador escolhe 1 empresa do mercado para seu `ACTIVE
+          PROGRAM`.</li>
+        <li><strong>3.7 Marcador de Rodadas:</strong> Coloque o Round Token na casa 1 do Round Tracker.</li>
+      </ol>
+    </section>
+
+    <!-- SEÇÃO 4 -->
+    <section id="sec4">
+      <h2>4. ESTRUTURA DA PARTIDA & ESCALA DE JOGADORES</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Número de Jogadores</th>
+            <th>Número de Rodadas</th>
+            <th>Duração Estimada</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2 Jogadores</td>
+            <td>10 Rodadas oficiais</td>
+            <td>40 minutos</td>
+          </tr>
+          <tr>
+            <td>3 a 4 Jogadores</td>
+            <td>8 Rodadas oficiais</td>
+            <td>45 minutos</td>
+          </tr>
+          <tr>
+            <td>5 a 6 Jogadores</td>
+            <td>8 Rodadas oficiais</td>
+            <td>60 minutos</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SEÇÃO 5 -->
+    <section id="sec5">
+      <h2>5. AÇÕES DO TURNO</h2>
+      <div class="callout-amber">
+        <strong>5.1 AÇÃO 1: RECON (OBRIGATÓRIA - ESCOLHA 1 OPÇÃO)</strong><br>
+        • (A) Comprar 2 cartas de Ação (3 se tiver Nmap).<br>
+        • (B) Comprar 1 carta do Baralho de Eventos.<br>
+        • (C) Desistir da empresa ativa e escolher uma nova no mercado.
+      </div>
+      <div class="callout-amber">
+        <strong>5.2 AÇÃO 2: EXPLOIT (ARMAGEM)</strong><br>
+        Baixe vulnerabilidades e ferramentas pagando os custos requeridos ou aplicados por ferramentas de redução
+        (SQLMap, Postman, OWASP ZAP, Burp Suite Pro).
+      </div>
+      <div class="callout-amber">
+        <strong>5.3 AÇÃO 3: REPORT (SUBMISSÃO FORMAL)</strong><br>
+        Verifique duplicatas (Duplicate Check) ➔ Some os pontos CVSS ➔ Aplique o multiplicador da empresa (×1, ×2, ×5,
+        ×10) ➔ Avance na Bounty Track ➔ Descarte as falhas e escolha novo alvo.
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6 -->
+    <section id="sec6">
+      <h2>6. PATCH SPEED: O RELÓGIO DO PATCH (TESTE D6)</h2>
+      <p>No final da rodada, jogadores com vulnerabilidades expostas na mesa rolam 1 dado D6:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Patch Speed do Programa</th>
+            <th>Resultado Crítico no Dado (D6)</th>
+            <th>Probabilidade de Correção</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lenta</td>
+            <td>Apenas resultado <strong>6</strong></td>
+            <td>16,6%</td>
+          </tr>
+          <tr>
+            <td>Moderada</td>
+            <td>Resultados <strong>5 ou 6</strong></td>
+            <td>33,3%</td>
+          </tr>
+          <tr>
+            <td>Rápida</td>
+            <td>Resultados <strong>4, 5 ou 6</strong></td>
+            <td>50,0%</td>
+          </tr>
+          <tr>
+            <td>Extrema</td>
+            <td>Resultados <strong>3, 4, 5 ou 6</strong></td>
+            <td>66,6%</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SEÇÃO 7 -->
+    <section id="sec7">
+      <h2>7. PATCH DEPLOYED!</h2>
+      <div class="callout-red">
+        <strong>🚨 PENALIDADES DO PATCH DEPLOYED:</strong><br>
+        1. Descarte imediato de todas as vulnerabilidades na mesa.<br>
+        2. Recuo de <strong>3 degraus</strong> na Bounty Track (piso mínimo em $0).<br>
+        3. Encerramento e descarte compulsório da empresa ativa.<br>
+        <em>Proteção:</em> A carta `Cofre 0-Day` (Defuse) anula 100% dos efeitos danosos.
+      </div>
+    </section>
+
+    <!-- SEÇÃO 8 -->
+    <section id="sec8">
+      <h2>8. EVENT CARDS & MECÂNICA DE CAOS</h2>
+      <p>
+        Eventos introduzem reviravoltas. Na Rodada 7, o Event Deck é misturado ao Main Deck. O <em>Social Engineer</em>
+        pode escolher nominalmente o alvo dos eventos disparados.
+      </p>
+    </section>
+
+    <!-- SEÇÃO 9 -->
+    <section id="sec9">
+      <h2>9. RESEARCHER ARCHETYPES (AS 6 CLASSES ASSIMÉTRICAS)</h2>
+      <ul>
+        <li><strong>9.1 n00b:</strong> Evolui sua árvore de habilidades passivas a cada Report efetuado.</li>
+        <li><strong>9.2 The Old Guard:</strong> Mão expandida de até 9 cartas. Reporta no máximo 1 vez por rodada.</li>
+        <li><strong>9.3 Bug Hunter:</strong> Processa 2 Reports na mesma ação (limitado a CVSS ≤ 6.0). Bônus de +50% com
+          5+ cartas.</li>
+        <li><strong>9.4 Social Engineer:</strong> Controla o alvo de eventos e pode comprar do Event Deck em Recon.</li>
+        <li><strong>9.5 Red Teamer:</strong> Ignora escopo de empresas com taxa operacional de -30% nos bounties.</li>
+        <li><strong>9.6 The Pentester:</strong> Imune a *Duplicate Report!* e *Triage Delay!*. Só sofre Patch no
+          resultado 6 do D6.</li>
+      </ul>
+    </section>
+
+    <!-- SEÇÃO 10 -->
+    <section id="sec10">
+      <h2>10. TOOL CARDS (TABELA COMPLETA DE FERRAMENTAS)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Ferramenta Operacional</th>
+            <th>Efeito Técnico Concedido</th>
+            <th>Ativação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Burp Suite Pro</td>
+            <td>Coringa universal (substitui qualquer ferramenta).</td>
+            <td>Ativa</td>
+          </tr>
+          <tr>
+            <td>Nmap + ffuf</td>
+            <td>+1 carta na ação de Recon (compra 3 cartas).</td>
+            <td>Passiva</td>
+          </tr>
+          <tr>
+            <td>OWASP ZAP</td>
+            <td>Vulnerabilidades Low e Medium têm custo zerado.</td>
+            <td>Ativa</td>
+          </tr>
+          <tr>
+            <td>Postman</td>
+            <td>Reduz em 1 unidade custo de Broken Access Control.</td>
+            <td>Ativa</td>
+          </tr>
+          <tr>
+            <td>Browser DevTools</td>
+            <td>Vulnerabilidades XSS agregam +50% no Report.</td>
+            <td>Passiva</td>
+          </tr>
+          <tr>
+            <td>SQLMap</td>
+            <td>Vulnerabilidades Injection têm custo zerado.</td>
+            <td>Ativa</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SEÇÃO 11 -->
+    <section id="sec11">
+      <h2>11. PROGRAM CARDS (TABELA DE EMPRESAS CORPORATIVAS)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Empresa / Alvo</th>
+            <th>Bounty Tier</th>
+            <th>Patch Speed</th>
+            <th>Multiplicador</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ShopAll Global</td>
+            <td>Medium</td>
+            <td>Moderada (5+)</td>
+            <td>×2</td>
+          </tr>
+          <tr>
+            <td>BankSafe Financial</td>
+            <td>High</td>
+            <td>Rápida (4+)</td>
+            <td>×5</td>
+          </tr>
+          <tr>
+            <td>GovPortal Nacional</td>
+            <td>Low</td>
+            <td>Lenta (6)</td>
+            <td>×1</td>
+          </tr>
+          <tr>
+            <td>HealthLock Medical</td>
+            <td>High</td>
+            <td>Rápida (4+)</td>
+            <td>×5</td>
+          </tr>
+          <tr>
+            <td>CloudNine Systems</td>
+            <td>Critical</td>
+            <td>Extrema (3+)</td>
+            <td>×10</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SEÇÃO 12 -->
+    <section id="sec12">
+      <h2>12. BOUNTY TRACK PROGRESSIVA (28 DEGRAUS $0 A $50.000)</h2>
+      <p>Régua monotônica dividida em 4 faixas cromáticas:</p>
+      <ul>
+        <li><strong style="color: #39d353;">🟩 ZONA BAIXA ($0 a $1.000)</strong>: 10 degraus de $100 em $100 ($0, $100,
+          $200... $1.000).</li>
+        <li><strong style="color: #eab308;">🟨 ZONA MÉDIA ($1.500 a $10.000)</strong>: 6 degraus intermediários.</li>
+        <li><strong style="color: #f97316;">🟧 ZONA ALTA ($12.500 a $25.000)</strong>: 6 degraus avançados.</li>
+        <li><strong style="color: #f85149;">🟥 ZONA CRÍTICA ($30.000 a $50.000)</strong>: 6 degraus de clímax.</li>
+      </ul>
+    </section>
+
+    <!-- SEÇÃO 13 -->
+    <section id="sec13">
+      <h2>13. FIM DA PARTIDA & CRITÉRIOS OFICIAIS DE DESEMPATE</h2>
+      <div class="callout">
+        <strong>⚖️ CRITÉRIOS DE DESEMPATE:</strong><br>
+        1º Critério: Maior número total de Reports concluídos.<br>
+        2º Critério: Maior número de falhas Critical submetidas (CVSS ≥ 9.0).<br>
+        3º Critério: Rolagem de morte súbita no dado D6 (maior resultado).
+      </div>
+    </section>
+
+    <!-- SEÇÃO 14 -->
+    <section id="sec14">
+      <h2>14. RODADAS FINAIS (7 E 8): O CAOS TOTAL</h2>
+      <p>
+        <strong>Rodada 7:</strong> O Event Deck é integrado ao Main Deck e o mercado expande para 5 programas.<br>
+        <strong>Rodada 8:</strong> O teste de Patch Speed exige a rolagem obrigatória de <strong>2 dados (2D6)</strong>
+        (sucesso em ambos para escapar do descarte).
+      </p>
+    </section>
+
+    <!-- SEÇÃO 15 -->
+    <section id="sec15">
+      <h2>15. GUIA VISUAL: MOLDURAS, SELOS E ENCAIXE NOS SLOTS</h2>
+      <p>
+        • Moldura Laranja (#f0883e) ➔ Exploits na Zona de Exploits.<br>
+        • Moldura Azul (#38bdf8) ➔ Tools no Tools Rack.<br>
+        • Moldura Verde (#39d353) ➔ Defuse no Slot Defuse.<br>
+        • Moldura Vermelha (#f85149) ➔ Eventos no Event Deck.
+      </p>
+    </section>
+
+    <!-- SEÇÃO 16 -->
+    <section id="sec16">
+      <h2>16. GUIA DE REFERÊNCIA RÁPIDA & GLOSSÁRIO GERAL</h2>
+      <p><strong>CVSS:</strong> Índice numérico de 1.0 a 10.0 que define o valor em dólares da recompensa no jogo.</p>
+    </section>
+
+  </div>
+
+  <footer>
+    PWND! — Bug Bounty Chaos © 2026 PWND! Game Development Studio. Todos os direitos reservados.
+  </footer>
+
+</body>
+
+</html>

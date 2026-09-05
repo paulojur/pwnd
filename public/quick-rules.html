@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWND! — Quick Rules Cards</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-main: #c9d1d9;
+            --accent-green: #39d353;
+            --accent-orange: #f0883e;
+            --accent-purple: #c084fc;
+            --accent-red: #f85149;
+            --accent-blue: #58a6ff;
+            --border-color: #30363d;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--accent-green);
+            font-family: var(--font-mono);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .print-btn {
+            background-color: var(--accent-green);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-family: var(--font-mono);
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .print-btn:hover {
+            background-color: #2ea043;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+        }
+
+        /* Standard Poker Size proportions: 63mm x 88mm. Scaled up for readability on screen. */
+        .card {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            width: 315px;
+            height: 440px;
+            box-sizing: border-box;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative top accent line */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue), var(--accent-green));
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-number {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--accent-purple);
+            font-weight: bold;
+            background: rgba(192, 132, 252, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .card-body {
+            font-size: 12px;
+            line-height: 1.35;
+            flex-grow: 1;
+        }
+
+        .card-body p {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .card-body h4 {
+            color: var(--accent-blue);
+            margin: 8px 0 4px 0;
+            font-size: 12px;
+        }
+
+        .card-body ul,
+        .card-body ol {
+            margin: 0;
+            padding-left: 16px;
+            margin-bottom: 8px;
+        }
+
+        .card-body li {
+            margin-bottom: 4px;
+        }
+
+        .highlight {
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        .alert-red {
+            color: var(--accent-red);
+            font-weight: bold;
+        }
+
+        .alert-green {
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .code-block {
+            background-color: #010409;
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            color: var(--accent-green);
+            margin-top: 10px;
+        }
+
+        .card-footer {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: #6e7681;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+            margin-top: auto;
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+
+            .print-btn,
+            h1 {
+                display: none;
+            }
+
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+
+            .card {
+                /* Exact mm sizes for print */
+                width: 63mm;
+                height: 88mm;
+                padding: 4mm;
+                border: 1px solid #000;
+                border-radius: 3mm;
+                box-shadow: none;
+                break-inside: avoid;
+            }
+
+            .card::before {
+                display: none;
+            }
+
+            .card-title {
+                font-size: 10pt;
+                margin: 0;
+            }
+
+            .card-number {
+                font-size: 8pt;
+                padding: 2px 4px;
+            }
+
+            .card-body {
+                font-size: 7.5pt;
+                line-height: 1.2;
+            }
+
+            .card-body h4 {
+                font-size: 8pt;
+                margin: 6px 0 2px 0;
+            }
+
+            .card-body ul,
+            .card-body ol {
+                padding-left: 12px;
+                margin-bottom: 6px;
+            }
+
+            .card-body li {
+                margin-bottom: 3px;
+            }
+
+            .code-block {
+                font-size: 6.5pt;
+                padding: 4px;
+                margin-top: 4px;
+            }
+
+            .card-header {
+                padding-bottom: 4px;
+                margin-bottom: 6px;
+            }
+
+            .card-footer {
+                font-size: 5pt;
+                padding-top: 4px;
+                margin-top: 6px;
+                border-top: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>PWND! — Cartas de Quick Rules</h1>
+    <button class="print-btn" onclick="window.print()">🖨️ Imprimir Cartas (A4)</button>
+
+    <div class="cards-grid">
+
+        <!-- CARD 1 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Fluxo do Turno</div>
+                <div class="card-number">01 / 06</div>
+            </div>
+            <div class="card-body">
+                <p>No turno, faça exatamente <strong>1 Ação Principal</strong>.</p>
+
+                <h4>AÇÕES PRINCIPAIS (Escolha 1)</h4>
+                <ul>
+                    <li><span class="highlight">1. RECON:</span> Comprar Cartas do Main Deck ou Trocar Alvo.</li>
+                    <li><span class="highlight">2. EXPLOIT:</span> Jogue 1 Vulnerability da mão para a mesa.</li>
+                    <li><span class="highlight">3. REPORT:</span> Entregue todas as falhas da mesa e pontue.</li>
+                </ul>
+
+                <h4>AÇÃO 1: RECON (Opções)</h4>
+                <ul>
+                    <li><strong>(A) Main Deck:</strong> Compre 2 cartas de ação.</li>
+                    <li><strong>(B) Pivot (Trocar):</strong> Descarte o programa ativo (e falhas dele), escolha novo do
+                        mercado.</li>
+                </ul>
+
+                <p style="font-size: 10px; margin-top: 10px; color: #8b949e;">*Fim do turno: se tiver falhas na mesa,
+                    faça o Patch Check em Stealth Mode!</p>
+            </div>
+            <div class="card-footer">QUICK RULES • PWND! BUG BOUNTY CHAOS</div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Exploit & Tools</div>
+                <div class="card-number">02 / 06</div>
+            </div>
+            <div class="card-body">
+                <h4>AÇÃO 2: EXPLOIT</h4>
+                <p>Jogue <strong>1 Vulnerability Card</strong> da mão para a mesa. Fica visível até Reportar ou Patch.</p>
+                <ol>
+                    <li>A falha deve pertencer ao escopo (Scope) do seu Active Program.</li>
+                    <li>Ação livre: Instale Tools no seu Rack (máx 3).</li>
+                </ol>
+
+                <h4>FERRAMENTAS (Tools)</h4>
+                <p>Possuem <strong>Cargas Degradáveis</strong> e bônus fixos em $.</p>
+                <ul>
+                    <li><span class="alert-green">🟢 2 Cargas:</span> 1º uso dá +$1.000, 2º uso degrada para +$500.</li>
+                    <li><span class="alert-red">🔴 1 Carga:</span> Épicas/Raras dão +$2.000 e descartam após 1 report.</li>
+                </ul>
+            </div>
+            <div class="card-footer">QUICK RULES • PWND! BUG BOUNTY CHAOS</div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Report & Bounty</div>
+                <div class="card-number">03 / 06</div>
+            </div>
+            <div class="card-body">
+                <h4>AÇÃO 3: REPORT (Soma Direta)</h4>
+                <p>Entregue as falhas para pontuar (Zero Calculadora!).</p>
+
+                <ol>
+                    <li><strong>Escopo:</strong> Alvos Alto/Crítico exigem <strong>2+ falhas</strong>.</li>
+                    <li><strong>Cálculo Direto:</strong> Falhas + Programa + Tools.</li>
+                    <li><strong>Bônus Fixos:</strong> Vulns ($1.5k-$6k) | Progs ($0-$4k) | Tools ($500-$2k).</li>
+                    <li><strong>Bounty Track (Acumulador):</strong> Some o payout ao saldo atual. Avance o marcador ao degrau correspondente (ou abaixo).</li>
+                    <li><span class="alert-red"><strong>CUSTO DO SUCESSO:</strong></span> Compre 1 carta de Evento obrigatória!</li>
+                </ol>
+            </div>
+            <div class="card-footer">QUICK RULES • PWND! BUG BOUNTY CHAOS</div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Patch Speed Check</div>
+                <div class="card-number">04 / 06</div>
+            </div>
+            <div class="card-body">
+                <h4>COMO ROLAR O D8</h4>
+                <p>Risco de Patch: Lenta (8), Moderada (7-8), Rápida (6-8), Extrema (5-8).</p>
+
+                <ul>
+                    <li><strong>🥷 Stealth Mode (Fim do Turno):</strong> Se você tem cartas na mesa mas ainda não reportou, role <strong>2 dados D8</strong> e escolha o <strong>menor resultado</strong> (Vantagem).</li>
+                    <li><strong>📢 Noisy Report (Ação Report):</strong> Ao submeter, você faz barulho. Role apenas <strong>1 dado D8</strong> (Risco Normal).</li>
+                </ul>
+
+                <p>Se o dado avaliado igualar ou superar o limite de Patch Speed, você toma Patch!</p>
+            </div>
+            <div class="card-footer">QUICK RULES • PWND! BUG BOUNTY CHAOS</div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Patch & Safeguards</div>
+                <div class="card-number">05 / 06</div>
+            </div>
+            <div class="card-body">
+                <h4>PATCH DEPLOYED!</h4>
+                <p>Ativado unicamente pelo dado D8. Penalidades imediatas:</p>
+                <ol>
+                    <li>Todas as Vulnerabilidades na mesa são <strong>descartadas</strong> (perde tudo).</li>
+                    <li>Seu programa ativo é <strong>encerrado</strong>.</li>
+                    <li><strong>Recuo por Patch:</strong> prejuízo fixo por zona de riqueza — Verde $1.500 · Amarela $3.000 · Laranja $4.500 · Vermelha $6.000. Deduza do saldo; marcador recua para refletir novo saldo (piso $0).</li>
+                </ol>
+
+                <h4>SAFEGUARDS (2 tipos)</h4>
+                <p><strong>🛡️ Bypass</strong> — proteção <em>financeira</em>: se tomar Patch, jogue da mão como reação fora do turno para <strong>anular 100%</strong> das penalidades. Tudo fica intacto.</p>
+                <p><strong>📜 CVE Assignment Protection</strong> — proteção de <em>escopo</em>: uso único, reativa. Anula <em>Duplicate Report!</em>, <em>Out of Scope</em> ou <em>DNS Hijack</em>. Não protege contra Patch.</p>
+            </div>
+            <div class="card-footer">QUICK RULES • PWND! BUG BOUNTY CHAOS</div>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Eventos & Regras Gerais</div>
+                <div class="card-number">06 / 06</div>
+            </div>
+            <div class="card-body">
+                <h4>EVENTOS DE CAOS</h4>
+                <p>Cartas <strong>IMEDIATAS</strong> saem após o Report (Custo do Sucesso) e resolvem na hora. Cartas <strong>GUARDÁVEIS</strong> podem ser guardadas (limite 2) e jogadas apenas na <strong>Janela de Caos (Opcional)</strong> do seu turno.</p>
+
+                <h4>LIMITES E GESTÃO</h4>
+                <ul>
+                    <li><strong>Mão Máxima:</strong> 6 cartas no final do turno (9 para The Old Guard).</li>
+                    <li><strong>Mercado Vazio:</strong> Se o deck acabar, reembaralhe a pilha de descarte.</li>
+                    <li><strong>Rack:</strong> Tools passivas não precisam ser descartadas.</li>
+                </ul>
+
+                <div class="code-block" style="margin-top: 15px;">
+                    WIN_COND == $40.000;<br>
+                    IF (ROUND == 8) WINNER = MAX_BOUNTY();
+                </div>
+            </div>
+            <div class="card-footer">QUICK RULES • PWND! BUG BOUNTY CHAOS</div>
+        </div>
+
+    </div>
+</body>
+
+</html>
