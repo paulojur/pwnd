@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PWND! — Quick Rules Cards</title>
+    <title>PWND! — Quick Rules Cards (80/20)</title>
     <style>
         :root {
             --bg-color: #0d1117;
@@ -62,7 +62,6 @@
             max-width: 1200px;
         }
 
-        /* Standard Poker Size proportions: 63mm x 88mm. Scaled up for readability on screen. */
         .card {
             background-color: var(--card-bg);
             border: 2px solid var(--border-color);
@@ -78,7 +77,6 @@
             overflow: hidden;
         }
 
-        /* Decorative top accent line */
         .card::before {
             content: '';
             position: absolute;
@@ -100,7 +98,7 @@
 
         .card-title {
             font-family: var(--font-mono);
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 800;
             color: #fff;
             text-transform: uppercase;
@@ -118,7 +116,7 @@
         }
 
         .card-body {
-            font-size: 12px;
+            font-size: 12.5px;
             line-height: 1.35;
             flex-grow: 1;
         }
@@ -160,17 +158,6 @@
             font-weight: bold;
         }
 
-        .code-block {
-            background-color: #010409;
-            border: 1px solid var(--border-color);
-            padding: 8px;
-            border-radius: 4px;
-            font-family: var(--font-mono);
-            font-size: 11.5px;
-            color: var(--accent-green);
-            margin-top: 10px;
-        }
-
         .card-footer {
             font-family: var(--font-mono);
             font-size: 9px;
@@ -198,7 +185,6 @@
             }
 
             .card {
-                /* Exact mm sizes for print */
                 width: 63mm;
                 height: 88mm;
                 padding: 4mm;
@@ -213,12 +199,12 @@
             }
 
             .card-title {
-                font-size: 10pt;
+                font-size: 9pt;
                 margin: 0;
             }
 
             .card-number {
-                font-size: 8pt;
+                font-size: 7pt;
                 padding: 2px 4px;
             }
 
@@ -242,12 +228,6 @@
                 margin-bottom: 3px;
             }
 
-            .code-block {
-                font-size: 6.5pt;
-                padding: 4px;
-                margin-top: 4px;
-            }
-
             .card-header {
                 padding-bottom: 4px;
                 margin-bottom: 6px;
@@ -265,7 +245,7 @@
 
 <body>
 
-    <h1>PWND! — Cartas de Quick Rules</h1>
+    <h1>PWND! — Quick Rules Cards</h1>
     <button class="print-btn" onclick="window.print()">🖨️ Imprimir Cartas (A4)</button>
 
     <div class="cards-grid">
@@ -273,142 +253,177 @@
         <!-- CARD 1 -->
         <div class="card">
             <div class="card-header">
-                <div class="card-title">Fluxo do Turno</div>
-                <div class="card-number">01 / 06</div>
+                <div class="card-title">Objetivo & Setup</div>
+                <div class="card-number">01 / 09</div>
             </div>
             <div class="card-body">
-                <p>No turno, faça exatamente <strong>1 Ação Principal</strong>.</p>
-
-                <h4>AÇÕES PRINCIPAIS (Escolha 1)</h4>
-                <ul>
-                    <li><span class="highlight">1. RECON:</span> Comprar Cartas do Main Deck ou Trocar Alvo.</li>
-                    <li><span class="highlight">2. EXPLOIT:</span> Jogue 1 Vulnerability da mão para a mesa.</li>
-                    <li><span class="highlight">3. REPORT:</span> Entregue todas as falhas da mesa e pontue.</li>
-                </ul>
-
-                <h4>AÇÃO 1: RECON (Opções)</h4>
-                <ul>
-                    <li><strong>(A) Main Deck:</strong> Compre 2 cartas de ação.</li>
-                    <li><strong>(B) Pivot (Trocar):</strong> Descarte o programa ativo (e falhas dele), escolha novo do
-                        mercado.</li>
-                </ul>
-
-                <p style="font-size: 10px; margin-top: 10px; color: #8b949e;">*Fim do turno: se tiver falhas na mesa,
-                    faça o Patch Check em Stealth Mode!</p>
+                <p><strong>Objetivo:</strong> O primeiro jogador a alcançar $40.000 vence!</p>
+                <h4>SETUP (6 PASSOS)</h4>
+                <ol>
+                    <li>Distribua 1 Arquétipo e <strong>6 cartas</strong> de Mão Inicial (5 comuns + 1 Bypass) para cada jogador.</li>
+                    <li>Monte o Tabuleiro Central (Event Deck, Round Track 1 a 8).</li>
+                    <li>Abra 3 cartas de Programa no Market.</li>
+                    <li>Cada um escolhe um Active Program e põe no Player Mat.</li>
+                    <li>Coloque os marcadores na Bounty Track no piso $0.</li>
+                    <li>Posicione o Bypass inicial no Slot Safeguard.</li>
+                </ol>
             </div>
-            <div class="card-footer">QUICK RULES • PWND! BUG BOUNTY CHAOS</div>
+            <div class="card-footer">QUICK RULES (80/20) • PWND!</div>
         </div>
 
         <!-- CARD 2 -->
         <div class="card">
             <div class="card-header">
-                <div class="card-title">Exploit & Tools</div>
-                <div class="card-number">02 / 06</div>
+                <div class="card-title">O Turno</div>
+                <div class="card-number">02 / 09</div>
             </div>
             <div class="card-body">
-                <h4>AÇÃO 2: EXPLOIT</h4>
-                <p>Jogue <strong>1 Vulnerability Card</strong> da mão para a mesa. Fica visível até Reportar ou Patch.</p>
+                <h4>FLUXO CANÔNICO</h4>
                 <ol>
-                    <li>A falha deve pertencer ao escopo (Scope) do seu Active Program.</li>
-                    <li>Ação livre: Instale Tools no seu Rack (máx 3).</li>
+                    <li><strong>Início:</strong> O seu turno começa.</li>
+                    <li><strong>Ação Principal:</strong> Escolha EXATAMENTE UMA (Recon, Exploit OU Report).</li>
+                    <li><strong>Custo do Sucesso:</strong> Só se fez Report: compre evento!</li>
+                    <li><strong>Janela de Caos (Opcional):</strong> Jogue eventos guardados do seu mat.</li>
+                    <li><strong>Patch Speed Check:</strong> Role D8 (Fim do turno, só se tiver falhas na mesa e não submeteu).</li>
+                    <li><strong>Fim:</strong> Descarte o excesso (mão máx. 6).</li>
                 </ol>
-
-                <h4>FERRAMENTAS (Tools)</h4>
-                <p>Possuem <strong>Cargas Degradáveis</strong> e bônus fixos em $.</p>
-                <ul>
-                    <li><span class="alert-green">🟢 2 Cargas:</span> 1º uso dá +$1.000, 2º uso degrada para +$500.</li>
-                    <li><span class="alert-red">🔴 1 Carga:</span> Épicas/Raras dão +$2.000 e descartam após 1 report.</li>
-                </ul>
             </div>
-            <div class="card-footer">QUICK RULES • PWND! BUG BOUNTY CHAOS</div>
+            <div class="card-footer">QUICK RULES (80/20) • PWND!</div>
         </div>
 
         <!-- CARD 3 -->
         <div class="card">
             <div class="card-header">
-                <div class="card-title">Report & Bounty</div>
-                <div class="card-number">03 / 06</div>
+                <div class="card-title">Recon & Exploit</div>
+                <div class="card-number">03 / 09</div>
             </div>
             <div class="card-body">
-                <h4>AÇÃO 3: REPORT (Soma Direta)</h4>
-                <p>Entregue as falhas para pontuar (Zero Calculadora!).</p>
-
-                <ol>
-                    <li><strong>Escopo:</strong> Alvos Alto/Crítico exigem <strong>2+ falhas</strong>.</li>
-                    <li><strong>Cálculo Direto:</strong> Falhas + Programa + Tools.</li>
-                    <li><strong>Bônus Fixos:</strong> Vulns ($1.5k-$6k) | Progs ($0-$4k) | Tools ($500-$2k).</li>
-                    <li><strong>Bounty Track (Acumulador):</strong> Some o payout ao saldo atual. Avance o marcador ao degrau correspondente (ou abaixo).</li>
-                    <li><span class="alert-red"><strong>CUSTO DO SUCESSO:</strong></span> Compre 1 carta de Evento obrigatória!</li>
-                </ol>
+                <h4>AÇÕES PRINCIPAIS (Escolha 1)</h4>
+                <ul>
+                    <li><strong>RECON:</strong> (A) Saque 2 cartas do Deck OU (B) Troque de Alvo (descarte alvo atual/falhas e pegue novo do Market).</li>
+                    <li><strong>EXPLOIT:</strong> Jogue 1 Falha na Zona. <em>Os Badges de Escopo da carta devem bater com o permitido no Programa!</em></li>
+                </ul>
+                <h4>FERRAMENTAS (Ação Livre)</h4>
+                <p>Instale Tools descartando 1 carta da mão. <em>Ativas:</em> Cargas degradam/queimam no Report. <em>Passivas:</em> Efeito contínuo.</p>
             </div>
-            <div class="card-footer">QUICK RULES • PWND! BUG BOUNTY CHAOS</div>
+            <div class="card-footer">QUICK RULES (80/20) • PWND!</div>
         </div>
 
         <!-- CARD 4 -->
         <div class="card">
             <div class="card-header">
-                <div class="card-title">Patch Speed Check</div>
-                <div class="card-number">04 / 06</div>
+                <div class="card-title">Report & Payout</div>
+                <div class="card-number">04 / 09</div>
             </div>
             <div class="card-body">
-                <h4>COMO ROLAR O D8</h4>
-                <p>Risco de Patch: Lenta (8), Moderada (7-8), Rápida (6-8), Extrema (5-8).</p>
-
+                <h4>AÇÃO PRINCIPAL: REPORT</h4>
+                <p>Entregue as falhas da Zona! <strong>(Rodada 5+ OU Alvos Altos exigem combo de 2+ falhas)</strong>.</p>
+                <h4>PAYOUT (Soma Direta)</h4>
+                <p>Valor da Falha + Bônus do Prog. + Tools.</p>
                 <ul>
-                    <li><strong>🥷 Stealth Mode (Fim do Turno):</strong> Se você tem cartas na mesa mas ainda não reportou, role <strong>2 dados D8</strong> e escolha o <strong>menor resultado</strong> (Vantagem).</li>
-                    <li><strong>📢 Noisy Report (Ação Report):</strong> Ao submeter, você faz barulho. Role apenas <strong>1 dado D8</strong> (Risco Normal).</li>
+                    <li>Some o payout ao saldo da Bounty Track.</li>
+                    <li><em>Ex:</em> Rara ($4k) + Prog ($2.5k) = $6.500 no saldo!</li>
                 </ul>
-
-                <p>Se o dado avaliado igualar ou superar o limite de Patch Speed, você toma Patch!</p>
+                <p><span class="alert-red">Duplicate Report:</span> Se alguém já reportou o mesmo bug exato, seu payout cai para apenas 10%!</p>
             </div>
-            <div class="card-footer">QUICK RULES • PWND! BUG BOUNTY CHAOS</div>
+            <div class="card-footer">QUICK RULES (80/20) • PWND!</div>
         </div>
 
         <!-- CARD 5 -->
         <div class="card">
             <div class="card-header">
-                <div class="card-title">Patch & Safeguards</div>
-                <div class="card-number">05 / 06</div>
+                <div class="card-title">Eventos & Caos</div>
+                <div class="card-number">05 / 09</div>
             </div>
             <div class="card-body">
-                <h4>PATCH DEPLOYED!</h4>
-                <p>Ativado unicamente pelo dado D8. Penalidades imediatas:</p>
-                <ol>
-                    <li>Todas as Vulnerabilidades na mesa são <strong>descartadas</strong> (perde tudo).</li>
-                    <li>Seu programa ativo é <strong>encerrado</strong>.</li>
-                    <li><strong>Recuo por Patch:</strong> prejuízo fixo por zona de riqueza — Verde $1.500 · Amarela $3.000 · Laranja $4.500 · Vermelha $6.000. Deduza do saldo; marcador recua para refletir novo saldo (piso $0).</li>
-                </ol>
-
-                <h4>SAFEGUARDS (2 tipos)</h4>
-                <p><strong>🛡️ Bypass</strong> — proteção <em>financeira</em>: se tomar Patch, jogue da mão como reação fora do turno para <strong>anular 100%</strong> das penalidades. Tudo fica intacto.</p>
-                <p><strong>📜 CVE Assignment Protection</strong> — proteção de <em>escopo</em>: uso único, reativa. Anula <em>Duplicate Report!</em>, <em>Out of Scope</em> ou <em>DNS Hijack</em>. Não protege contra Patch.</p>
+                <h4>CUSTO DO SUCESSO</h4>
+                <p>Sempre que fizer um Report bem-sucedido, você <strong>deve</strong> comprar 1 Evento antes do seu turno acabar.</p>
+                <ul>
+                    <li><strong>Imediato:</strong> Resolve na hora da compra.</li>
+                    <li><strong>Guardável:</strong> Resolva na hora ou guarde na sua área do mat (limite 2). Só podem ser jogados na sua <em>Janela de Caos</em>. Guardar nunca anula a obrigação da compra!</li>
+                </ul>
             </div>
-            <div class="card-footer">QUICK RULES • PWND! BUG BOUNTY CHAOS</div>
+            <div class="card-footer">QUICK RULES (80/20) • PWND!</div>
         </div>
 
         <!-- CARD 6 -->
         <div class="card">
             <div class="card-header">
-                <div class="card-title">Eventos & Regras Gerais</div>
-                <div class="card-number">06 / 06</div>
+                <div class="card-title">Patch Speed Check</div>
+                <div class="card-number">06 / 09</div>
             </div>
             <div class="card-body">
-                <h4>EVENTOS DE CAOS</h4>
-                <p>Cartas <strong>IMEDIATAS</strong> saem após o Report (Custo do Sucesso) e resolvem na hora. Cartas <strong>GUARDÁVEIS</strong> podem ser guardadas (limite 2) e jogadas apenas na <strong>Janela de Caos (Opcional)</strong> do seu turno.</p>
-
-                <h4>LIMITES E GESTÃO</h4>
-                <ul>
-                    <li><strong>Mão Máxima:</strong> 6 cartas no final do turno (9 para The Old Guard).</li>
-                    <li><strong>Mercado Vazio:</strong> Se o deck acabar, reembaralhe a pilha de descarte.</li>
-                    <li><strong>Rack:</strong> Tools passivas não precisam ser descartadas.</li>
-                </ul>
-
-                <div class="code-block" style="margin-top: 15px;">
-                    WIN_COND == $40.000;<br>
-                    IF (ROUND == 8) WINNER = MAX_BOUNTY();
-                </div>
+                <p><strong>Stealth Mode:</strong> Fim do turno, se tiver falhas na mesa sem reportar. Role 2 D8, escolha o menor.</p>
+                <p><strong>Noisy Report (Exceção):</strong> Rola 1 D8 no exato momento do Report (antes de esvaziar a Zona). <span class="alert-red">Se falhar no D8, o Report falha (não pontua) e você sofre o Patch Deployed!</span></p>
+                
+                <h4>LIMIARES DE FALHA</h4>
+                <p>Lenta (8) • Moderada (7-8) • Rápida (6-8) • Extrema (5-8)</p>
             </div>
-            <div class="card-footer">QUICK RULES • PWND! BUG BOUNTY CHAOS</div>
+            <div class="card-footer">QUICK RULES (80/20) • PWND!</div>
+        </div>
+
+        <!-- CARD 7 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Safeguards & Penalidades</div>
+                <div class="card-number">07 / 09</div>
+            </div>
+            <div class="card-body">
+                <h4>PATCH DEPLOYED! (Penalidade)</h4>
+                <p>Perde as falhas da Zona, perde o Programa e toma recuo (piso $0):</p>
+                <ul>
+                    <li><span class="alert-green">Verde:</span> recua $1.500 | <span class="highlight">Amarela:</span> recua $3.000</li>
+                    <li><span class="highlight" style="color: #c2410c;">Laranja:</span> recua $4.500 | <span class="alert-red">Vermelha:</span> recua $6.000</li>
+                </ul>
+                <h4>SAFEGUARDS (Reação)</h4>
+                <ul>
+                    <li><strong>Bypass:</strong> Anula o Patch Deployed 100%.</li>
+                    <li><strong>CVE Protection:</strong> Anula Duplicate Report/DNS Hijack/Out of Scope.</li>
+                </ul>
+            </div>
+            <div class="card-footer">QUICK RULES (80/20) • PWND!</div>
+        </div>
+
+        <!-- CARD 8 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Arquétipos</div>
+                <div class="card-number">08 / 09</div>
+            </div>
+            <div class="card-body">
+                <h4>PODERES ASSIMÉTRICOS</h4>
+                <ul>
+                    <li><strong>n00b (Mão 6):</strong> Escolhe passiva bônus após Reports.</li>
+                    <li><strong>Old Guard (Mão 9):</strong> Mão 9. 1 Report por rodada.</li>
+                    <li><strong>Bug Hunter (Mão 6):</strong> Submete 2 lotes em um Report. Só reporta bugs com CVSS ≤ 6.0.</li>
+                    <li><strong>Social Engineer (Mão 6):</strong> Acessa Event Deck via Recon; redireciona caos.</li>
+                    <li><strong>Red Teamer (Mão 6):</strong> Imune a escopo. Payout -30%. Só toma Patch tirando 8.</li>
+                    <li><strong>Pentester (Mão 6):</strong> Imune a Duplicate Report e Triage Delay. Só toma Patch tirando 8.</li>
+                </ul>
+            </div>
+            <div class="card-footer">QUICK RULES (80/20) • PWND!</div>
+        </div>
+
+        <!-- CARD 9 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Ref. Rápida & Vitória</div>
+                <div class="card-number">09 / 09</div>
+            </div>
+            <div class="card-body">
+                <h4 style="color:var(--accent-green)">VITÓRIA IMEDIATA</h4>
+                <p><strong>Atingiu $40.000 (ou mais), venceu!</strong> Ao cruzar o limite de uma Zona, anuncie a cor em voz alta.</p>
+                
+                <h4>RECOMPENSAS-BASE (VULNS)</h4>
+                <ul>
+                    <li>Cinza (Comum): +$1.500</li>
+                    <li>🟢 Incomum: +$2.500</li>
+                    <li>🔵 Rara: +$4.000</li>
+                    <li>🟣 Épica: +$5.000</li>
+                    <li>🟡 Lendária: +$6.000</li>
+                </ul>
+            </div>
+            <div class="card-footer">QUICK RULES (80/20) • PWND!</div>
         </div>
 
     </div>

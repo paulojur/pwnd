@@ -640,15 +640,28 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
                     </div>
                   </div>
 
-                  {/* Tools Rack (3 Slots Verticais 63×88mm Idênticos a Researcher e Active Program) */}
-                  <div style={{ border: '2px solid #000', padding: '12px', borderRadius: '8px' }}>
-                    <div style={{ fontSize: '12px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>TOOLS RACK (3 SLOTS VERTICAIS DE FERRAMENTAS)</div>
-                    <div style={{ display: 'flex', gap: '30px', justifyContent: 'center' }}>
-                      {[1, 2, 3].map(t => (
-                        <div key={t} style={{ ...getSlotStyle(), border: '1.5px dashed #000', borderRadius: '6px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 'bold', background: '#f8fafc' }}>
-                          <span>SLOT TOOL #{t}</span>
-                        </div>
-                      ))}
+                  {/* Tools Rack & Eventos Guardados */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gap: '16px', justifyContent: 'center' }}>
+                    <div style={{ border: '2px solid #000', padding: '12px', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>TOOLS RACK (MÁX. 3)</div>
+                      <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
+                        {[1, 2, 3].map(t => (
+                          <div key={t} style={{ ...getSlotStyle(), border: '1.5px dashed #000', borderRadius: '6px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 'bold', background: '#f8fafc' }}>
+                            <span>SLOT TOOL #{t}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div style={{ border: '2px solid #000', padding: '12px', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>EVENTOS GUARDADOS (LIMITE 2)</div>
+                      <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
+                        {[1, 2].map(e => (
+                          <div key={e} style={{ ...getSlotStyle(), border: '1.5px dashed #000', borderRadius: '6px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 'bold', background: '#fcf8fa' }}>
+                            <span>EVENTO #{e}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
