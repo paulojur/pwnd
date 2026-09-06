@@ -3,7 +3,7 @@ const fs = require('fs');
 // ─────────────────────────────────────────────────────────────
 //  PHASE 0: CANONICALIZE — kill manual.html in public and dist
 // ─────────────────────────────────────────────────────────────
-const OLD_PUBLIC   = 'f:/PWNDgame/public/manual.html';
+const OLD_PUBLIC = 'f:/PWNDgame/public/manual.html';
 const OLD_DIST_MAN = 'f:/PWNDgame/dist/pwnd-manual.html';
 
 if (fs.existsSync(OLD_PUBLIC)) {
@@ -258,8 +258,8 @@ manual = manual.replace(
 );
 // More specific replacement for the payout table
 manual = manual.replace(
-  '<strong>• Falhas:</strong> Comum (+$500) | Incomum (+$1.500) | Rara (+$3.000) | Épica\n                                (+$4.000) | Lendária (+$7.500)<br>',
-  '<strong>• Falhas:</strong> Comum (+$500) | Incomum (+$1.500) | Rara (+$3.000) | Épica (+$5.000) | Lendária (+$7.500)<br>'
+  '<strong>• vulnerabilidades:</strong> Comum (+$500) | Incomum (+$1.500) | Rara (+$3.000) | Épica\n                                (+$4.000) | Lendária (+$7.500)<br>',
+  '<strong>• vulnerabilidades:</strong> Comum (+$500) | Incomum (+$1.500) | Rara (+$3.000) | Épica (+$5.000) | Lendária (+$7.500)<br>'
 );
 console.log('[Fix 6] Vuln Épica restored to +$5.000');
 
@@ -290,8 +290,8 @@ console.log('[Fix 8] Recon Event Deck general option removed (if existed)');
 
 // ── FIX 9: Glossary PATCH DEPLOYED — fix broken subject
 manual = manual.replace(
-  '<dd>Evento destrutivo acionado quando o Patch Speed Check falha. Descarta todas as vulnerabilidades\n                        da Zona de Exploits, sofre um prejuízo financeiro conforme sua zona (Verde $1.500, Amarela\n                        $3.000, Laranja $4.500, Vermelha $6.000) e recua na Bounty Track e encerra o programa ativo.\n                    </dd>',
-  '<dd>Evento destrutivo acionado quando o Patch Speed Check falha. O jogador que sofre o PATCH DEPLOYED! perde todas as vulnerabilidades da Zona de Exploits, sofre prejuízo financeiro fixo conforme sua zona de riqueza (Verde $1.500, Amarela $3.000, Laranja $4.500, Vermelha $6.000), recua na Bounty Track até refletir o novo saldo (piso $0) e encerra o programa ativo.</dd>'
+  '<dd>Evento destrutivo acionado quando o Patch Speed Check vulnerabilidade. Descarta todas as vulnerabilidades\n                        da Zona de Exploits, sofre um prejuízo financeiro conforme sua zona (Verde $1.500, Amarela\n                        $3.000, Laranja $4.500, Vermelha $6.000) e recua na Bounty Track e encerra o programa ativo.\n                    </dd>',
+  '<dd>Evento destrutivo acionado quando o Patch Speed Check vulnerabilidade. O jogador que sofre o PATCH DEPLOYED! perde todas as vulnerabilidades da Zona de Exploits, sofre prejuízo financeiro fixo conforme sua zona de riqueza (Verde $1.500, Amarela $3.000, Laranja $4.500, Vermelha $6.000), recua na Bounty Track até refletir o novo saldo (piso $0) e encerra o programa ativo.</dd>'
 );
 console.log('[Fix 9] Glossary PATCH DEPLOYED sentence fixed');
 
@@ -346,7 +346,7 @@ console.log('✅ quick-rules.html saved.');
 // ─────────────────────────────────────────────────────────────
 console.log('\n──── VALIDATION ────');
 const manFinal = fs.readFileSync('f:/PWNDgame/public/pwnd-manual.html', 'utf8');
-const qrFinal  = fs.readFileSync('f:/PWNDgame/public/quick-rules.html', 'utf8');
+const qrFinal = fs.readFileSync('f:/PWNDgame/public/quick-rules.html', 'utf8');
 
 const forbidden = [
   { pattern: /1 degrau para trás/, label: '"1 degrau para trás"' },

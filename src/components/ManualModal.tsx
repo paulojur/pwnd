@@ -212,7 +212,7 @@ export const ManualModal: React.FC<ManualModalProps> = ({ isOpen, onClose }) => 
                 <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--amber-glow)', fontFamily: 'var(--font-mono)', borderBottom: '1px solid var(--amber-glow)', paddingBottom: '8px', marginBottom: '16px' }}>
                   SEÇÃO 2: OBJETIVO DO JOGO & CONDIÇÃO DE VITÓRIA
                 </h3>
-                <p>Cada participante assume o papel de um pesquisador independente de segurança ofensiva competindo em plataformas abertas de caça a falhas.</p>
+                <p>Cada participante assume o papel de um pesquisador independente de segurança ofensiva competindo em plataformas abertas de caça a vulnerabilidades.</p>
                 <div style={{ background: 'rgba(56, 189, 248, 0.1)', borderLeft: '4px solid var(--cyber-blue)', padding: '14px', borderRadius: '4px' }}>
                   <strong style={{ color: 'var(--cyber-blue)' }}>🏆 CONDIÇÃO DE VITÓRIA:</strong><br />
                   O primeiro pesquisador a atingir a meta de <strong>$40.000 na Bounty Track</strong> vence instantaneamente. Se ninguém atingir $40.000 até o final da <strong>8ª Rodada</strong>, vence quem tiver a maior quantia acumulada.
@@ -287,7 +287,7 @@ export const ManualModal: React.FC<ManualModalProps> = ({ isOpen, onClose }) => 
                   <div style={{ border: '1px solid var(--terminal-green)', padding: '12px', borderRadius: '6px', background: 'rgba(57, 211, 83, 0.05)' }}>
                     <h4 style={{ color: 'var(--terminal-green)', fontWeight: 'bold', margin: '0 0 4px 0' }}>5.3 AÇÃO 3: REPORT (SUBMISSÃO FORMAL)</h4>
                     <p style={{ fontSize: '11px', margin: 0 }}>
-                      Verifique duplicatas (Duplicate Check) ➔ Some os pontos CVSS ➔ Aplique o multiplicador da empresa (×1, ×2, ×5, ×10) ➔ Avance na Bounty Track ➔ Descarte as falhas e escolha novo alvo.
+                      Verifique duplicatas (Duplicate Check) ➔ Some os pontos CVSS ➔ Aplique o multiplicador da empresa (×1, ×2, ×5, ×10) ➔ Avance na Bounty Track ➔ Descarte as vulnerabilidades e escolha novo alvo.
                     </p>
                   </div>
                 </div>
@@ -426,7 +426,7 @@ export const ManualModal: React.FC<ManualModalProps> = ({ isOpen, onClose }) => 
                 <div style={{ background: 'rgba(56, 189, 248, 0.1)', borderLeft: '4px solid var(--cyber-blue)', padding: '12px', borderRadius: '4px', fontSize: '11.5px' }}>
                   <strong>⚖️ CRITÉRIOS DE DESEMPATE:</strong><br />
                   1º Critério: Maior número total de Reports concluídos com sucesso.<br />
-                  2º Critério: Maior número de falhas Critical submetidas (CVSS ≥ 9.0).<br />
+                  2º Critério: Maior número de vulnerabilidades Critical submetidas (CVSS ≥ 9.0).<br />
                   3º Critério: Rolagem de morte súbita no dado D6 (maior resultado).
                 </div>
               </div>

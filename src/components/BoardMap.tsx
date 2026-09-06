@@ -10,7 +10,7 @@ export const BoardMap: React.FC = () => {
 
   return (
     <div className="terminal-box" style={{ padding: '20px', marginBottom: '20px', background: 'radial-gradient(circle at 50% 50%, #151a2e 0%, #0b0e19 100%)' }}>
-      
+
       {/* Map Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
         <div>
@@ -98,7 +98,7 @@ export const BoardMap: React.FC = () => {
 
                     {/* Exploits Count */}
                     <div style={{ fontSize: '10px', color: 'var(--electric-purple-light)', fontFamily: 'var(--font-mono)' }}>
-                      {nodeExploits.length > 0 ? `💥 ${nodeExploits.length} falhas` : 'Nenhuma falha'}
+                      {nodeExploits.length > 0 ? `💥 ${nodeExploits.length} vulnerabilidades` : 'Nenhuma vulnerabilidade'}
                     </div>
 
                     {/* Move Button prompt if connected */}

@@ -35,7 +35,7 @@ export const SERVERS_DATA: ServerRegion[] = [
         serverName: 'Banco BankSafe',
         serverColor: '#39d353',
         bountyMultiplier: 1.5,
-        description: 'Ponto de entrada do sistema bancário. Falhas de login e formulários.',
+        description: 'Ponto de entrada do sistema bancário. vulnerabilidades de login e formulários.',
         connectedNodeIds: ['node-bank-db', 'node-ecom-cart']
       },
       {

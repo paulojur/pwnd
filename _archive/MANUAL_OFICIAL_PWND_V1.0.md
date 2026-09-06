@@ -65,7 +65,7 @@ O jogo **PWND! — Bug Bounty Chaos** é composto por elementos modulares de alt
 
 ### 2. OBJETIVO DO JOGO & CONDIÇÃO DE VITÓRIA
 
-Em **PWND!**, cada participante assume o papel de um pesquisador independente de segurança ofensiva competindo em plataformas abertas de caça a falhas. Ao longo de 8 rodadas estruturadas, os participantes devem realizar varreduras, estruturar cadeias de ataque (exploits) e emitir relatórios técnicos validados antes que as equipes defensivas corrijam as vulnerabilidades em produção.
+Em **PWND!**, cada participante assume o papel de um pesquisador independente de segurança ofensiva competindo em plataformas abertas de caça a vulnerabilidades. Ao longo de 8 rodadas estruturadas, os participantes devem realizar varreduras, estruturar cadeias de ataque (exploits) e emitir relatórios técnicos validados antes que as equipes defensivas corrijam as vulnerabilidades em produção.
 
 > *"O pesquisador que acumular a meta de $50.000 na Bounty Track ou o maior volume financeiro ao final da 8ª rodada é declarado o vencedor absoluto da competição."*
 
@@ -136,7 +136,7 @@ Escolha **UMA** das três alternativas operacionais de Recon:
 
 *Nota tática: O limite máximo estrutural de cartas mantidas em mão é de 6 cartas (9 para The Old Guard). Excedentes devem ser descartados.*
 
-#### 5.2 Ação 2: EXPLOIT (Execução de Falha na Mesa)
+#### 5.2 Ação 2: EXPLOIT (Execução de vulnerabilidade na Mesa)
 Jogue 1 Vulnerability Card da sua mão para a Zona de Exploits do seu Mat. A colocação da carta exige três etapas:
 1. **Validação de Scope Técnico:** A classe descrita na Vulnerability Card precisa constar no escopo do seu Active Program (salvo se operando como *Red Teamer*).
 2. **Pagamento de Custo de Ferramental:** Descarte as Tool Cards requeridas ou aplique os abatimentos de ferramentas ativas (*SQLMap* zera injeção, *Postman* reduz BAC em 1, *OWASP ZAP* zera Low/Medium, *Burp Suite Pro* é coringa universal).
@@ -144,7 +144,7 @@ Jogue 1 Vulnerability Card da sua mão para a Zona de Exploits do seu Mat. A col
 
 #### 5.3 Ação 3: REPORT (Submissão Formal e Coleta de Recompensa)
 Realize a entrega formal das vulnerabilidades alocadas na sua Zona de Exploits:
-1. **Verificação de Duplicação (Duplicate Check):** Se um oponente já reportou o mesmo título no mesmo programa na rodada, a falha é considerada duplicada (*Duplicate Report!*) e paga apenas 10% da recompensa.
+1. **Verificação de Duplicação (Duplicate Check):** Se um oponente já reportou o mesmo título no mesmo programa na rodada, a vulnerabilidade é considerada duplicada (*Duplicate Report!*) e paga apenas 10% da recompensa.
 2. **Cálculo da Severidade Base:** Some a pontuação nominal **CVSS (1.0 a 10.0)** das cartas válidas.
 3. **Aplicação do Multiplicador do Programa:**
    - Low Bounty Program: Pontos = CVSS Total × 1
@@ -152,7 +152,7 @@ Realize a entrega formal das vulnerabilidades alocadas na sua Zona de Exploits:
    - High Bounty Program: Pontos = CVSS Total × 5
    - Critical Bounty Program: Pontos = CVSS Total × 10
 4. **Progressão na Bounty Track:** Avance seu marcadores na régua de 28 degraus financeiras.
-5. **Descarte e Reposição:** Descarte as falhas submetidas e escolha um novo programa no Program Market.
+5. **Descarte e Reposição:** Descarte as vulnerabilidades submetidas e escolha um novo programa no Program Market.
 
 ---
 
@@ -253,7 +253,7 @@ No início da **Rodada 7**, todo o remanescente do Event Deck é recolhido e emb
 | **Burp Suite Pro** | Atua como coringa universal, substituindo qualquer exigência de ferramenta. | Ativa (descarte no uso) |
 | **Nmap + ffuf** | Concede +1 carta adicional na execução da ação de Recon (compra 3 cartas). | Passiva (permanente no rack) |
 | **OWASP ZAP** | Vulnerabilidades Low e Medium têm seu custo de ferramentas reduzido a zero. | Ativa (descarte no uso) |
-| **Postman** | Reduz em 1 unidade o custo de falhas da classe Broken Access Control. | Ativa (descarte no uso) |
+| **Postman** | Reduz em 1 unidade o custo de vulnerabilidades da classe Broken Access Control. | Ativa (descarte no uso) |
 | **Browser DevTools** | Vulnerabilidades XSS agregam +50% de valor no momento do Report. | Passiva (permanente no rack) |
 | **Burp Collaborator** | Resgata 1 Tool Card do descarte toda vez que um oponente reportar SSRF. | Passiva (permanente no rack) |
 | **SQLMap** | Vulnerabilidades da classe Injection têm seu custo reduzido a zero. | Ativa (descarte no uso) |
@@ -302,7 +302,7 @@ A partida é encerrada imediatamente após a finalização da 8ª rodada (ou 10�
 |                   CRITÉRIOS OFICIAIS DE DESEMPATE                 |
 +-------------------------------------------------------------------+
 | 1º Critério: Maior número total de Reports concluídos com sucesso  |
-| 2º Critério: Maior número de falhas Critical submetidas (CVSS ≥ 9.0)|
+| 2º Critério: Maior número de vulnerabilidades Critical submetidas (CVSS ≥ 9.0)|
 | 3º Critério: Rolagem de morte súbita (maior resultado em 1 D6)    |
 +-------------------------------------------------------------------+
 ```
@@ -345,7 +345,7 @@ As rodadas finais representam o encerramento do trimestre fiscal das empresas, p
 
 ### 16. GUIA DE REFERÊNCIA RÁPIDA & GLOSSÁRIO GERAL
 
-- **Ações no turno:** Realize 1 ação: **Recon** (compra recursos/evento), **Exploit** (arma falhas) ou **Report** (submete e pontua).
+- **Ações no turno:** Realize 1 ação: **Recon** (compra recursos/evento), **Exploit** (arma vulnerabilidades) ou **Report** (submete e pontua).
 - **Final de rodada:** Teste de **Patch Speed Check (D6)** para quem mantiver vulnerabilidades na mesa.
 - **PATCH DEPLOYED!:** Descarta vulnerabilidades da mesa, recua 3 degraus na Bounty Track e encerra o programa ativo.
 - **Proteção:** A carta `Cofre 0-Day` (Defuse) anula 100% o Patch Deployed.

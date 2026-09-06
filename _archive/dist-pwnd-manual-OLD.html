@@ -581,8 +581,10 @@
             <h2 class="sec"><span class="num">01</span> Introdução</h2>
             <p><strong>PWND! — Bug Bounty Chaos</strong> é um jogo de cartas estratégico em que você assume o papel de
                 um pesquisador de segurança independente. Sua missão: encontrar vulnerabilidades em programas de
-                recompensa patrocinados por corporações fictícias, encadear falhas, validar relatórios e <strong>receber
-                    o pagamento antes que a equipe de engenharia do alvo publique a correção</strong>.</p>
+                recompensa patrocinados por corporações fictícias, encadear vulnerabilidades, validar relatórios e
+                <strong>receber
+                    o pagamento antes que a equipe de engenharia do alvo publique a correção</strong>.
+            </p>
             <p>O jogo combina duas forças clássicas do design moderno: a <strong>construção de motores de
                     recursos</strong> (engine-building) — você monta sua bancada de ferramentas e gera vantagens a cada
                 turno — e o <strong>risco calculado</strong> (push-your-luck) — cada reconhecimento pode revelar uma
@@ -601,7 +603,8 @@
             <div class="card-grid">
                 <div class="card-type vuln">
                     <h4>Vulnerability Cards</h4>
-                    <p>As falhas que você explora e reporta. Geram severidade (CVSS) e recompensa em Bounty.</p>
+                    <p>As vulnerabilidades que você explora e reporta. Geram severidade (CVSS) e recompensa em Bounty.
+                    </p>
                     <span class="count">147 cartas</span>
                 </div>
                 <div class="card-type tool">
@@ -651,7 +654,7 @@
                 <li><strong>Equipar ferramentas</strong> que gerem os recursos exigidos pelas vulnerabilidades;</li>
                 <li><strong>Explorar</strong> e alocar vulnerabilidades na sua bancada;</li>
                 <li><strong>Reportar</strong> antes que o alvo publique o patch — e antes que outro pesquisador reporte
-                    a mesma classe de falha.</li>
+                    a mesma classe de vulnerabilidade.</li>
             </ol>
             <div class="callout warn">
                 <span class="label">Atenção</span>
@@ -712,7 +715,8 @@
 
             <h3>Severidade CVSS</h3>
             <p>Cada Vulnerability Card exibe uma pontuação CVSS (de 0.0 a 10.0) representada por pontos coloridos.
-                Quanto maior o CVSS, maior o valor em Bounty — e maior a atenção que a falha atrai dos defensores.</p>
+                Quanto maior o CVSS, maior o valor em Bounty — e maior a atenção que a vulnerabilidade atrai dos
+                defensores.</p>
 
             <h3>Patch Speed</h3>
             <p>Cada Corporação possui um contador regressivo de turnos. Quando chega a zero, o patch é publicado e o
@@ -726,7 +730,8 @@
 
             <h3>Tensão Triangular</h3>
             <p>Vários pesquisadores compartilham o mesmo alvo. O <strong>primeiro</strong> a reportar uma classe de
-                falha recebe o valor integral; o segundo que tentar submeter a mesma classe recebe a penalidade
+                vulnerabilidade recebe o valor integral; o segundo que tentar submeter a mesma classe recebe a
+                penalidade
                 <em>Duplicate Report!</em> e perde o pagamento do lote.
             </p>
         </section>
@@ -750,7 +755,7 @@
             <div class="callout">
                 <span class="label">Loop central</span>
                 <p style="margin:0"><strong>Recon → Exploit → Report → Bounty.</strong> Compre cartas, monte sua
-                    bancada, encadeie falhas e converta em dinheiro antes do patch.</p>
+                    bancada, encadeie vulnerabilidades e converta em dinheiro antes do patch.</p>
             </div>
         </section>
 
@@ -775,7 +780,8 @@
                 realizada <strong>uma vez por programa</strong> antes que o alvo seja resetado.</p>
             <div class="callout warn">
                 <span class="label">Risco</span>
-                <p style="margin:0">Se outro jogador já reportou a mesma classe de falha neste programa nesta rodada,
+                <p style="margin:0">Se outro jogador já reportou a mesma classe de vulnerabilidade neste programa nesta
+                    rodada,
                     você recebe <em>Duplicate Report!</em> e perde o pagamento do lote.</p>
             </div>
 
@@ -1000,7 +1006,7 @@
                 <dt>AP (Action Points)</dt>
                 <dd>Pontos de Ação gastos para executar ações no turno. Padrão: 3 por turno.</dd>
                 <dt>BOLA</dt>
-                <dd>Broken Object Level Authorization — falha de autorização ao nível do objeto.</dd>
+                <dd>Broken Object Level Authorization — vulnerabilidade de autorização ao nível do objeto.</dd>
                 <dt>Bounty</dt>
                 <dd>Recompensa em moeda fictícia recebida por reportar vulnerabilidades.</dd>
                 <dt>Bounty Track</dt>
@@ -1010,13 +1016,13 @@
                 <dt>Defuse</dt>
                 <dd>Carta de Safeguard que neutraliza eventos destrutivos.</dd>
                 <dt>Duplicate Report!</dt>
-                <dd>Penalidade aplicada ao segundo pesquisador que reporta a mesma classe de falha.</dd>
+                <dd>Penalidade aplicada ao segundo pesquisador que reporta a mesma classe de vulnerabilidade.</dd>
                 <dt>Exploit</dt>
                 <dd>Ação de alocar uma vulnerabilidade na bancada, pagando custo de ferramentas.</dd>
                 <dt>IDOR</dt>
                 <dd>Insecure Direct Object Reference — acesso direto a objetos sem autorização.</dd>
                 <dt>Patch Speed</dt>
-                <dd>Velocidade com que a corporação corrige falhas; contador regressivo de turnos.</dd>
+                <dd>Velocidade com que a corporação corrige vulnerabilidades; contador regressivo de turnos.</dd>
                 <dt>PATCH DEPLOYED!</dt>
                 <dd>Evento fatal que descarta vulnerabilidades não submetidas da bancada.</dd>
                 <dt>Program</dt>

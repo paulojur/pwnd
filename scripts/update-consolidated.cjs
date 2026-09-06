@@ -13,7 +13,7 @@ function processHTML(path) {
   html = html.replace(/Fase 4: Caos/g, 'Janela de Caos (Opcional)');
   html = html.replace(/Fase 4 \(Caos\)/g, 'Janela de Caos');
   html = html.replace(/Fase de Caos/g, 'Janela de Caos');
-  
+
   // Turn structure replacement
   const oldTurnStruct = /<ol>\s*<li><strong>Início:<\/strong>.*?<\/ol>/is;
   const newTurnStruct = `<ol>
@@ -38,8 +38,8 @@ function processHTML(path) {
   html = html.replace(/1 degrau de penalidade/gi, 'a penalidade do patch');
 
   // Payout Formula
-  html = html.replace(/CVSS × Multiplicador do Programa ×\s*Bônus de Ferramentas/gi, 'Valor base da Falha (CVSS) + Bônus do Programa + Bônus de Tools');
-  
+  html = html.replace(/CVSS × Multiplicador do Programa ×\s*Bônus de Ferramentas/gi, 'Valor base da vulnerabilidade (CVSS) + Bônus do Programa + Bônus de Tools');
+
   // Remove Mult from tables
   html = html.replace(/<th>Mult\.<\/th>/g, '');
   html = html.replace(/<td>x\d+(\.\d+)?<\/td>/g, ''); // Removes e.g. <td>x1.5</td>
@@ -56,7 +56,7 @@ function processHTML(path) {
   // Patch Speed Check timings
   html = html.replace(/final de cada rodada/gi, 'final do turno do jogador');
   html = html.replace(/final da rodada/gi, 'final do turno do jogador');
-  
+
   // Patch thresholds
   html = html.replace(/Lenta \(8\),\s*Moderada \(7 a 8\),\s*Rápida \(6 a 8\),\s*Extrema \(5 a 8\)/gi, 'Lenta 8, Moderada 7-8, Rápida 6-8, Extrema 5-8');
 
@@ -74,14 +74,14 @@ function processHTML(path) {
   html = replaceAll(html, 'teste obrigatório de dado D6', 'teste obrigatório de dado D8');
   html = replaceAll(html, 'duplo teste D6', 'duplo teste D8');
   html = html.replace(/\+\$5\.000/g, '+$4.000'); // Note: could be broad, let's keep it tight if needed, but per request it's ok.
-  html = html.replace(/ou eventos de sabotagem/g, ''); 
+  html = html.replace(/ou eventos de sabotagem/g, '');
 
   // Section 06 Example
-  html = html.replace(/→ Opeão avança diretamente para o degrau <strong>\$10\.000<\/strong> na Bounty Track\./g, 
-  '→ Se o saldo do jogador era <strong>$1.500</strong>, o novo saldo é <strong>$9.500</strong>.<br>\n        → O peão avança e assenta no degrau <strong>$9.000</strong> da Bounty Track (o degrau imediatamente abaixo).');
-  
+  html = html.replace(/→ Opeão avança diretamente para o degrau <strong>\$10\.000<\/strong> na Bounty Track\./g,
+    '→ Se o saldo do jogador era <strong>$1.500</strong>, o novo saldo é <strong>$9.500</strong>.<br>\n        → O peão avança e assenta no degrau <strong>$9.000</strong> da Bounty Track (o degrau imediatamente abaixo).');
+
   html = html.replace(/Crítico \(\+\$5\.000\)/g, 'Crítico (+$4.000)');
-  
+
   fs.writeFileSync(path, html);
 }
 

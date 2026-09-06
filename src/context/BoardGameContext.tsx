@@ -154,7 +154,7 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
       points: 0,
       rarity: 'Rare',
       icon: '🛡️',
-      simpleDescription: 'Safeguard SUPREMA: Salva todas as suas falhas na mesa quando o alarme de Patch Deployed for disparado!'
+      simpleDescription: 'Safeguard SUPREMA: Salva todas as suas vulnerabilidades na mesa quando o alarme de Patch Deployed for disparado!'
     };
 
     setPlayerHand([...initialCards, starterDefuse]);
@@ -258,7 +258,7 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
 
       if (!isAllowedCategory) {
         soundFx.playPatchDeployedAlarm();
-        alert(`❌ FALHA FORA DE ESCOPO (Out of Scope)!\n\nO programa [${playerActiveProgram.name}] aceita apenas: ${Array.isArray(allowed) ? allowed.join(', ') : allowed}.\nA carta [${card.name}] não é permitida!`);
+        alert(`❌ vulnerabilidade FORA DE ESCOPO (Out of Scope)!\n\nO programa [${playerActiveProgram.name}] aceita apenas: ${Array.isArray(allowed) ? allowed.join(', ') : allowed}.\nA carta [${card.name}] não é permitida!`);
         addLog(`❌ REJEITADO: Carta "${card.name}" está fora de escopo no ${playerActiveProgram.name}!`);
         return;
       }
@@ -315,7 +315,7 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
 
     if (playerHand.length <= 1) {
       alert('CUSTO INSUFICIENTE: Você precisa descartar 1 carta da mão para descer uma Tool. Mão vazia = não pode instalar!');
-      addLog(`❌ Falha ao instalar Tool "${card.name}": Sem cartas para pagar o custo de descarte.`);
+      addLog(`❌ vulnerabilidade ao instalar Tool "${card.name}": Sem cartas para pagar o custo de descarte.`);
       return;
     }
 
@@ -352,14 +352,14 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
 
     const myExploitsInTable = deployedExploits.filter(e => e.playerId === myRole);
     if (myExploitsInTable.length === 0) {
-      alert('Você não possui nenhuma falha armada na mesa para reportar!');
-      addLog('Nenhuma falha sua implantada na mesa para reportar!');
+      alert('Você não possui nenhuma vulnerabilidade armada na mesa para reportar!');
+      addLog('Nenhuma vulnerabilidade sua implantada na mesa para reportar!');
       return;
     }
 
     if (currentTurn >= 5 || (playerActiveProgram && playerActiveProgram.flatBountyBonus >= 2000)) {
       if (myExploitsInTable.length < 2) {
-        alert('MÍNIMO DE ESCOPO: A partir da Rodada 5 (Alerta Global) OU em programas de Tier Alto/Crítico, é exigido um combo de no mínimo 2 falhas na mesa para submeter o Report!');
+        alert('MÍNIMO DE ESCOPO: A partir da Rodada 5 (Alerta Global) OU em programas de Tier Alto/Crítico, é exigido um combo de no mínimo 2 vulnerabilidades na mesa para submeter o Report!');
         addLog(`Report em ${playerActiveProgram?.name} bloqueado: Faltou complexidade (Min. 2 cartas válidas exigidas).`);
         return;
       }
@@ -465,7 +465,7 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
 
         // Mandatory event draw after successful report
         drawEventCard();
-        
+
         // Wait, drawEventCard already calls soundFx and setActiveEventCard which opens the modal.
         // We will call finalizeTurnAdvance from the event modal closing? No, the modal just overlays. 
         // finalizeTurnAdvance() is safe to call, it advances the turn.
@@ -473,7 +473,7 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
       } else {
         setPatchAlertModal(true);
         soundFx.playPatchDeployedAlarm();
-        addLog(`🚨 PATCH DEPLOYED NO REPORT! O dado D8 tirou ${result.diceValue} e a empresa corrigiu a falha!`);
+        addLog(`🚨 PATCH DEPLOYED NO REPORT! O dado D8 tirou ${result.diceValue} e a empresa corrigiu a vulnerabilidade!`);
       }
     } else if (diceRollReason === 'endTurn') {
       if (!result.passed) {
@@ -514,7 +514,7 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
 
   const defusePatch = () => {
     setPatchAlertModal(false);
-    addLog('Safeguard 0-DAY: Seu cofre salvou as falhas contra a correção de emergência!');
+    addLog('Safeguard 0-DAY: Seu cofre salvou as vulnerabilidades contra a correção de emergência!');
     finalizeTurnAdvance();
   };
 
@@ -523,9 +523,9 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
     setDeployedExploits(prev => prev.filter(e => e.playerId !== myRole));
     const zone = getZoneByBalance(playerScore);
     const penalty = zone.patchPenalty;
-    
+
     setPlayerScore(prev => Math.max(0, prev - penalty));
-    addLog(`COLAPSO: PATCH DEPLOYED! limpou suas falhas e deduziu ${penalty} (Zona ${zone.name}) do seu saldo na Bounty Track!`);
+    addLog(`COLAPSO: PATCH DEPLOYED! limpou suas vulnerabilidades e deduziu ${penalty} (Zona ${zone.name}) do seu saldo na Bounty Track!`);
     finalizeTurnAdvance();
   };
 

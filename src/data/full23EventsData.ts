@@ -27,7 +27,7 @@ export const FULL_23_EVENTS: EventCardData[] = [
     technicalReference: 'Duplicated Vulnerability Submission',
     icon: '📝',
     targetText: 'Escolha 1 Oponente',
-    simpleDescription: 'Alguém reportou a falha minutos antes! Escolha 1 oponente com falhas na mesa: ele descarta a vulnerabilidade de maior CVSS exposta.',
+    simpleDescription: 'Alguém reportou a vulnerabilidade minutos antes! Escolha 1 oponente com vulnerabilidades na mesa: ele descarta a vulnerabilidade de maior CVSS exposta.',
     effectType: 'duplicate'
   },
   {
@@ -37,7 +37,7 @@ export const FULL_23_EVENTS: EventCardData[] = [
     technicalReference: 'Out of Scope Boundary Rejection',
     icon: '❌',
     targetText: 'Você (Autor do Report)',
-    simpleDescription: 'Seu reporte gerou alerta no comitê de escopo! Você fica impedido de realizar a ação Exploit (baixar falhas) no seu próximo turno.',
+    simpleDescription: 'Seu reporte gerou alerta no comitê de escopo! Você fica impedido de realizar a ação Exploit (baixar vulnerabilidades) no seu próximo turno.',
     effectType: 'scope'
   },
   {
@@ -97,7 +97,7 @@ export const FULL_23_EVENTS: EventCardData[] = [
     technicalReference: 'Public Zero-Day Exfiltration',
     icon: '📢',
     targetText: 'Todos os Jogadores (Imune ao Social Engineer)',
-    simpleDescription: 'Vazamento público! Todos os jogadores descartam suas falhas expostas na mesa, mas recebem $1.000 de compensação imediata.',
+    simpleDescription: 'Vazamento público! Todos os jogadores descartam suas vulnerabilidades expostas na mesa, mas recebem $1.000 de compensação imediata.',
     effectType: 'bounty'
   },
   {
@@ -137,7 +137,7 @@ export const FULL_23_EVENTS: EventCardData[] = [
     technicalReference: 'Instant Free Submission Window',
     icon: '📄',
     targetText: 'Todos os Jogadores (Imune ao Social Engineer)',
-    simpleDescription: 'Janela de divulgação responsável! Todos os jogadores que tiverem falhas válidas na mesa podem fazer 1 Report gratuito fora de turno (respeitando a ordem da mesa).',
+    simpleDescription: 'Janela de divulgação responsável! Todos os jogadores que tiverem vulnerabilidades válidas na mesa podem fazer 1 Report gratuito fora de turno (respeitando a ordem da mesa).',
     effectType: 'bounty'
   },
   {

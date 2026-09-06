@@ -28,7 +28,7 @@ export const EVENT_CARDS_LIST: EventCardData[] = [
   {
     id: 'evt-data-breach',
     name: 'Data Breach!',
-    effectDescription: 'Vazamento de dados massivo! Todos os participantes mostram suas mãos. O participante com mais falhas descarta metade da mão.',
+    effectDescription: 'Vazamento de dados massivo! Todos os participantes mostram suas mãos. O participante com mais vulnerabilidades descarta metade da mão.',
     icon: '💥',
     type: 'global'
   },

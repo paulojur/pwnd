@@ -87,7 +87,7 @@ export const ARCHETYPES: Archetype[] = [
     maxHandSize: 6,
     reportsPerTurn: 1,
     bountyModifier: 1.0,
-    specialPowers: ['2 Lotes em 1 Report', '+50% de bônus se submeter 5+ falhas no total', 'Restrito a CVSS ≤ 6.0'],
+    specialPowers: ['2 Lotes em 1 Report', '+50% de bônus se submeter 5+ vulnerabilidades no total', 'Restrito a CVSS ≤ 6.0'],
     avatarIcon: '⚡',
     color: '#f0883e'
   },
@@ -230,7 +230,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     patchSpeed: 'Extrema',
     bountyRange: '+$4.0k Bônus Fixos',
     flatBountyBonus: 4000,
-    description: 'Recompensas astronômicas para RCE, SSRF e falhas de infraestrutura. Alto risco de Patch!'
+    description: 'Recompensas astronômicas para RCE, SSRF e vulnerabilidades de infraestrutura. Alto risco de Patch!'
   },
   {
     id: 'cloudnine-2',
@@ -252,7 +252,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     patchSpeed: 'Moderada',
     bountyRange: '+$1.0k Bônus Fixos',
     flatBountyBonus: 1200,
-    description: 'Focado em falhas de privacidade, XSS e lógica de engajamento social.'
+    description: 'Focado em vulnerabilidades de privacidade, XSS e lógica de engajamento social.'
   },
   {
     id: 'socialbee-2',
@@ -328,7 +328,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     patchSpeed: 'Rápida',
     bountyRange: '+$4.0k Bônus Fixos',
     flatBountyBonus: 2200,
-    description: 'Infraestrutura blockchain com recompensas vultosas para falhas de saldo.'
+    description: 'Infraestrutura blockchain com recompensas vultosas para vulnerabilidades de saldo.'
   },
 
   // --- 10. AI Core Systems (NOVO - 2 cópias) ---
@@ -704,7 +704,7 @@ export const MASTER_DECK: Card[] = [
     id: 'event-duplicate-report',
     name: 'Duplicate Report!',
     type: 'event',
-    effectDescription: 'DUPLICADO! Outro pesquisador submeteu a falha minutos antes. Perde a vulnerabilidade de maior pontuação no programa ativo.',
+    effectDescription: 'DUPLICADO! Outro pesquisador submeteu a vulnerabilidade minutos antes. Perde a vulnerabilidade de maior pontuação no programa ativo.',
     flavorText: 'Status: Closed as Duplicate. Sem recompensa.',
     artConcept: 'Carimbo vermelho "DUPLICATE" sobre relatório em código.',
     rarity: 'Uncommon'

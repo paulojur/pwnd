@@ -81,7 +81,7 @@ export const FULL_80_VULNERABILITIES: CardV2[] = [
     points: 28,
     rarity: 'Uncommon',
     icon: '🗄️',
-    simpleDescription: 'Explora falhas de abstração em queries ORM para vazamento de colunas privadas.'
+    simpleDescription: 'Explora vulnerabilidades de abstração em queries ORM para vazamento de colunas privadas.'
   },
   {
     id: 'inj-9',
@@ -385,7 +385,7 @@ export const FULL_80_VULNERABILITIES: CardV2[] = [
     points: 25,
     rarity: 'Uncommon',
     icon: '✂️',
-    simpleDescription: 'Escapa da aspa do atributo input com " onfocus="alert(1) e dispara a falha.'
+    simpleDescription: 'Escapa da aspa do atributo input com " onfocus="alert(1) e dispara a vulnerabilidade.'
   },
   {
     id: 'xss-9',
@@ -879,7 +879,7 @@ export const FULL_12_TOOLS: CardV2[] = [
     points: 0,
     rarity: 'Common',
     icon: '🚀',
-    simpleDescription: 'ATIVA: Reduz o custo de ativação de falhas da classe Broken Access Control em 1 recurso.'
+    simpleDescription: 'ATIVA: Reduz o custo de ativação de vulnerabilidades da classe Broken Access Control em 1 recurso.'
   },
   {
     id: 'tool-devtools-1',

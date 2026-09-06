@@ -10,16 +10,16 @@ html = html.replace(/<span class="val">\$50\.000<\/span><span>🏆 VITÓRIA INST
 // Note: $40.000 was already patched in the track HTML in previous steps.
 
 // Section 8.1 Patch Penalty
-html = html.replace(/<strong>Recuo na Bounty Track:<\/strong> mova o seu Bounty Token <strong>1 degrau para\s*trás<\/strong> na Bounty Track\. Se já estiver no início, o marcador é fixado no\s*piso de \$0\./g, 
-`<strong>Recuo por Patch:</strong> o jogador sofre um prejuízo financeiro fixo conforme sua zona de riqueza (Verde $1.500, Amarela $3.000, Laranja $4.500, Vermelha $6.000). Deduza o valor do saldo acumulado atual; o marcador recua na Bounty Track até refletir o novo saldo, travando no mínimo de $0.`);
+html = html.replace(/<strong>Recuo na Bounty Track:<\/strong> mova o seu Bounty Token <strong>1 degrau para\s*trás<\/strong> na Bounty Track\. Se já estiver no início, o marcador é fixado no\s*piso de \$0\./g,
+    `<strong>Recuo por Patch:</strong> o jogador sofre um prejuízo financeiro fixo conforme sua zona de riqueza (Verde $1.500, Amarela $3.000, Laranja $4.500, Vermelha $6.000). Deduza o valor do saldo acumulado atual; o marcador recua na Bounty Track até refletir o novo saldo, travando no mínimo de $0.`);
 
 // Event Cards
 html = html.replace(/sobem 1 degrau ou recebem \$500/g, 'recebem $1.500');
 html = html.replace(/recua 3 degraus na Bounty Track/g, 'sofre um prejuízo financeiro conforme sua zona (Verde $1.500, Amarela $3.000, Laranja $4.500, Vermelha $6.000) e recua na Bounty Track');
 
 // Section 13 Mechanics
-html = html.replace(/Avance o Bounty Token para o <strong>degrau mais próximo acima do valor\s*obtido<\/strong>\./g, 
-`O Bounty Track é um acumulador de patrimônio. Ao concluir um Report, some o valor pago ao seu saldo atual. Avance o seu token para o degrau que corresponda ao seu novo saldo total (ou o degrau imediatamente abaixo dele, caso o valor quebrado não tenha um degrau exato). O jogo termina imediatamente quando um jogador alcança ou ultrapassa $40.000. O primeiro jogador a fazê-lo vence a partida.`);
+html = html.replace(/Avance o Bounty Token para o <strong>degrau mais próximo acima do valor\s*obtido<\/strong>\./g,
+    `O Bounty Track é um acumulador de patrimônio. Ao concluir um Report, some o valor pago ao seu saldo atual. Avance o seu token para o degrau que corresponda ao seu novo saldo total (ou o degrau imediatamente abaixo dele, caso o valor quebrado não tenha um degrau exato). O jogo termina imediatamente quando um jogador alcança ou ultrapassa $40.000. O primeiro jogador a fazê-lo vence a partida.`);
 
 // Redesign of the 28 Steps in HTML
 const newTrackHtml = `<p><strong style="color:#39D353">🟩 Zona Baixa — "Entry Level"</strong> (9 degraus)</p>
@@ -119,13 +119,13 @@ fs.writeFileSync('f:/PWNDgame/src/context/GameContext.tsx', gCtx);
 // --- BoardGameContext.tsx ---
 let bgCtx = fs.readFileSync('f:/PWNDgame/src/context/BoardGameContext.tsx', 'utf8');
 bgCtx = bgCtx.replace(/setPlayerScore\(prev => Math\.max\(0, prev - 1000\)\);[\s\S]*?1 casa na Bounty Track!'\);/,
-`let penalty = 1500;
+    `let penalty = 1500;
     if (playerScore >= 34000) penalty = 6000;
     else if (playerScore >= 22000) penalty = 4500;
     else if (playerScore >= 12000) penalty = 3000;
     
     setPlayerScore(prev => Math.max(0, prev - penalty));
-    addLog(\`COLAPSO: PATCH DEPLOYED! limpou suas falhas e deduziu $\${penalty} do seu saldo na Bounty Track!\`);`);
+    addLog(\`COLAPSO: PATCH DEPLOYED! limpou suas vulnerabilidades e deduziu $\${penalty} do seu saldo na Bounty Track!\`);`);
 fs.writeFileSync('f:/PWNDgame/src/context/BoardGameContext.tsx', bgCtx);
 
 // --- full23EventsData.ts ---

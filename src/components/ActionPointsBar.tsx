@@ -17,7 +17,7 @@ export const ActionPointsBar: React.FC = () => {
 
   return (
     <div style={{ marginBottom: '20px' }}>
-      
+
       {/* TURN STATUS BANNER (Sua Vez vs Aguardando Oponente) */}
       <div
         style={{
@@ -55,7 +55,7 @@ export const ActionPointsBar: React.FC = () => {
 
       {/* Main Controls Box */}
       <div className="terminal-box" style={{ padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px', opacity: isMyTurn ? 1 : 0.65 }}>
-        
+
         {/* Total Score & Rule Title */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ background: 'rgba(57, 211, 83, 0.1)', border: '1px solid var(--terminal-green)', borderRadius: 'var(--radius-md)', padding: '8px 16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -99,7 +99,7 @@ export const ActionPointsBar: React.FC = () => {
             <Search size={16} /> Varrer / Recon (1 Ação)
           </button>
 
-          {/* Reportar Falhas (1 Ação) */}
+          {/* Reportar vulnerabilidades (1 Ação) */}
           <button
             onClick={() => { soundFx.playClick(); actionReportar(); }}
             disabled={!isMyTurn}
@@ -118,7 +118,7 @@ export const ActionPointsBar: React.FC = () => {
               gap: '6px'
             }}
           >
-            <Send size={16} /> Reportar Falhas (1 Ação)
+            <Send size={16} /> Reportar vulnerabilidades (1 Ação)
           </button>
 
           {/* Botão de Teste do Dado D6 3D */}

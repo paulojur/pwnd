@@ -132,7 +132,7 @@ export const RulebookHelpModal: React.FC<RulebookHelpModalProps> = ({ isOpen, on
               <ul style={{ paddingLeft: '18px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <li>🌱 <strong>n00b:</strong> Ganha +1 habilidade passiva permanente a cada Report concluído.</li>
                 <li>🧠 <strong>The Old Guard:</strong> Mão expandida de 9 cartas, limite de 1 Report por rodada.</li>
-                <li>⚡ <strong>Bug Hunter:</strong> 2 Reports por turno (limitado a falhas de severidade Low/Medium).</li>
+                <li>⚡ <strong>Bug Hunter:</strong> 2 Reports por turno (limitado a vulnerabilidades de severidade Low/Medium).</li>
                 <li>🎭 <strong>Social Engineer:</strong> Escolha quem sofre o efeito de cartas de Evento de Caos.</li>
                 <li>⚔️ <strong>Red Teamer:</strong> Ignora todas as restrições de escopo (-30% de taxa no pagamento).</li>
                 <li>🛡️ <strong>The Pentester:</strong> Imune a Duplicate Report! e Patch dispara apenas no número 6.</li>

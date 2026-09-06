@@ -984,7 +984,7 @@
                 <h2 class="sec"><span class="num">01</span> Introdução</h2>
                 <p><strong>PWND! — Bug Bounty Chaos</strong> é um jogo de cartas estratégico em que você assume o papel
                     de um pesquisador de segurança independente. Sua missão: encontrar vulnerabilidades em programas de
-                    recompensa patrocinados por corporações fictícias, encadear falhas, validar relatórios e
+                    recompensa patrocinados por corporações fictícias, encadear vulnerabilidades, validar relatórios e
                     <strong>receber o pagamento antes que a equipe de engenharia do alvo publique a correção</strong>.
                 </p>
                 <p>O jogo combina duas forças clássicas do design moderno: a <strong>construção de motores de
@@ -1008,7 +1008,7 @@
                 <div class="card-grid">
                     <div class="card-type vuln">
                         <h4>Vulnerability Cards</h4>
-                        <p>As falhas que você explora e reporta. Cada uma exibe classe técnica, pontuação CVSS
+                        <p>As vulnerabilidades que você explora e reporta. Cada uma exibe classe técnica, pontuação CVSS
                             (severidade), raridade e habilidade operacional. Geram recompensa na Bounty Track ao serem
                             reportadas.</p>
                         <span class="count">80 cartas · 8 classes técnicas · 5 raridades</span>
@@ -1028,14 +1028,21 @@
                     </div>
                     <div class="card-type event">
                         <h4>Event Cards</h4>
-                        <p>Interrupções, sabotagens burocráticas e oscilações do mercado de segurança. Sacadas obrigatoriamente como <strong>Custo do Sucesso</strong> após um Report bem-sucedido, ou jogadas durante a <strong>Janela de Caos (Opcional)</strong> do próprio turno. Acesso direto ao Event Deck via Recon é poder exclusivo do Social Engineer.</p>
+                        <p>Interrupções, sabotagens burocráticas e oscilações do mercado de segurança. Sacadas
+                            obrigatoriamente como <strong>Custo do Sucesso</strong> após um Report bem-sucedido, ou
+                            jogadas durante a <strong>Janela de Caos (Opcional)</strong> do próprio turno. Acesso direto
+                            ao Event Deck via Recon é poder exclusivo do Social Engineer.</p>
                         <span class="count">23 cartas de Caos</span>
                     </div>
                     <div class="card-type defuse">
                         <h4>Safeguards (Bypass + CVE)</h4>
                         <p>Duas categorias de proteção:
-                            <strong>Bypass</strong> — anula 100% as penalidades do PATCH DEPLOYED! (financeiras e descarte de exploits).
-                            <strong>CVE Assignment Protection</strong> — proteção de escopo reativa e de uso único: descarta ao ser usada. Anula <em>Duplicate Report!</em>, <em>Out of Scope</em> e <em>DNS Hijack</em> quando acionados contra o seu programa ativo. O jogador pode segurar na mão ou jogar imediatamente (custa 1 slot de mão).
+                            <strong>Bypass</strong> — anula 100% as penalidades do PATCH DEPLOYED! (financeiras e
+                            descarte de exploits).
+                            <strong>CVE Assignment Protection</strong> — proteção de escopo reativa e de uso único:
+                            descarta ao ser usada. Anula <em>Duplicate Report!</em>, <em>Out of Scope</em> e <em>DNS
+                                Hijack</em> quando acionados contra o seu programa ativo. O jogador pode segurar na mão
+                            ou jogar imediatamente (custa 1 slot de mão).
                         </p>
                         <span class="count">10 cartas — 8 Bypass + 2 CVE Assignment Protection</span>
                     </div>
@@ -1051,7 +1058,9 @@
                 <ul>
                     <li><strong>1 Tabuleiro Central (Board, 30×20cm):</strong> contém o Slot do Event Deck, o Program
                         Market (3 slots), a Discard Pile compartilhada e o Round Tracker (1 a 8 rodadas).</li>
-                    <li><strong>6 Player Mats (25×35cm):</strong> cada tapete individual possui Slot de Researcher, Slot de Active Program, Slot de Bypass, Tools Rack (3 slots), <strong>Área de Eventos Guardados (limite de 2 cartas)</strong>, Zona de Exploits (area limpa) e Bounty Track lateral.</li>
+                    <li><strong>6 Player Mats (25×35cm):</strong> cada tapete individual possui Slot de Researcher, Slot
+                        de Active Program, Slot de Bypass, Tools Rack (3 slots), <strong>Área de Eventos Guardados
+                            (limite de 2 cartas)</strong>, Zona de Exploits (area limpa) e Bounty Track lateral.</li>
                     <li><strong>6 Bounty Tokens:</strong> marcadores hexagonais acrílicos, 1 por jogador (cores
                         exclusivas).</li>
                     <li><strong>1 Round Token:</strong> rastreador de turnos de acrílico vermelho.</li>
@@ -1061,10 +1070,14 @@
                 <h3>Sistema de Raridade das Cartas de Vulnerabilidade</h3>
                 <p>As cartas de vulnerabilidade possuem 5 níveis de raridade indicados pela cor da borda lateral:</p>
                 <ul>
-                    <li><strong>Cinza — Comum:</strong> falhas de baixa a média severidade, frequentes no baralho.</li>
-                    <li><strong>Verde — Incomum:</strong> falhas de média severidade com habilidades operacionais.</li>
-                    <li><strong>Azul — Rara:</strong> falhas de alta severidade com efeitos especiais de deploy.</li>
-                    <li><strong>Roxa — Épica:</strong> falhas críticas com habilidades poderosas de combinação.</li>
+                    <li><strong>Cinza — Comum:</strong> vulnerabilidades de baixa a média severidade, frequentes no
+                        baralho.</li>
+                    <li><strong>Verde — Incomum:</strong> vulnerabilidades de média severidade com habilidades
+                        operacionais.</li>
+                    <li><strong>Azul — Rara:</strong> vulnerabilidades de alta severidade com efeitos especiais de
+                        deploy.</li>
+                    <li><strong>Roxa — Épica:</strong> vulnerabilidades críticas com habilidades poderosas de
+                        combinação.</li>
                     <li><strong>Dourada — Lendária:</strong> vulnerabilidades de nível máximo (RCE, Zero-Day global), as
                         mais valiosas do jogo.</li>
                 </ul>
@@ -1074,12 +1087,15 @@
             <section id="objetivo">
                 <h2 class="sec"><span class="num">03</span> Objetivo do Jogo</h2>
                 <p>Em <strong>PWND!</strong>, cada participante assume o papel de um pesquisador independente de
-                    segurança ofensiva competindo em plataformas abertas de caça a falhas. Ao longo de rodadas
+                    segurança ofensiva competindo em plataformas abertas de caça a vulnerabilidades. Ao longo de rodadas
                     estruturadas, os participantes realizam varreduras, estruturam cadeias de ataque e emitem relatórios
                     técnicos antes que as equipes defensivas corrijam as vulnerabilidades em produção.</p>
                 <div class="callout">
                     <span class="label">Condição de Vitória</span>
-                    <p>O objetivo é acumular a maior quantia em dólares na Bounty Track. O primeiro pesquisador a atingir <strong>$40.000</strong> vence a partida instantaneamente. Se nenhum jogador atingir $40.000 até o encerramento da última rodada (8ª ou 10ª), quem tiver o maior saldo é declarado vencedor.</p>
+                    <p>O objetivo é acumular a maior quantia em dólares na Bounty Track. O primeiro pesquisador a
+                        atingir <strong>$40.000</strong> vence a partida instantaneamente. Se nenhum jogador atingir
+                        $40.000 até o encerramento da última rodada (8ª ou 10ª), quem tiver o maior saldo é declarado
+                        vencedor.</p>
                 </div>
                 <p>Para acumular Bounty, você precisa:</p>
                 <ol>
@@ -1109,7 +1125,13 @@
 
                 <h3>4.2 · Preparação dos Baralhos</h3>
                 <ol>
-                    <li><strong>Main Deck (Baralho de Ação):</strong> O jogo possui 126 cartas de ação totais. A fórmula de distribuição universal é: <strong>126 = 120 no deck de compra + N na mão (1 Bypass por jogador) + (6 − N) na caixa</strong>. Antes de embaralhar, separe 1 Bypass para a mão de cada jogador. Embaralhe no Main Deck <strong>80 Vulnerability Cards</strong>, <strong>36 Tool Cards</strong> (12 tipos × 3 cópias) e <strong>4 Safeguards</strong> (2 Bypass + 2 CVE Assignment Protection) — total exato de <strong>120 cartas no deck de compra</strong>. As Bypass restantes voltam para a caixa. Forme o deck central.</li>
+                    <li><strong>Main Deck (Baralho de Ação):</strong> O jogo possui 126 cartas de ação totais. A fórmula
+                        de distribuição universal é: <strong>126 = 120 no deck de compra + N na mão (1 Bypass por
+                            jogador) + (6 − N) na caixa</strong>. Antes de embaralhar, separe 1 Bypass para a mão de
+                        cada jogador. Embaralhe no Main Deck <strong>80 Vulnerability Cards</strong>, <strong>36 Tool
+                            Cards</strong> (12 tipos × 3 cópias) e <strong>4 Safeguards</strong> (2 Bypass + 2 CVE
+                        Assignment Protection) — total exato de <strong>120 cartas no deck de compra</strong>. As Bypass
+                        restantes voltam para a caixa. Forme o deck central.</li>
                     <li><strong>Event Deck:</strong> embaralhe as <strong>23 Event Cards</strong> e coloque o baralho
                         fechado no slot indicado do Tabuleiro Central.</li>
                     <li><strong>Program Market:</strong> revele <strong>3 Program Cards</strong> nas 3 posições do
@@ -1125,7 +1147,8 @@
 
                 <h3>4.4 · Distribuição da Mão Inicial (Regra N+4)</h3>
                 <p>A distribuição de Safeguards segue a <strong>Fórmula N+4</strong>: cada jogador começa com
-                    <strong>1 carta Bypass garantida na mão</strong>. No Main Deck ficam embaralhadas <strong>2 Bypass + 2 CVE Assignment Protection</strong>.
+                    <strong>1 carta Bypass garantida na mão</strong>. No Main Deck ficam embaralhadas <strong>2 Bypass +
+                        2 CVE Assignment Protection</strong>.
                 </p>
                 <div class="callout cyan">
                     <span class="label">Mão Inicial</span>
@@ -1180,7 +1203,10 @@
                     </table>
                 </div>
                 <p style="margin-top: 15px; font-size: 0.95rem; color: var(--text-muted);">
-                    <em>*Nota: O baralho físico de PWND! possui 8 Bypass + 2 CVE = 10 Safeguards. Em partidas com menos de 6 jogadores, sobrarão Bypasses. Estas sobras <strong>devem ser devolvidas à caixa</strong> e não participam do jogo. As 2 CVE Assignment Protection <strong>sempre</strong> ficam embaralhadas no Main Deck.</em>
+                    <em>*Nota: O baralho físico de PWND! possui 8 Bypass + 2 CVE = 10 Safeguards. Em partidas com menos
+                        de 6 jogadores, sobrarão Bypasses. Estas sobras <strong>devem ser devolvidas à caixa</strong> e
+                        não participam do jogo. As 2 CVE Assignment Protection <strong>sempre</strong> ficam
+                        embaralhadas no Main Deck.</em>
                 </p>
 
                 <h3>4.5 · Seleção do Alvo Inicial</h3>
@@ -1252,7 +1278,8 @@
 
                 <div class="callout">
                     <span class="label">Loop Central do Jogo</span>
-                    <p><strong>RECON → EXPLOIT → REPORT → (CAOS) → BOUNTY.</strong> Adquira cartas, arme falhas na sua
+                    <p><strong>RECON → EXPLOIT → REPORT → (CAOS) → BOUNTY.</strong> Adquira cartas, arme
+                        vulnerabilidades na sua
                         bancada, submeta o relatório antes do patch e converta o CVSS em dólares.</p>
                 </div>
             </section>
@@ -1301,15 +1328,29 @@
                 <p>Realize a entrega formal de todas as Vulnerability Cards alocadas na sua Zona de Exploits. O
                     processamento ocorre por <strong>Adição Simples (Zero Calculadora)</strong>:</p>
                 <ol>
-                    <li><strong>Mínimo de Escopo:</strong> A quantidade mínima de falhas válidas para poder executar a ação de Report varia por Tier do programa: Low/Medium exigem no mínimo <strong>1 falha válida</strong>; High/Critical exigem no mínimo <strong>2 falhas válidas</strong>. Cartas descidas fora do escopo são descartadas antes da contagem e não contam para o mínimo. Se você estiver abaixo do mínimo exigido, a ação de Report <strong>não está disponível</strong> (você deve usar Recon para trocar de alvo ou Exploit para descer novas falhas). <em>Nota (Bug Hunter): o mínimo de 2 falhas em programas Alto/Crítico se aplica ao TOTAL do Report, e nunca por lote.</em></li>
-                    <li><strong>Alerta Global:</strong> <em>Atenção: A partir da Rodada 5, entra em vigor o Alerta Global, e TODOS os programas passam a exigir no mínimo 2 cartas válidas.</em></li>
+                    <li><strong>Mínimo de Escopo:</strong> A quantidade mínima de vulnerabilidades válidas para poder
+                        executar a
+                        ação de Report varia por Tier do programa: Low/Medium exigem no mínimo <strong>1 vulnerabilidade
+                            válida</strong>; High/Critical exigem no mínimo <strong>2 vulnerabilidades válidas</strong>.
+                        Cartas
+                        descidas fora do escopo são descartadas antes da contagem e não contam para o mínimo. Se você
+                        estiver abaixo do mínimo exigido, a ação de Report <strong>não está disponível</strong> (você
+                        deve usar Recon para trocar de alvo ou Exploit para descer novas vulnerabilidades). <em>Nota
+                            (Bug Hunter):
+                            o mínimo de 2 vulnerabilidades em programas Alto/Crítico se aplica ao TOTAL do Report, e
+                            nunca por
+                            lote.</em></li>
+                    <li><strong>Alerta Global:</strong> <em>Atenção: A partir da Rodada 5, entra em vigor o Alerta
+                            Global, e TODOS os programas passam a exigir no mínimo 2 cartas válidas.</em></li>
                     <li><strong>Cálculo do Payout (Modelo A — Soma Direta):</strong>
-                        $$\text{Bounty Total} = \sum \text{Valor das Falhas} + \text{Bônus do Programa} + \sum
+                        $$\text{Bounty Total} = \sum \text{Valor das vulnerabilidades} + \text{Bônus do Programa} + \sum
                         \text{Bônus das Tools}$$
                         <div class="callout" style="margin-top:.7rem">
                             <span class="label">Tabela de Bônus Fixos do Modelo A</span>
                             <p>
-                                <strong>• Falhas:</strong> Comum (+$1.500) | Incomum (+$2.500) | Rara (+$4.000) | Épica (+$5.000) | Lendária (+$6.000)<br>
+                                <strong>• vulnerabilidades:</strong> Comum (+$1.500) | Incomum (+$2.500) | Rara
+                                (+$4.000) | Épica
+                                (+$5.000) | Lendária (+$6.000)<br>
                                 <strong>• Programas:</strong> Baixo (+$0) | Médio (+$1.000) | Alto (+$2.500) | Crítico
                                 (+$4.000)<br>
                                 <strong>• Tools:</strong> Épicas/Raras (+$2.000) | Comuns (1ª carga: +$1.000 / 2ª carga:
@@ -1318,12 +1359,16 @@
                         </div>
                         <div class="callout cyan" style="margin-top:.7rem">
                             <span class="label">Exemplo de Cálculo Aditivo na Mesa</span>
-                            <p>1 Falha Rara ($4.000) + 1 Incomum ($2.500) na BankSafe (Alto +$2.500) com 1 Tool (1ª
+                            <p>1 vulnerabilidade Rara ($4.000) + 1 Incomum ($2.500) na BankSafe (Alto +$2.500) com 1
+                                Tool (1ª
                                 carga +$1.000):<br>
                                 $$\$4.000 + \$2.500 + \$2.500 + \$1.000 = \mathbf{\$10.000\text{ Payout Total}}$$
-                                → Se o saldo do jogador era <strong>$1.500</strong>, o novo saldo é <strong>$11.500</strong>.<br>
-                                → O peão avança e assenta no degrau <strong>$11.000</strong> da Bounty Track (o degrau imediatamente abaixo).<br>
-                                → A Tool consome 1 carga (passa a ter 1 carga de +$500 restante).</p>
+                                → Se o saldo do jogador era <strong>$1.500</strong>, o novo saldo é
+                                <strong>$11.500</strong>.<br>
+                                → O peão avança e assenta no degrau <strong>$11.000</strong> da Bounty Track (o degrau
+                                imediatamente abaixo).<br>
+                                → A Tool consome 1 carga (passa a ter 1 carga de +$500 restante).
+                            </p>
                         </div>
                     </li>
                     <li><strong>O Custo do Sucesso (Evento Obrigatório):</strong> Imediatamente após receber seu
@@ -1346,14 +1391,16 @@
                 <p>No final do seu turno, se você mantiver uma ou mais Vulnerability Cards na sua Zona de Exploits (ou
                     seja, você desceu cartas mas não reportou ainda), a equipe de engenharia executa varreduras e você é
                     <strong>obrigado</strong> a realizar um <strong>Patch Speed Check</strong>. <em>Se você não tiver
-                        Vulnerability Cards na Zona de Exploits ao final do turno, nenhum Check é necessário.</em></p>
+                        Vulnerability Cards na Zona de Exploits ao final do turno, nenhum Check é necessário.</em>
+                </p>
 
                 <h3>A Mecânica de Vantagem (Stealth Mode vs Noisy Report)</h3>
                 <p>O risco de ser pego varia dependendo da sua atitude no turno:</p>
                 <ul>
                     <li><strong>Stealth Mode (Ao passar o turno):</strong> Se você apenas usou a ação de Exploit (baixou
                         carta) e está encerrando o turno silenciosamente, você joga com <strong>VANTAGEM</strong>. Role
-                        <strong>2 dados D8</strong> e escolha o menor resultado (o mais seguro para você).</li>
+                        <strong>2 dados D8</strong> e escolha o menor resultado (o mais seguro para você).
+                    </li>
                     <li><strong>Noisy Report (Após Reportar):</strong> Se você ativou o Report e fez barulho (ou se o
                         jogo exigir em outra ocasião), você rola apenas <strong>1 dado D8</strong>, enfrentando o risco
                         total da empresa.</li>
@@ -1420,7 +1467,10 @@
                 <ol>
                     <li><strong>Perda Integral de Exploits:</strong> todas as Vulnerability Cards presentes na sua Zona
                         de Exploits são descartadas para a Discard Pile sem direito a pontos ou recompensas.</li>
-                    <li><strong>Recuo por Patch:</strong> o jogador sofre um prejuízo financeiro fixo conforme sua zona de riqueza (Verde $1.500, Amarela $3.000, Laranja $4.500, Vermelha $6.000). Deduza o valor do saldo acumulado atual; o marcador recua na Bounty Track até refletir o novo saldo, travando no mínimo de $0. A zona é determinada pelo saldo antes da dedução.</li>
+                    <li><strong>Recuo por Patch:</strong> o jogador sofre um prejuízo financeiro fixo conforme sua zona
+                        de riqueza (Verde $1.500, Amarela $3.000, Laranja $4.500, Vermelha $6.000). Deduza o valor do
+                        saldo acumulado atual; o marcador recua na Bounty Track até refletir o novo saldo, travando no
+                        mínimo de $0. A zona é determinada pelo saldo antes da dedução.</li>
                     <li><strong>Fechamento Compulsório do Programa:</strong> o programa ativo no seu mat é encerrado e
                         descartado. No seu próximo turno, antes de sua ação, você deve selecionar um novo programa do
                         mercado.</li>
@@ -1436,7 +1486,8 @@
 
                 <h3>8.3 · Mecanismo de Defesa — Bypass</h3>
                 <p>Se o jogador possuir a carta <em>Bypass</em> na mão no momento do patch, ele pode descartá-la para
-                    <strong>anular 100% dos efeitos danosos</strong>.</p>
+                    <strong>anular 100% dos efeitos danosos</strong>.
+                </p>
             </section>
 
             <!-- ================= 09 EVENTOS ================= -->
@@ -1449,7 +1500,8 @@
                 <h3>Quando comprar Eventos?</h3>
                 <p>Você compra cartas de Evento obrigatoriamente logo após concluir com sucesso uma ação de
                     <strong>Report</strong> ("O Custo do Sucesso"). Compre a carta do topo do deck e <strong>resolva o
-                        efeito imediatamente</strong> contra você mesmo ou contra o jogador indicado na carta.</p>
+                        efeito imediatamente</strong> contra você mesmo ou contra o jogador indicado na carta.
+                </p>
                 <div class="callout" style="margin-top:1rem;">
                     <span class="label">Nota de Design (O Fator "Kingmaking")</span>
                     <p>Hackear é sujo. Usar eventos de Caos para travar o líder deliberadamente é tão legítimo e
@@ -1458,7 +1510,11 @@
                 </div>
 
                 <h3>Classificação de Eventos</h3>
-                <p>Os Event Cards agora possuem duas classificações: <strong>Imediato</strong> (ativa no momento da compra, não vai para a mão) e <strong>Guardável</strong> (o jogador pode executar na hora ou guardar, com limite máximo de 2 eventos guardados na sua área de jogo). Eventos guardados só podem ser jogados durante a <strong>Janela de Caos</strong> do próprio turno do jogador, nunca no turno de adversários.</p>
+                <p>Os Event Cards agora possuem duas classificações: <strong>Imediato</strong> (ativa no momento da
+                    compra, não vai para a mão) e <strong>Guardável</strong> (o jogador pode executar na hora ou
+                    guardar, com limite máximo de 2 eventos guardados na sua área de jogo). Eventos guardados só podem
+                    ser jogados durante a <strong>Janela de Caos</strong> do próprio turno do jogador, nunca no turno de
+                    adversários.</p>
 
                 <h3>Cartas de Reação (Bypass)</h3>
                 <p>Cartas de Defesa (<em>Bypass</em>) podem ser compradas no Main Deck e jogadas <strong>fora do seu
@@ -1467,9 +1523,14 @@
 
                 <h3>Diretrizes de Resolução</h3>
                 <ul>
-                    <li><strong>Cartas IMEDIATAS</strong> são resolvidas no momento em que são sacadas, antes do próximo jogador assumir o turno.</li>
-                    <li><strong>Cartas GUARDÁVEIS</strong> podem ser resolvidas imediatamente ou guardadas na área <em>Eventos Guardados</em> (limite de 2 por jogador), para serem jogadas apenas na <strong>Janela de Caos (Opcional)</strong> do próprio turno do jogador.</li>
-                    <li>Cartas que afetam "Escolha 1 Oponente" permitem ao jogador ativo selecionar qualquer adversário como alvo.</li>
+                    <li><strong>Cartas IMEDIATAS</strong> são resolvidas no momento em que são sacadas, antes do próximo
+                        jogador assumir o turno.</li>
+                    <li><strong>Cartas GUARDÁVEIS</strong> podem ser resolvidas imediatamente ou guardadas na área
+                        <em>Eventos Guardados</em> (limite de 2 por jogador), para serem jogadas apenas na
+                        <strong>Janela de Caos (Opcional)</strong> do próprio turno do jogador.
+                    </li>
+                    <li>Cartas que afetam "Escolha 1 Oponente" permitem ao jogador ativo selecionar qualquer adversário
+                        como alvo.</li>
                     <li>Eventos globais aplicam seus efeitos a todos os participantes simultaneamente.</li>
                 </ul>
 
@@ -1496,7 +1557,9 @@
                                 <td>02</td>
                                 <td><strong>Duplicate Report!</strong> 📝</td>
                                 <td><span class="alert-red">Escolha 1 Oponente</span></td>
-                                <td>Alguém reportou a falha minutos antes! Escolha 1 oponente com falhas na mesa: ele
+                                <td>Alguém reportou a vulnerabilidade minutos antes! Escolha 1 oponente com
+                                    vulnerabilidades na
+                                    mesa: ele
                                     descarta a vulnerabilidade de maior CVSS exposta.</td>
                             </tr>
                             <tr>
@@ -1504,7 +1567,7 @@
                                 <td><strong>Out of Scope!</strong> ❌</td>
                                 <td><span class="alert-green">Você (Autor)</span></td>
                                 <td>Seu reporte gerou alerta no comitê de escopo! Você fica impedido de realizar a ação
-                                    Exploit (baixar falhas) no seu próximo turno.</td>
+                                    Exploit (baixar vulnerabilidades) no seu próximo turno.</td>
                             </tr>
                             <tr>
                                 <td>04</td>
@@ -1545,7 +1608,8 @@
                                 <td>09</td>
                                 <td><strong>Public Disclosure!</strong> 📢</td>
                                 <td><span class="highlight">Todos os Jogadores</span></td>
-                                <td>Vazamento público! Todos os jogadores descartam suas falhas expostas na mesa, mas
+                                <td>Vazamento público! Todos os jogadores descartam suas vulnerabilidades expostas na
+                                    mesa, mas
                                     recebem $1.000 de compensação imediata.</td>
                             </tr>
                             <tr>
@@ -1573,7 +1637,8 @@
                                 <td>13</td>
                                 <td><strong>Responsible Disclosure!</strong> 📄</td>
                                 <td><span class="highlight">Todos os Jogadores</span></td>
-                                <td>Janela de divulgação responsável! Todos os jogadores que tiverem falhas válidas na
+                                <td>Janela de divulgação responsável! Todos os jogadores que tiverem vulnerabilidades
+                                    válidas na
                                     mesa podem fazer 1 Report gratuito imediatamente.</td>
                             </tr>
                             <tr>
@@ -1587,7 +1652,8 @@
                                 <td>15</td>
                                 <td><strong>CVE Assignment Delayed!</strong> ⏳</td>
                                 <td><span class="highlight">Todos os Jogadores</span></td>
-                                <td>Burocracia na atribuição de CVE! Cartas de Safeguard (Bypass e CVE Assignment Protection) ficam bloqueadas de serem
+                                <td>Burocracia na atribuição de CVE! Cartas de Safeguard (Bypass e CVE Assignment
+                                    Protection) ficam bloqueadas de serem
                                     jogadas por 1 rodada completa.</td>
                             </tr>
                             <tr>
@@ -1701,8 +1767,11 @@
                     <div class="archetype-card">
                         <h4>Social Engineer</h4>
                         <div class="role">O Manipulador da Mesa</div>
-                        <p><strong>Controle de Alvo:</strong> ao acionar qualquer Event Card (seja como Custo do Sucesso ou durante a <strong>Janela de Caos (Opcional)</strong>), decide livremente qual participante é afetado, ignorando os alvos automáticos impressos na carta.</p>
-                        <p style="margin-top:.6rem"><strong>Acesso Privilegiado ao Event Deck:</strong> pode comprar 1 carta do Event Deck como terceira opção de Recon — poder exclusivo desta classe.</p>
+                        <p><strong>Controle de Alvo:</strong> ao acionar qualquer Event Card (seja como Custo do Sucesso
+                            ou durante a <strong>Janela de Caos (Opcional)</strong>), decide livremente qual
+                            participante é afetado, ignorando os alvos automáticos impressos na carta.</p>
+                        <p style="margin-top:.6rem"><strong>Acesso Privilegiado ao Event Deck:</strong> pode comprar 1
+                            carta do Event Deck como terceira opção de Recon — poder exclusivo desta classe.</p>
                     </div>
                     <div class="archetype-card">
                         <h4>Red Teamer</h4>
@@ -1791,7 +1860,8 @@
                             </tr>
                             <tr>
                                 <td><strong>Burp Collaborator</strong></td>
-                                <td>Toda vez que um adversário reportar uma falha SSRF, resgata 1 Tool Card do descarte.
+                                <td>Toda vez que um adversário reportar uma vulnerabilidade SSRF, resgata 1 Tool Card do
+                                    descarte.
                                 </td>
                                 <td>🟢 Passiva (instale no rack; dispara automaticamente)</td>
                             </tr>
@@ -1838,7 +1908,8 @@
             <!-- ================= 12 PROGRAMAS ================= -->
             <section id="programas">
                 <h2 class="sec"><span class="num">12</span> Program Cards — Empresas Corporativas</h2>
-                <p>As empresas corporativas determinam os limites operacionais, bônus fixos de remuneração (Soma Direta) e a
+                <p>As empresas corporativas determinam os limites operacionais, bônus fixos de remuneração (Soma Direta)
+                    e a
                     volatilidade do Patch Speed Check. Cada empresa existe em <strong>2 cópias no baralho</strong> — é
                     possível que dois pesquisadores auditem a mesma empresa simultaneamente, criando a disputa de
                     <em>Duplicate Report!</em>.
@@ -1868,7 +1939,7 @@
                                 <th>Tier</th>
                                 <th>Escopo Autorizado</th>
                                 <th>Patch Speed</th>
-                                <th>Mín. de Falhas</th>
+                                <th>Mín. de Vulnerabilidades</th>
                                 <th>Bônus Fixo (Programa)</th>
                             </tr>
                         </thead>
@@ -1950,12 +2021,15 @@
                     ferramentas e vulnerabilidades de alta severidade para alcançar o clímax financeiro.</p>
 
                 <h3>Mecanismo de Avanço</h3>
-                <p>Ao processar uma ação de Report, calcule o valor total em dólares (Valor base da Falha (CVSS) + Bônus
+                <p>Ao processar uma ação de Report, calcule o valor total em dólares (Valor base da vulnerabilidade
+                    (CVSS) + Bônus
                     do Programa + Bônus de Tools). O Bounty Track é um acumulador de patrimônio. Ao concluir um Report,
                     some o valor pago ao seu saldo atual. Avance o seu token para o degrau que corresponda ao seu novo
                     saldo total (ou o degrau imediatamente abaixo dele, caso o valor quebrado não tenha um degrau
                     exato). O jogo termina imediatamente quando um jogador alcança ou ultrapassa $40.000. O primeiro
-                    jogador a fazê-lo vence a partida. O marcador nunca recua voluntariamente; só regride com o <em>PATCH DEPLOYED!</em>, deduzindo valor fixo conforme a zona de riqueza (ver Seção 08).</p>
+                    jogador a fazê-lo vence a partida. O marcador nunca recua voluntariamente; só regride com o
+                    <em>PATCH DEPLOYED!</em>, deduzindo valor fixo conforme a zona de riqueza (ver Seção 08).
+                </p>
 
                 <h3>Piso Inviolável</h3>
                 <p>A pontuação nunca atinge valores negativos. Se uma penalidade exigir recuo maior que o saldo atual, o
@@ -2025,7 +2099,8 @@
                 <ol>
                     <li><strong>1º Critério:</strong> maior número total de Reports concluídos com sucesso na partida.
                     </li>
-                    <li><strong>2º Critério:</strong> maior número de falhas de severidade Critical submetidas (CVSS ≥
+                    <li><strong>2º Critério:</strong> maior número de vulnerabilidades de severidade Critical submetidas
+                        (CVSS ≥
                         9.0).</li>
                     <li><strong>3º Critério:</strong> rolagem de morte súbita — cada jogador empatado rola 1 D8; quem
                         obter o maior resultado vence. Em caso de novo empate, repita.</li>
@@ -2231,13 +2306,19 @@
 
                     <dt>CVSS (Common Vulnerability Scoring System)</dt>
                     <dd>Índice numérico internacional de severidade de vulnerabilidades, variando de 1.0 a 10.0. No
-                        jogo, determina o valor base de Bounty de cada carta de falha.</dd>
+                        jogo, determina o valor base de Bounty de cada carta de vulnerabilidade.</dd>
 
                     <dt>Bypass</dt>
-                    <dd>Safeguard de <strong>proteção financeira</strong>: anula 100% os efeitos do PATCH DEPLOYED!, impedindo o descarte de exploits e o recuo na Bounty Track. Jogada como reação fora do turno. Não protege contra eventos de escopo (Duplicate, Out of Scope, DNS Hijack).</dd>
+                    <dd>Safeguard de <strong>proteção financeira</strong>: anula 100% os efeitos do PATCH DEPLOYED!,
+                        impedindo o descarte de exploits e o recuo na Bounty Track. Jogada como reação fora do turno.
+                        Não protege contra eventos de escopo (Duplicate, Out of Scope, DNS Hijack).</dd>
 
                     <dt>CVE Assignment Protection</dt>
-                    <dd>Safeguard de <strong>proteção de escopo</strong>: reativa e de uso único (descartada ao ser usada). Anula a penalidade de 10% do <em>Duplicate Report!</em> aplicada ao seu próprio Report, bem como os Eventos <em>Duplicate Report!</em>, <em>Out of Scope</em> e <em>DNS Hijack</em> direcionados a você. O jogador pode guardar na mão (custa 1 slot) ou jogar imediatamente. Não protege contra PATCH DEPLOYED!.</dd>
+                    <dd>Safeguard de <strong>proteção de escopo</strong>: reativa e de uso único (descartada ao ser
+                        usada). Anula a penalidade de 10% do <em>Duplicate Report!</em> aplicada ao seu próprio Report,
+                        bem como os Eventos <em>Duplicate Report!</em>, <em>Out of Scope</em> e <em>DNS Hijack</em>
+                        direcionados a você. O jogador pode guardar na mão (custa 1 slot) ou jogar imediatamente. Não
+                        protege contra PATCH DEPLOYED!.</dd>
 
                     <dt>Duplicate Report!</dt>
                     <dd>Penalidade aplicada quando um pesquisador tenta reportar uma vulnerabilidade com o mesmo título
@@ -2253,17 +2334,27 @@
                         ferramentas requeridos e respeitando o escopo do programa ativo.</dd>
 
                     <dt>Fórmula N+4 (Distribuição de Safeguards)</dt>
-                    <dd>Regra de distribuição de Safeguards: cada jogador (N) começa com 1 Bypass na mão. No Main Deck ficam embaralhadas 2 Bypass + 2 CVE Assignment Protection. Total em jogo = N + 4 Safeguards (as CVE sempre entram no deck).</dd>
+                    <dd>Regra de distribuição de Safeguards: cada jogador (N) começa com 1 Bypass na mão. No Main Deck
+                        ficam embaralhadas 2 Bypass + 2 CVE Assignment Protection. Total em jogo = N + 4 Safeguards (as
+                        CVE sempre entram no deck).</dd>
 
                     <dt>Main Deck</dt>
-                    <dd>Baralho central compartilhado composto por 80 Vulnerability Cards, 36 Tool Cards (12 tipos × 3 cópias) e 4 Safeguards (2 Bypass + 2 CVE Assignment Protection) — total exato de 120 cartas no deck de compra. (A caixa contém 126 componentes físicos = 120 no deck + N na mão (1 Bypass por jogador) + (6 − N) na caixa).</dd>
+                    <dd>Baralho central compartilhado composto por 80 Vulnerability Cards, 36 Tool Cards (12 tipos × 3
+                        cópias) e 4 Safeguards (2 Bypass + 2 CVE Assignment Protection) — total exato de 120 cartas no
+                        deck de compra. (A caixa contém 126 componentes físicos = 120 no deck + N na mão (1 Bypass por
+                        jogador) + (6 − N) na caixa).</dd>
 
                     <dt>Out of Scope</dt>
-                    <dd>Falha técnica cuja classe de ataque não consta no escopo autorizado do programa ativo do
+                    <dd>vulnerabilidade técnica cuja classe de ataque não consta no escopo autorizado do programa ativo
+                        do
                         pesquisador. Não pode ser alocada na Zona de Exploits (exceto pelo Red Teamer).</dd>
 
                     <dt>PATCH DEPLOYED!</dt>
-                    <dd>Evento destrutivo acionado quando o Patch Speed Check falha. O jogador que sofre o PATCH DEPLOYED! perde o valor fixo conforme sua zona de riqueza (Verde $1.500, Amarela $3.000, Laranja $4.500, Vermelha $6.000), recua na Bounty Track até refletir o novo saldo (mínimo $0) e encerra o programa ativo.</dd>
+                    <dd>Evento destrutivo acionado quando o Patch Speed Check vulnerabilidade. O jogador que sofre o
+                        PATCH
+                        DEPLOYED! perde o valor fixo conforme sua zona de riqueza (Verde $1.500, Amarela $3.000, Laranja
+                        $4.500, Vermelha $6.000), recua na Bounty Track até refletir o novo saldo (mínimo $0) e encerra
+                        o programa ativo.</dd>
 
                     <dt>Patch Speed Check</dt>
                     <dd>Teste obrigatório de dado D8 realizado no final do turno do jogador por jogadores com
@@ -2283,10 +2374,14 @@
                         9.5–10.0, raridade Lendária).</dd>
 
                     <dt>Recon</dt>
-                    <dd>Ação primária de reconhecimento: comprar 2 cartas do Main Deck (opção A) ou trocar de programa ativo (opção B). Acesso ao Event Deck via Recon é poder exclusivo do Social Engineer.</dd>
+                    <dd>Ação primária de reconhecimento: comprar 2 cartas do Main Deck (opção A) ou trocar de programa
+                        ativo (opção B). Acesso ao Event Deck via Recon é poder exclusivo do Social Engineer.</dd>
 
                     <dt>Report</dt>
-                    <dd>Ação formal de submissão: calcula o payout somando o Valor base da Falha (CVSS) + Bônus do Programa + Bônus de Tools, soma ao saldo acumulado e avança na Bounty Track conforme o Acumulador. Em seguida descarta as vulnerabilidades e encerra o programa ativo.</dd>
+                    <dd>Ação formal de submissão: calcula o payout somando o Valor base da vulnerabilidade (CVSS) +
+                        Bônus do
+                        Programa + Bônus de Tools, soma ao saldo acumulado e avança na Bounty Track conforme o
+                        Acumulador. Em seguida descarta as vulnerabilidades e encerra o programa ativo.</dd>
 
                     <dt>Round Tracker</dt>
                     <dd>Trilha numerada no Tabuleiro Central que registra o avanço das rodadas da partida (1 a 8, ou 1 a

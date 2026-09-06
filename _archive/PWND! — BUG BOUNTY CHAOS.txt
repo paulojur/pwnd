@@ -65,7 +65,7 @@ O jogo PWND! — Bug Bounty Chaos é composto por elementos modulares de alta pr
 
 ### 2. OBJETIVO DO JOGO
 
-Em PWND!, cada participante assume o papel de um pesquisador independente de segurança ofensiva competindo em plataformas abertas de caça a falhas. Ao longo de 8 rodadas estruturadas, os participantes devem realizar varreduras, estruturar cadeias de ataque (exploits) e emitir relatórios técnicos validados antes que as equipes defensivas corrijam as vulnerabilidades em produção.
+Em PWND!, cada participante assume o papel de um pesquisador independente de segurança ofensiva competindo em plataformas abertas de caça a vulnerabilidades. Ao longo de 8 rodadas estruturadas, os participantes devem realizar varreduras, estruturar cadeias de ataque (exploits) e emitir relatórios técnicos validados antes que as equipes defensivas corrijam as vulnerabilidades em produção.
 
 
 "O pesquisador que acumular o maior volume financeiro na Bounty Track ao final da 8ª rodada é declarado o vencedor absoluto da competição."
@@ -142,7 +142,7 @@ O limite máximo estrutural de cartas mantidas em mão ao final do turno é de 6
 Nota tática: A ação de Recon não aciona testes de segurança nem riscos defensivos, funcionando como uma manobra estratégica de recomposição de mão.
 
 
-#### 5.2 Ação 2: EXPLOIT (Execução de Falha na Mesa)
+#### 5.2 Ação 2: EXPLOIT (Execução de vulnerabilidade na Mesa)
 Jogue 1 Vulnerability Card da sua mão para a zona de Exploits do seu Mat Individual. A colocação da carta exige o cumprimento rigoroso de três etapas obrigatórias:
 
 1. **Validação de Scope Técnico:** A classe descrita na Vulnerability Card precisa constar expressamente na lista de escopo permitido (Scope) do seu Active Program. É estritamente proibido baixar uma vulnerabilidade fora de escopo, salvo se você estiver operando como o arquétipo **Red Teamer**.
@@ -257,7 +257,7 @@ No início da Rodada 7, todo o remanescente do Event Deck é recolhido e embaral
 - **Scope Expansion!:** O escopo de todos os programas ativos na mesa torna-se irrestrito por 2 rodadas completas, aceitando qualquer classe técnica.
 - **Bounty Increase!:** Todos os multiplicadores de programas sobem 1 nível de recompensa (Low $\rightarrow$ Medium $\rightarrow$ High $\rightarrow$ Critical) por 2 rodadas.
 - **Hall of Fame Update!:** O participante posicionado na última colocação da Bounty Track recebe imediatamente 2 Tool Cards do topo do baralho.
-- **Data Breach!:** Todos os jogadores mostram suas mãos; o participante com maior número de falhas críticas descarta metade da sua mão.
+- **Data Breach!:** Todos os jogadores mostram suas mãos; o participante com maior número de vulnerabilidades críticas descarta metade da sua mão.
 - **Swag Drop!:** Cada pesquisador presente na mesa compra 1 carta de ferramenta imediatamente do deck principal.
 
 ---
@@ -291,7 +291,7 @@ Os 6 arquétipos disponíveis oferecem estilos de jogo complementares e totalmen
 
 #### 9.3 Bug Hunter — O Especialista em Escala
 - **Dupla Submissão:** Pode processar **2 Reports completos em uma única ação** de submissão.
-- **Restrição de Severidade:** Só pode coletar pontuações de falhas com CVSS **igual ou inferior a 6.0** (severidades Low e Medium).
+- **Restrição de Severidade:** Só pode coletar pontuações de vulnerabilidades com CVSS **igual ou inferior a 6.0** (severidades Low e Medium).
 - **Bônus de Volume:** Se submeter 5 ou mais cartas em um único Report, recebe um **acréscimo de +50% no bounty total** da jogada.
 
 #### 9.4 Social Engineer — O Manipulador da Mesa
@@ -307,7 +307,7 @@ Os 6 arquétipos disponíveis oferecem estilos de jogo complementares e totalmen
 #### 9.6 The Pentester — O Auditor Estruturado
 - **Imunidade Burocrática:** Totalmente imune às cartas e penalidades de *"Duplicate Report!"* e *"Triage Delay!"*.
 - **Controle de Risco:** Em todos os testes de Patch Speed Check, só é afetado caso tire o número **6 no dado**, independentemente da severidade real do programa auditado.
-- **Estilo:** Operação analítica imune a falhas aleatórias e duplicatas.
+- **Estilo:** Operação analítica imune a vulnerabilidades aleatórias e duplicatas.
 
 ---
 
@@ -341,7 +341,7 @@ Ativa (descarte no uso)
 
 
 Postman
-Reduz em 1 unidade o custo de falhas da classe Broken Access Control
+Reduz em 1 unidade o custo de vulnerabilidades da classe Broken Access Control
 Ativa (descarte no uso)
 
 
@@ -351,7 +351,7 @@ Passiva (permanente)
 
 
 Burp Collaborator
-Resgata 1 Tool Card do descarte toda vez que um oponente reportar falha SSRF
+Resgata 1 Tool Card do descarte toda vez que um oponente reportar vulnerabilidade SSRF
 Passiva (permanente)
 
 
@@ -490,7 +490,7 @@ A partida é encerrada imediatamente após a finalização da 8ª rodada (ou 10�
 ++
 | |
 |   1º Critério: Maior número total de Reports concluídos           |
-|   2º Critério: Maior número de falhas Critical (CVSS >= 9.0)      |
+|   2º Critério: Maior número de vulnerabilidades Critical (CVSS >= 9.0)      |
 |   3º Critério: Rolagem de morte súbita (maior resultado em 1 D6)  |
 | |
 ++
@@ -516,7 +516,7 @@ As rodadas finais representam o encerramento do trimestre fiscal das empresas, p
 
 Consulte este resumo sintético durante o andamento da partida para sanar dúvidas imediatas de jogabilidade:
 
-- **Opções no seu turno:** Realize apenas 1 ação: **Recon** (compra recursos), **Exploit** (arma falhas pagando ferramentas) ou **Report** (submete e pontua).
+- **Opções no seu turno:** Realize apenas 1 ação: **Recon** (compra recursos), **Exploit** (arma vulnerabilidades pagando ferramentas) ou **Report** (submete e pontua).
 - **Final de rodada:** Todos os jogadores com vulnerabilidades na mesa rolam o dado de **Patch Speed Check**. O Round Token avança 1 casa.
 - **Penalidade de PATCH DEPLOYED!:** Descarta todas as vulnerabilidades armadas na mesa, recua 3 casas na Bounty Track e encerra o programa ativo.
 - **Proteção:** A carta **0-Day Reserve** anula completamente o Patch Deployed.
@@ -528,18 +528,18 @@ Consulte este resumo sintético durante o andamento da partida para sanar dúvid
 
 - **Bounty Token:** Marcador acrílico hexagonal utilizado para apontar o progresso na trilha financeira do mat individual.
 - **Bounty Track:** Trilha de pontuação graduada de $0 a $50.000 presente no mat de cada jogador.
-- **CVSS (Common Vulnerability Scoring System):** Índice numérico internacional de severidade da falha técnica, variando de 1.0 a 10.0.
+- **CVSS (Common Vulnerability Scoring System):** Índice numérico internacional de severidade da vulnerabilidade técnica, variando de 1.0 a 10.0.
 - **Defuse Card (0-Day Reserve):** Carta especial de segurança que neutraliza os efeitos destrutivos de uma correção em produção.
 - **Duplicate Report:** Condição de anulação que ocorre quando dois pesquisadores tentam pontuar o mesmo achado no mesmo programa corporativo.
 - **Event Card:** Carta de perturbação e impacto tático imediato sobre o ambiente da partida.
 - **Exploit:** Ação tática de colocar uma vulnerabilidade na mesa pagando os devidos insumos de ferramentas.
 - **Main Deck:** Baralho central compartilhado composto por Vulnerability Cards e Tool Cards misturadas.
-- **Out of Scope:** Falha técnica cuja classe de ataque não é aceita pelas diretrizes do programa ativo do pesquisador.
-- **Patch Speed Check:** Teste obrigatório de dado realizado no fechamento da rodada para checar se a empresa corrigiu as falhas abertas.
+- **Out of Scope:** vulnerabilidade técnica cuja classe de ataque não é aceita pelas diretrizes do programa ativo do pesquisador.
+- **Patch Speed Check:** Teste obrigatório de dado realizado no fechamento da rodada para checar se a empresa corrigiu as vulnerabilidades abertas.
 - **Program Market:** Espaço central no tabuleiro com cartas de empresas disponíveis para alocação de pesquisa.
 - **Recon:** Ação primária de compra de recursos operacionais do baralho central.
 - **Report:** Ação formal de validação, entrega e cobrança das recompensas acumuladas na mesa.
-- **Scope:** Conjunto formal de regras técnicas que delimitam quais falhas são aceitas por uma empresa.
+- **Scope:** Conjunto formal de regras técnicas que delimitam quais vulnerabilidades são aceitas por uma empresa.
 - **Tool Card:** Insumo técnico consumível ou permanente utilizado para viabilizar ataques cibernéticos.
 - **Vulnerability Card:** Carta principal de pontuação contendo classe técnica, requisitos, habilidades e valor CVSS.
 

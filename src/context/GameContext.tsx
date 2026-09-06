@@ -210,7 +210,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     if (!isRedTeamer && currentProgram.allowedClasses !== 'ALL') {
       const allowed = currentProgram.allowedClasses as string[];
       if (card.vulnClass && !allowed.includes(card.vulnClass)) {
-        addLog(`BLOQUEADO: A falha ${card.vulnClass} não está no escopo de ${currentProgram.name}!`, 'danger');
+        addLog(`BLOQUEADO: A vulnerabilidade ${card.vulnClass} não está no escopo de ${currentProgram.name}!`, 'danger');
         return;
       }
     }
@@ -264,7 +264,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     const vulnTotal = playerActiveVulns.reduce((sum, v) => sum + getVulnFlatValue(v.rarity), 0);
-    
+
     const getProgramFlatBonus = (progName: string = '') => {
       const name = progName.toLowerCase();
       if (name.includes('cloudnine') || name.includes('cryptox') || name.includes('aicore')) return 4000;
@@ -275,7 +275,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const programBonus = getProgramFlatBonus(currentProgram.name);
     const toolTotalBonus = playerActiveTools.length * 500; // Aproximação simplificada para V1
-    
+
     let totalBounty = vulnTotal + programBonus + toolTotalBonus;
 
     if (archetype?.id === 'red-teamer') {
@@ -294,7 +294,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setDiscardPile(prev => [...prev, ...playerActiveVulns]);
     setPlayerActiveVulns([]);
 
-    addLog(`REPORT ACEITO! Submetidas ${playerActiveVulns.length} falhas em ${currentProgram.name}. Recompensa depositada: +$${totalBounty.toLocaleString('pt-BR')}!`, 'success');
+    addLog(`REPORT ACEITO! Submetidas ${playerActiveVulns.length} vulnerabilidades em ${currentProgram.name}. Recompensa depositada: +$${totalBounty.toLocaleString('pt-BR')}!`, 'success');
 
     if (playerBountyTotal + totalBounty >= 40000) {
       setGameWinner('Você (Pesquisador)');
@@ -334,7 +334,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const zone = getZoneByBalance(playerBountyTotal);
     const penalty = zone.patchPenalty;
-    
+
     setPlayerBountyTotal(prev => Math.max(0, prev - penalty));
 
     addLog(`COLAPSO! PATCH DEPLOYED! destruiu suas vulnerabilidades não reportadas e deduziu ${penalty} (Zona ${zone.name}) do seu saldo.`, 'danger');
