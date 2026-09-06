@@ -163,6 +163,22 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
     addLog(`FASE DE PREPARAÇÃO CONCLUÍDA! Arquétipo [${archetype.name}] e Alvo [${program.name}] alocados. Mão inicial contendo 1 Safeguard 0-Day Reserve garantida.`);
   };
 
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get('autoStart') === 'true') {
+      const randArchetype = ARCHETYPES[Math.floor(Math.random() * ARCHETYPES.length)];
+      const randProgram = PROGRAM_CARDS[Math.floor(Math.random() * 3)]; // from market
+      
+      // small delay to let UI mount
+      setTimeout(() => {
+        completeSetup(randArchetype, randProgram);
+        // Clean up URL so it doesn't auto-start on refresh
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }, 300);
+    }
+  }, []);
+
+
   const drawEventCard = () => {
     soundFx.playPatchDeployedAlarm();
     const randEvent = EVENT_CARDS_LIST[Math.floor(Math.random() * EVENT_CARDS_LIST.length)];
