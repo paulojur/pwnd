@@ -1022,9 +1022,9 @@
                     <div class="card-type program">
                         <h4>Program Cards</h4>
                         <p>Corporações fictícias (ShopAll, BankSafe, CloudNine...) com escopo autorizado, faixa de
-                            recompensa (Tier) e velocidade de correção (Patch Speed). Cada empresa aparece em 2 cópias,
-                            permitindo a disputa por <em>Duplicate Report!</em>.</p>
-                        <span class="count">16 cartas · 8 empresas × 2 cópias cada</span>
+                            recompensa (Tier) e velocidade de correção (Patch Speed). As empresas possuem entre 1 e 3 cópias no baralho, dependendo da sua raridade,
+                            permitindo a disputa por <em>Duplicate Report!</em> nos alvos mais comuns.</p>
+                        <span class="count">24 cartas · 12 corporações de recompensa (distribuição ponderada)</span>
                     </div>
                     <div class="card-type event">
                         <h4>Event Cards</h4>
@@ -1040,9 +1040,9 @@
                             <strong>Bypass</strong> — anula 100% as penalidades do PATCH DEPLOYED! (financeiras e
                             descarte de exploits).
                             <strong>CVE Assignment Protection</strong> — proteção de escopo reativa e de uso único:
-                            descarta ao ser usada. Anula <em>Duplicate Report!</em>, <em>Out of Scope</em> e <em>DNS
-                                Hijack</em> quando acionados contra o seu programa ativo. O jogador pode segurar na mão
-                            ou jogar imediatamente (custa 1 slot de mão).
+                            descarta ao ser usada. Anula a penalidade de 10% do <em>Duplicate Report!</em> no seu próprio Report E os Eventos <em>Duplicate Report!</em>, <em>Out of Scope!</em> e <em>DNS
+                                Hijack!</em> direcionados a você. O jogador pode segurar na mão
+                            ou jogar imediatamente (custa 1 slot de mão). Não protege contra PATCH DEPLOYED!.
                         </p>
                         <span class="count">10 cartas — 8 Bypass + 2 CVE Assignment Protection</span>
                     </div>
@@ -1437,13 +1437,13 @@
                                 <td><strong>Rápida</strong></td>
                                 <td>Resultados <strong>6, 7 ou 8</strong></td>
                                 <td>37,5% (3 em 8)</td>
-                                <td>BankSafe, HealthLock</td>
+                                <td>BankSafe, HealthLock, PayGateway, CryptoX</td>
                             </tr>
                             <tr>
                                 <td><strong>Extrema</strong></td>
                                 <td>Resultados <strong>5, 6, 7 ou 8</strong></td>
                                 <td>50,0% (4 em 8)</td>
-                                <td>CloudNine Systems</td>
+                                <td>CloudNine Systems, AI Core</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1732,68 +1732,69 @@
                 <div class="archetype-grid">
                     <div class="archetype-card">
                         <h4>n00b</h4>
-                        <div class="role">O Aprendiz Evolutivo</div>
-                        <p><strong>Evolução Progressiva:</strong> a cada ação de Report concluída com sucesso, escolhe
-                            permanentemente 1 nova habilidade passiva da sua árvore operacional (+1 compra em Recon,
-                            redução permanente de custo de ferramentas em classes específicas, ou expansão do limite de
-                            mão).</p>
-                        <p style="margin-top:.6rem">Começa frágil na rodada 1 e atinge pico de dominância nas rodadas 6
-                            a 8.</p>
+                        <div class="role">O Iniciante Dedicado</div>
+                        <p><strong>Playstyle:</strong> Engine Builder: Ganha +1 habilidade passiva constante a cada report enviado com sucesso.</p>
+                        <p style="margin-top:.6rem"><strong>Limite de Mão:</strong> 6 cartas</p>
+                        <ul style="margin-top:.6rem; padding-left:1.2rem;">
+                            <li>Inicia simples</li>
+                            <li>Escalabilidade contínua de recursos</li>
+                            <li>+1 compra de carta por report</li>
+                        </ul>
                     </div>
                     <div class="archetype-card">
                         <h4>The Old Guard</h4>
-                        <div class="role">O Veterano Metódico</div>
-                        <p><strong>Mão Expandida:</strong> mantém limite de <strong>9 cartas</strong> na mão ao longo de
-                            todo o jogo (vs. 6 dos demais).</p>
-                        <p style="margin-top:.6rem"><strong>Cadência Controlada:</strong> pode realizar a ação de Report
-                            no máximo <strong>1 vez por rodada</strong>, mas monta relatórios monumentais com CVSS
-                            acumulado altíssimo.</p>
+                        <div class="role">O Veterano de C/ASM</div>
+                        <p><strong>Playstyle:</strong> Mão Expandida: Pode segurar até 9 cartas, perfeito para montar combos devastadores de alta severidade.</p>
+                        <p style="margin-top:.6rem"><strong>Limite de Mão:</strong> 9 cartas</p>
+                        <ul style="margin-top:.6rem; padding-left:1.2rem;">
+                            <li>Limite de mão: 9 cartas</li>
+                            <li>Bônus de +20% em vulnerabilidades Críticas</li>
+                            <li>Submissão única por rodada</li>
+                        </ul>
                     </div>
                     <div class="archetype-card">
                         <h4>Bug Hunter</h4>
-                        <div class="role">O Especialista em Escala</div>
-                        <p><strong>Submissão em Dois Lotes:</strong> ao executar uma ação de Report, o Bug Hunter
-                            divide as vulnerabilidades da Zona de Exploits em <strong>2 lotes separados</strong>, ambos
-                            dentro do <em>mesmo Active Program</em>. Cada lote passa pelo Duplicate Check e pelo cálculo
-                            de bônus de ferramentas independentemente. O programa fecha apenas após ambos os lotes serem
-                            processados.</p>
-                        <p style="margin-top:.6rem"><strong>Restrição de Severidade:</strong> só pode exploitar
-                            vulnerabilidades com CVSS ≤ 6.0 (Low e Medium). Não pode alocar cartas High ou Critical na
-                            Zona de Exploits.</p>
-                        <p style="margin-top:.6rem"><strong>Bônus de Volume:</strong> se a soma dos dois lotes contiver
-                            5 ou mais cartas no total, o valor combinado recebe <strong>+50% de bônus</strong> antes de
-                            avançar na Bounty Track.</p>
+                        <div class="role">O Caçador em Escala</div>
+                        <p><strong>Playstyle:</strong> Submissão em Dois Lotes: Ao realizar Report, divide a Zona de Exploits em 2 lotes independentes no mesmo Active Program.</p>
+                        <p style="margin-top:.6rem"><strong>Limite de Mão:</strong> 6 cartas</p>
+                        <ul style="margin-top:.6rem; padding-left:1.2rem;">
+                            <li>2 Lotes em 1 Report</li>
+                            <li>+50% de bônus se submeter 5+ vulnerabilidades no total</li>
+                            <li>Restrito a CVSS &le; 6.0</li>
+                        </ul>
                     </div>
                     <div class="archetype-card">
                         <h4>Social Engineer</h4>
-                        <div class="role">O Manipulador da Mesa</div>
-                        <p><strong>Controle de Alvo:</strong> ao acionar qualquer Event Card (seja como Custo do Sucesso
-                            ou durante a <strong>Janela de Caos (Opcional)</strong>), decide livremente qual
-                            participante é afetado, ignorando os alvos automáticos impressos na carta.</p>
-                        <p style="margin-top:.6rem"><strong>Acesso Privilegiado ao Event Deck:</strong> pode comprar 1
-                            carta do Event Deck como terceira opção de Recon — poder exclusivo desta classe.</p>
+                        <div class="role">O Manipulador Social</div>
+                        <p><strong>Playstyle:</strong> Caos Redirecionado: Pode escolher nominalmente qual adversário sofrerá o impacto de cartas de Evento jogadas.</p>
+                        <p style="margin-top:.6rem"><strong>Limite de Mão:</strong> 6 cartas</p>
+                        <ul style="margin-top:.6rem; padding-left:1.2rem;">
+                            <li>Redireciona cartas de evento</li>
+                            <li>Força descartes de oponentes</li>
+                            <li>Alta interação PvP</li>
+                        </ul>
                     </div>
                     <div class="archetype-card">
                         <h4>Red Teamer</h4>
-                        <div class="role">O Agente Irrestrito</div>
-                        <p><strong>Quebra de Escopo:</strong> totalmente imune a restrições de escopo. Pode alocar
-                            qualquer classe de vulnerabilidade em qualquer empresa corporativa.</p>
-                        <p style="margin-top:.6rem"><strong>Taxa Operacional:</strong> todos os Reports sofrem
-                            abatimento compulsório de <strong>-30% no valor total de payout</strong> (multiplicador
-                            final × 0.7).</p>
-                        <p style="margin-top:.6rem">Se a sua empresa atual sofrer <em>PATCH DEPLOYED!</em>, você só
-                            recua o seu progresso se tirar o <strong>número 8 no D8</strong>, independentemente da
-                            velocidade real do programa auditado.</p>
+                        <div class="role">O Operador Ofensivo</div>
+                        <p><strong>Playstyle:</strong> Sem Limites: Ignora todas as restrições de escopo dos programas (paga -30% nos bounties obtidos).</p>
+                        <p style="margin-top:.6rem"><strong>Limite de Mão:</strong> 6 cartas</p>
+                        <ul style="margin-top:.6rem; padding-left:1.2rem;">
+                            <li>Ignora escopo de programas</li>
+                            <li>Explora qualquer vulnerabilidade em qualquer alvo</li>
+                            <li>Flexibilidade total</li>
+                        </ul>
                     </div>
                     <div class="archetype-card">
                         <h4>The Pentester</h4>
-                        <div class="role">O Auditor Estruturado</div>
-                        <p><strong>Imunidade Burocrática:</strong> totalmente imune às penalidades de <em>Duplicate
-                                Report!</em> e <em>Triage Delay!</em>.</p>
-                        <p style="margin-top:.6rem"><strong>Controle de Risco de Patch:</strong> em
-                            <strong>todos</strong> os testes de Patch Speed Check, só é afetado caso tire o
-                            <strong>número 8 no D8</strong>, independentemente da velocidade real do programa auditado.
-                        </p>
+                        <div class="role">O Auditor Metódico</div>
+                        <p><strong>Playstyle:</strong> Imunidade Profissional: Imune a cartas de disrupção como Duplicate Report! e Triage Delay!.</p>
+                        <p style="margin-top:.6rem"><strong>Limite de Mão:</strong> 6 cartas</p>
+                        <ul style="margin-top:.6rem; padding-left:1.2rem;">
+                            <li>Imunidade a Duplicate Report!</li>
+                            <li>Imunidade a Triage Delay!</li>
+                            <li>Fluxo estável de caixa</li>
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -1910,9 +1911,7 @@
                 <h2 class="sec"><span class="num">12</span> Program Cards — Empresas Corporativas</h2>
                 <p>As empresas corporativas determinam os limites operacionais, bônus fixos de remuneração (Soma Direta)
                     e a
-                    volatilidade do Patch Speed Check. Cada empresa existe em <strong>2 cópias no baralho</strong> — é
-                    possível que dois pesquisadores auditem a mesma empresa simultaneamente, criando a disputa de
-                    <em>Duplicate Report!</em>.
+                    volatilidade do Patch Speed Check. As empresas possuem entre 1 e 3 cópias no baralho (distribuição ponderada por tier), permitindo a disputa por <em>Duplicate Report!</em> nos alvos mais comuns.
                 </p>
 
                 <h3>Regra de Mercado Vazio (Program Market Rotation)</h3>
@@ -1953,15 +1952,79 @@
                                 <td>+$1.000</td>
                             </tr>
                             <tr>
+                                <td><strong>SocialBee Media</strong></td>
+                                <td>Medium</td>
+                                <td>Cross-Site Scripting, Business Logic, Broken Access Control</td>
+                                <td>Moderada (7-8)</td>
+                                <td>1</td>
+                                <td>+$1.000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DeliveryDash App</strong></td>
+                                <td>Medium</td>
+                                <td>Business Logic, Broken Access Control, Cross-Site Scripting</td>
+                                <td>Moderada (7-8)</td>
+                                <td>1</td>
+                                <td>+$1.000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GameVerse MMO</strong></td>
+                                <td>Medium</td>
+                                <td>Business Logic, Injection, Cross-Site Scripting</td>
+                                <td>Moderada (7-8)</td>
+                                <td>1</td>
+                                <td>+$1.000</td>
+                            </tr>
+                            <tr>
                                 <td><strong>BankSafe Financial</strong></td>
                                 <td>High</td>
-                                <td>APIs, Autenticação e Criptografia</td>
+                                <td>Authentication, Cryptographic Failures, Broken Access Control, Injection</td>
                                 <td>Rápida (6-8)</td>
                                 <td>2</td>
                                 <td>+$2.500</td>
                             </tr>
                             <tr>
-                                <td><strong>GovPortal Nacional</strong></td>
+                                <td><strong>HealthLock EHR</strong></td>
+                                <td>High</td>
+                                <td>Cryptographic Failures, Authentication, SSRF, Broken Access Control</td>
+                                <td>Rápida (6-8)</td>
+                                <td>2</td>
+                                <td>+$2.500</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PayGateway Prime</strong></td>
+                                <td>High</td>
+                                <td>Broken Access Control, Authentication, Injection</td>
+                                <td>Rápida (6-8)</td>
+                                <td>2</td>
+                                <td>+$2.500</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CloudNine Cloud Services</strong></td>
+                                <td>Critical</td>
+                                <td>SSRF, Injection, Legendary</td>
+                                <td>Extrema (5-8)</td>
+                                <td>2</td>
+                                <td>+$4.000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CryptoX Exchange</strong></td>
+                                <td>Critical</td>
+                                <td>Authentication, Cryptographic Failures, Business Logic, Legendary</td>
+                                <td>Rápida (6-8)</td>
+                                <td>2</td>
+                                <td>+$4.000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>AI Core Systems</strong></td>
+                                <td>Critical</td>
+                                <td>Injection, SSRF, Legendary</td>
+                                <td>Extrema (5-8)</td>
+                                <td>2</td>
+                                <td>+$4.000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GovPortal Legacy</strong></td>
                                 <td>Low</td>
                                 <td>Broken Access Control</td>
                                 <td>Lenta (8)</td>
@@ -1969,39 +2032,7 @@
                                 <td>+$0</td>
                             </tr>
                             <tr>
-                                <td><strong>HealthLock Medical</strong></td>
-                                <td>High</td>
-                                <td>Criptografia e Autenticação</td>
-                                <td>Rápida (6-8)</td>
-                                <td>2</td>
-                                <td>+$2.500</td>
-                            </tr>
-                            <tr>
-                                <td><strong>SocialBee Network</strong></td>
-                                <td>Medium</td>
-                                <td>Escopo Amplo (todas as classes)</td>
-                                <td>Moderada (7-8)</td>
-                                <td>1</td>
-                                <td>+$1.000</td>
-                            </tr>
-                            <tr>
-                                <td><strong>CloudNine Systems</strong></td>
-                                <td>Critical</td>
-                                <td>Infraestrutura, RCE e SSRF</td>
-                                <td>Extrema (5-8)</td>
-                                <td>2</td>
-                                <td>+$4.000</td>
-                            </tr>
-                            <tr>
-                                <td><strong>GameVerse Studios</strong></td>
-                                <td>Medium</td>
-                                <td>WebSockets e Lógica de Negócios</td>
-                                <td>Moderada (7-8)</td>
-                                <td>1</td>
-                                <td>+$1.000</td>
-                            </tr>
-                            <tr>
-                                <td><strong>EduConnect Tech</strong></td>
+                                <td><strong>EduConnect LMS</strong></td>
                                 <td>Low</td>
                                 <td>Escopo Amplo (todas as classes)</td>
                                 <td>Lenta (8)</td>
