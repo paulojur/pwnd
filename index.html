@@ -247,9 +247,16 @@
 
     <h1>PWND! — Quick Rules Cards</h1>
     <div style="display: flex; gap: 15px; margin-bottom: 40px;">
-        <button class="print-btn" style="margin-bottom: 0;" onclick="window.print()">🖨️ Imprimir Cartas (A4)</button>
+        <button id="print-btn" class="print-btn" style="margin-bottom: 0;" onclick="window.print()">🖨️ Imprimir Cartas (A4)</button>
         <a href="/game.html?autoStart=true" class="start-btn" style="background-color: var(--accent-orange); color: #000; padding: 10px 20px; font-weight: bold; font-family: var(--font-mono); text-decoration: none; border-radius: 4px; font-size: 16px; box-shadow: 0 0 10px rgba(240, 136, 62, 0.5);">🚀 Começar Jogo</a>
     </div>
+
+    <script>
+        // Ocultar botão de impressão em produção
+        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            document.getElementById('print-btn').style.display = 'none';
+        }
+    </script>
 
     <div class="cards-grid">
 

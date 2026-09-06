@@ -118,6 +118,8 @@ const BoardGameContent: React.FC = () => {
     }
   };
 
+  const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
   return (
     <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '16px' }}>
       
@@ -160,26 +162,28 @@ const BoardGameContent: React.FC = () => {
             <BookOpen size={15} /> 📖 Manual de Regras (HTML)
           </button>
 
-          <button
-            onClick={() => { soundFx.playClick(); setPrintModalOpen(true); }}
-            style={{
-              padding: '8px 14px',
-              background: 'var(--terminal-green)',
-              color: '#000',
-              border: 'none',
-              borderRadius: 'var(--radius-sm)',
-              fontSize: '12px',
-              fontWeight: '900',
-              fontFamily: 'var(--font-mono)',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              boxShadow: 'var(--glow-green)'
-            }}
-          >
-            <Printer size={15} /> 🖨️ Print & Play (Papel)
-          </button>
+          {isLocalhost && (
+            <button
+              onClick={() => { soundFx.playClick(); setPrintModalOpen(true); }}
+              style={{
+                padding: '8px 14px',
+                background: 'var(--terminal-green)',
+                color: '#000',
+                border: 'none',
+                borderRadius: 'var(--radius-sm)',
+                fontSize: '12px',
+                fontWeight: '900',
+                fontFamily: 'var(--font-mono)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: 'var(--glow-green)'
+              }}
+            >
+              <Printer size={15} /> 🖨️ Print & Play (Papel)
+            </button>
+          )}
 
           <button
             onClick={() => { soundFx.playClick(); setMultiplayerModalOpen(true); }}
