@@ -132,7 +132,7 @@ export const CenterMarketMat: React.FC<CenterMarketMatProps> = ({
       </div>
 
       {/* 2. LOWER SECTION: EVENT DECK, ROUND TRACK & SEVERITY LEGEND */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', alignItems: 'center' }}>
+      <div className="responsive-col-3-to-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', alignItems: 'center' }}>
         
         {/* EVENT DECK (INTERATIVO - CLIQUE PARA PUXAR EVENT CARD) */}
         <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>

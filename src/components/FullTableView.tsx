@@ -125,9 +125,9 @@ export const FullTableView: React.FC<FullTableViewProps> = ({
         — TAPETES INDIVIDUAIS DOS 6 JOGADORES DA MESA —
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: '24px' }}>
+      <div className="full-table-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
         {all6Players.map(pData => (
-          <div key={pData.playerId} style={{ transform: 'scale(0.95)', transformOrigin: 'top center' }}>
+          <div key={pData.playerId} style={{ transform: 'scale(0.95)', transformOrigin: 'top center', maxWidth: '100vw', overflowX: 'hidden' }}>
             <PlayerMat playerData={pData} />
           </div>
         ))}

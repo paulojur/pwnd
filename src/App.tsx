@@ -21,7 +21,7 @@ const CardGameContent: React.FC<{ onSwitchToBoardGame: () => void }> = ({ onSwit
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
       {/* Top Banner to Switch to Board Game Mode */}
-      <div style={{ background: 'linear-gradient(90deg, rgba(123, 47, 190, 0.2), rgba(240, 136, 62, 0.2))', border: '1px solid var(--amber-glow)', borderRadius: 'var(--radius-md)', padding: '10px 16px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className="top-banner-responsive" style={{ background: 'linear-gradient(90deg, rgba(123, 47, 190, 0.2), rgba(240, 136, 62, 0.2))', border: '1px solid var(--amber-glow)', borderRadius: 'var(--radius-md)', padding: '10px 16px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#fff', fontFamily: 'var(--font-mono)' }}>
           <Layers size={18} color="var(--amber-glow)" />
           <span>Experimente a nova versão: <strong>PWND! Board Game Edition (v2.0)</strong> com tabuleiro e nomes leigos!</span>

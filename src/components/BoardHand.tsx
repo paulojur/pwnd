@@ -307,7 +307,7 @@ export const BoardHand: React.FC = () => {
                         cursor: isMyTurn ? 'pointer' : 'not-allowed'
                       }}
                     >
-                      ENVIAR DEFUSE
+                      ENVIAR SAFEGUARD
                     </button>
                   )}
 

@@ -76,7 +76,7 @@ export const ActionPointsBar: React.FC = () => {
         </div>
 
         {/* Action Buttons (1 Ação Única Por Turno) */}
-        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+        <div className="action-bar-container" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
           {/* Varrer / Recon (1 Ação) */}
           <button
             onClick={() => { soundFx.playClick(); actionVarrer(); }}

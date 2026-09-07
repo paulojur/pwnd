@@ -61,7 +61,7 @@ export const PlayerMat: React.FC<PlayerMatProps> = ({
 
   return (
     <div
-      className="playmat-container"
+      className="playmat-container responsive-playmat-grid"
       style={{
         padding: '20px',
         borderColor: currentZone.cssColor,
@@ -106,7 +106,7 @@ export const PlayerMat: React.FC<PlayerMatProps> = ({
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: 0, width: '100%' }}>
 
         {/* TOP ROW: RESEARCHER, ACTIVE PROGRAM & DEFUSE (RETÂNGULOS VERTICAIS PROPORCIONAIS) */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
+        <div className="responsive-col-3-to-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
 
           {/* RESEARCHER SLOT */}
           <div className="playmat-slot" style={{ padding: '12px', height: '160px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -168,11 +168,11 @@ export const PlayerMat: React.FC<PlayerMatProps> = ({
 
         {/* MIDDLE ROW: TOOLS RACK (3 SLOTS VERTICAIS PROPORCIONAIS DE 120px DE ALTURA) */}
         <div>
-          <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: '14px' }}>
+          <div className="responsive-col-2-to-1" style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: '14px' }}>
             {/* TOOLS RACK (3 SLOTS) */}
             <div>
               <div className="playmat-slot-label" style={{ marginBottom: '6px' }}>TOOLS RACK</div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+              <div className="responsive-col-3-to-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
                 {[0, 1, 2].map(slotIdx => {
                   const tool = activeTools[slotIdx];
 

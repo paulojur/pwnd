@@ -25,10 +25,16 @@
             color: var(--text-main);
             font-family: var(--font-main);
             margin: 0;
-            padding: 40px;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 20px 10px; }
+            h1 { font-size: 24px; }
+            .print-btn { width: 100%; text-align: center; }
         }
 
         h1 {
@@ -57,17 +63,20 @@
 
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             max-width: 1200px;
+            width: 100%;
         }
 
         .card {
             background-color: var(--card-bg);
             border: 2px solid var(--border-color);
             border-radius: 12px;
-            width: 315px;
-            height: 440px;
+            width: 100%;
+            max-width: 330px;
+            height: auto;
+            min-height: 440px;
             box-sizing: border-box;
             padding: 16px;
             display: flex;
@@ -75,6 +84,7 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
+            margin: 0 auto;
         }
 
         .card::before {
