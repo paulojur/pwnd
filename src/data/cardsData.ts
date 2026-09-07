@@ -130,10 +130,10 @@ export const ARCHETYPES: Archetype[] = [
 ];
 
 // ----------------------------------------------------
-// PROGRAM CARDS (24 Alvos Corporativos: 12 Empresas x 2 Cópias)
+// PROGRAM CARDS (24 Alvos Corporativos, Distribuição Ponderada)
 // ----------------------------------------------------
 export const PROGRAM_CARDS: ProgramCard[] = [
-  // --- 1. ShopAll Global (2 cópias) ---
+  // --- 1. ShopAll Global (3 cópias) ---
   {
     id: 'shopall-1',
     name: 'ShopAll Global',
@@ -153,6 +153,16 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     bountyRange: '+$1.0k Bônus Fixos',
     flatBountyBonus: 1000,
     description: 'Escopo amplo. Permitido disputar Duplicate Report em tempo real!'
+  },
+  {
+    id: 'shopall-3',
+    name: 'ShopAll Global',
+    companyType: 'E-Commerce Multinacional',
+    allowedClasses: 'ALL',
+    patchSpeed: 'Moderada',
+    bountyRange: '+$1.0k Bônus Fixos',
+    flatBountyBonus: 1000,
+    description: 'Plataforma gigante com alta rotatividade de pesquisadores.'
   },
 
   // --- 2. BankSafe Financial (2 cópias) ---
@@ -182,7 +192,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     id: 'govportal-1',
     name: 'GovPortal Legacy',
     companyType: 'Sistema Governamental Legado',
-    allowedClasses: ['Broken Access Control', 'Injection', 'Cross-Site Scripting'],
+    allowedClasses: ['Broken Access Control'],
     patchSpeed: 'Lenta',
     bountyRange: '+$0 Bônus Fixos',
     flatBountyBonus: 0,
@@ -192,7 +202,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     id: 'govportal-2',
     name: 'GovPortal Legacy',
     companyType: 'Sistema Governamental Legado',
-    allowedClasses: ['Broken Access Control', 'Injection', 'Cross-Site Scripting'],
+    allowedClasses: ['Broken Access Control'],
     patchSpeed: 'Lenta',
     bountyRange: '+$0 Bônus Fixos',
     flatBountyBonus: 0,
@@ -221,7 +231,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     description: 'Sistema hospitalar privado sob constante auditoria de conformidade.'
   },
 
-  // --- 5. CloudNine Cloud Services (2 cópias) ---
+  // --- 5. CloudNine Cloud Services (1 cópia) ---
   {
     id: 'cloudnine-1',
     name: 'CloudNine Cloud Services',
@@ -232,18 +242,8 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     flatBountyBonus: 4000,
     description: 'Recompensas astronômicas para RCE, SSRF e vulnerabilidades de infraestrutura. Alto risco de Patch!'
   },
-  {
-    id: 'cloudnine-2',
-    name: 'CloudNine Cloud Services',
-    companyType: 'Provedor de Infraestrutura em Nuvem',
-    allowedClasses: ['SSRF', 'Injection', 'Legendary'],
-    patchSpeed: 'Extrema',
-    bountyRange: '+$4.0k Bônus Fixos',
-    flatBountyBonus: 4000,
-    description: 'Infraestrutura crítica de hyperscaler. Pagamentos máximos na Bounty Track!'
-  },
 
-  // --- 6. SocialBee Media (2 cópias) ---
+  // --- 6. SocialBee Media (3 cópias) ---
   {
     id: 'socialbee-1',
     name: 'SocialBee Media',
@@ -251,7 +251,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     allowedClasses: ['Cross-Site Scripting', 'Business Logic', 'Broken Access Control'],
     patchSpeed: 'Moderada',
     bountyRange: '+$1.0k Bônus Fixos',
-    flatBountyBonus: 1200,
+    flatBountyBonus: 1000,
     description: 'Focado em vulnerabilidades de privacidade, XSS e lógica de engajamento social.'
   },
   {
@@ -261,8 +261,18 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     allowedClasses: ['Cross-Site Scripting', 'Business Logic', 'Broken Access Control'],
     patchSpeed: 'Moderada',
     bountyRange: '+$1.0k Bônus Fixos',
-    flatBountyBonus: 1200,
+    flatBountyBonus: 1000,
     description: 'Plataforma social de alto tráfego com foco em permissões de perfil.'
+  },
+  {
+    id: 'socialbee-3',
+    name: 'SocialBee Media',
+    companyType: 'Rede Social Global',
+    allowedClasses: ['Cross-Site Scripting', 'Business Logic', 'Broken Access Control'],
+    patchSpeed: 'Moderada',
+    bountyRange: '+$1.0k Bônus Fixos',
+    flatBountyBonus: 1000,
+    description: 'Inúmeras sub-plataformas integradas suscetíveis a roubo de cookies e manipulação.'
   },
 
   // --- 7. GameVerse MMO (2 cópias) ---
@@ -273,7 +283,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     allowedClasses: ['Business Logic', 'Injection', 'Cross-Site Scripting'],
     patchSpeed: 'Moderada',
     bountyRange: '+$1.0k Bônus Fixos',
-    flatBountyBonus: 1100,
+    flatBountyBonus: 1000,
     description: 'Injeção de itens, manipulação de saldo virtual e exploits em WebSockets.'
   },
   {
@@ -283,7 +293,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     allowedClasses: ['Business Logic', 'Injection', 'Cross-Site Scripting'],
     patchSpeed: 'Moderada',
     bountyRange: '+$1.0k Bônus Fixos',
-    flatBountyBonus: 1100,
+    flatBountyBonus: 1000,
     description: 'Servidores de jogos síncronos expostos a exploração de lógica de mercado.'
   },
 
@@ -293,9 +303,9 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     name: 'EduConnect LMS',
     companyType: 'Plataforma Educacional',
     allowedClasses: 'ALL',
-    patchSpeed: 'Muito Lenta',
+    patchSpeed: 'Lenta',
     bountyRange: '+$0 Bônus Fixos',
-    flatBountyBonus: 800,
+    flatBountyBonus: 0,
     description: 'Ambiente seguro para iniciantes praticarem. Quase sem risco de Patch instantâneo.'
   },
   {
@@ -303,13 +313,13 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     name: 'EduConnect LMS',
     companyType: 'Plataforma Educacional',
     allowedClasses: 'ALL',
-    patchSpeed: 'Muito Lenta',
+    patchSpeed: 'Lenta',
     bountyRange: '+$0 Bônus Fixos',
-    flatBountyBonus: 800,
+    flatBountyBonus: 0,
     description: 'Sistema acadêmico comunitário com tolerância prolongada de patches.'
   },
 
-  // --- 9. CryptoX Exchange (NOVO - 2 cópias) ---
+  // --- 9. CryptoX Exchange (1 cópia) ---
   {
     id: 'cryptox-1',
     name: 'CryptoX Exchange',
@@ -317,21 +327,11 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     allowedClasses: ['Authentication', 'Cryptographic Failures', 'Business Logic', 'Legendary'],
     patchSpeed: 'Rápida',
     bountyRange: '+$4.0k Bônus Fixos',
-    flatBountyBonus: 2200,
+    flatBountyBonus: 4000,
     description: 'Corretora de ativos digitais sob alto risco de ataques de autenticação e carteira.'
   },
-  {
-    id: 'cryptox-2',
-    name: 'CryptoX Exchange',
-    companyType: 'Corretora de Criptomoedas',
-    allowedClasses: ['Authentication', 'Cryptographic Failures', 'Business Logic', 'Legendary'],
-    patchSpeed: 'Rápida',
-    bountyRange: '+$4.0k Bônus Fixos',
-    flatBountyBonus: 2200,
-    description: 'Infraestrutura blockchain com recompensas vultosas para vulnerabilidades de saldo.'
-  },
 
-  // --- 10. AI Core Systems (NOVO - 2 cópias) ---
+  // --- 10. AI Core Systems (1 cópia) ---
   {
     id: 'aicore-1',
     name: 'AI Core Systems',
@@ -339,21 +339,11 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     allowedClasses: ['Injection', 'SSRF', 'Legendary'],
     patchSpeed: 'Extrema',
     bountyRange: '+$4.0k Bônus Fixos',
-    flatBountyBonus: 2400,
+    flatBountyBonus: 4000,
     description: 'Clusters de treinamento de modelos de linguagem vulneráveis a Prompt Injection e RCE.'
   },
-  {
-    id: 'aicore-2',
-    name: 'AI Core Systems',
-    companyType: 'Infraestrutura de IA Generativa',
-    allowedClasses: ['Injection', 'SSRF', 'Legendary'],
-    patchSpeed: 'Extrema',
-    bountyRange: '+$4.0k Bônus Fixos',
-    flatBountyBonus: 2400,
-    description: 'API de modelos neurais exposta a exfiltração de dados por SSRF e injeção.'
-  },
 
-  // --- 11. PayGateway Prime (NOVO - 2 cópias) ---
+  // --- 11. PayGateway Prime (2 cópias) ---
   {
     id: 'paygateway-1',
     name: 'PayGateway Prime',
@@ -361,7 +351,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     allowedClasses: ['Broken Access Control', 'Authentication', 'Injection'],
     patchSpeed: 'Rápida',
     bountyRange: '+$2.5k Bônus Fixos',
-    flatBountyBonus: 2000,
+    flatBountyBonus: 2500,
     description: 'Gateway financeiro global conectando cartões de crédito e Pix.'
   },
   {
@@ -371,11 +361,11 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     allowedClasses: ['Broken Access Control', 'Authentication', 'Injection'],
     patchSpeed: 'Rápida',
     bountyRange: '+$2.5k Bônus Fixos',
-    flatBountyBonus: 2000,
+    flatBountyBonus: 2500,
     description: 'Processador financeiro com rigorosos controles de auditoria de cartões.'
   },
 
-  // --- 12. DeliveryDash App (NOVO - 2 cópias) ---
+  // --- 12. DeliveryDash App (3 cópias) ---
   {
     id: 'deliverydash-1',
     name: 'DeliveryDash App',
@@ -383,7 +373,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     allowedClasses: ['Business Logic', 'Broken Access Control', 'Cross-Site Scripting'],
     patchSpeed: 'Moderada',
     bountyRange: '+$1.0k Bônus Fixos',
-    flatBountyBonus: 1300,
+    flatBountyBonus: 1000,
     description: 'Aplicativo de entregas urbanas com vulnerabilidades de cupom e IDOR de pedidos.'
   },
   {
@@ -393,8 +383,18 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     allowedClasses: ['Business Logic', 'Broken Access Control', 'Cross-Site Scripting'],
     patchSpeed: 'Moderada',
     bountyRange: '+$1.0k Bônus Fixos',
-    flatBountyBonus: 1300,
+    flatBountyBonus: 1000,
     description: 'Rede logística de entregas rápidas suscetível a manipulação de pedidos.'
+  },
+  {
+    id: 'deliverydash-3',
+    name: 'DeliveryDash App',
+    companyType: 'Plataforma Logística e Entregas',
+    allowedClasses: ['Business Logic', 'Broken Access Control', 'Cross-Site Scripting'],
+    patchSpeed: 'Moderada',
+    bountyRange: '+$1.0k Bônus Fixos',
+    flatBountyBonus: 1000,
+    description: 'Frequentes falhas de lógica em promoções e cupons da plataforma.'
   }
 ];
 

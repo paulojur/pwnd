@@ -9,7 +9,6 @@ import { MultiplayerLobbyModal } from './MultiplayerLobbyModal';
 import { GameSetupWizard } from './GameSetupWizard';
 import { EventCardModal } from './EventCardModal';
 import { PrintAndPlayModal } from './PrintAndPlayModal';
-import { ManualModal } from './ManualModal';
 import { ARCHETYPES, PROGRAM_CARDS, ProgramCard } from '../data/cardsData';
 import { Layers, RefreshCw, Eye, Users, ShieldAlert, Globe, Printer, BookOpen, Trophy } from 'lucide-react';
 import { soundFx } from '../utils/audio';
@@ -67,7 +66,6 @@ const BoardGameContent: React.FC = () => {
   const [viewMode, setViewMode] = useState<'myMat' | 'fullTable'>('myMat');
   const [multiplayerModalOpen, setMultiplayerModalOpen] = useState<boolean>(false);
   const [printModalOpen, setPrintModalOpen] = useState<boolean>(false);
-  const [manualModalOpen, setManualModalOpen] = useState<boolean>(false);
   const [roomCode, setRoomCode] = useState<string | null>(null);
 
   // Escutar evento de desistência/troca de programa ativo
@@ -142,7 +140,7 @@ const BoardGameContent: React.FC = () => {
         {/* View Mode Toggle Buttons, Print & Play & Multiplayer Lobby Button */}
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
           <button
-            onClick={() => { soundFx.playClick(); setManualModalOpen(true); }}
+            onClick={() => { soundFx.playClick(); window.open('/pwnd-manual.html', '_blank'); }}
             style={{
               padding: '8px 14px',
               background: 'var(--amber-glow)',
@@ -403,9 +401,6 @@ const BoardGameContent: React.FC = () => {
           </div>
         </div>
       )}
-
-      {/* Manual de Regras Oficial em HTML Modal */}
-      <ManualModal isOpen={manualModalOpen} onClose={() => setManualModalOpen(false)} />
 
       {/* Victory Modal Overlay */}
       {gameWinner && (
