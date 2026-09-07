@@ -140,7 +140,7 @@ export const ActionPointsBar: React.FC = () => {
               boxShadow: 'var(--glow-purple)'
             }}
           >
-            <Dices size={16} /> Testar Dado D6
+            <Dices size={16} /> Testar Dado D8
           </button>
 
           {/* Passar Turno (Manual) */}
