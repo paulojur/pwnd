@@ -6,6 +6,15 @@ import { ProgramCard, PROGRAM_CARDS, Archetype, ARCHETYPES } from '../data/cards
 import { EVENT_CARDS_LIST, EventCardData } from '../components/EventCardModal';
 import { mpSync } from '../utils/multiplayerSync';
 import { soundFx } from '../utils/audio';
+
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+};
 import confetti from 'canvas-confetti';
 
 export interface DeployedExploit {
@@ -143,7 +152,8 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
     setPlayerActiveProgram(program);
 
     const initialHandSize = archetype.id === 'old-guard' ? 8 : 5;
-    const initialCards = CARDS_V2.slice(0, initialHandSize);
+    const shuffledCards = shuffleArray(CARDS_V2);
+    const initialCards = shuffledCards.slice(0, initialHandSize);
 
     // GARANTIA DE 1 Safeguard SUPREMA (0-Day Reserve) NA MÃO INICIAL
     const starterDefuse: CardV2 = {
@@ -167,7 +177,10 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
     const searchParams = new URLSearchParams(window.location.search);
     if (searchParams.get('autoStart') === 'true') {
       const randArchetype = ARCHETYPES[Math.floor(Math.random() * ARCHETYPES.length)];
-      const randProgram = PROGRAM_CARDS[Math.floor(Math.random() * 3)]; // from market
+      const shuffledPrograms = shuffleArray(PROGRAM_CARDS);
+      setProgramMarket(shuffledPrograms.slice(0, 3));
+      setProgramDeck(shuffledPrograms.slice(3));
+      const randProgram = shuffledPrograms[Math.floor(Math.random() * 3)]; // from market
       
       // small delay to let UI mount
       setTimeout(() => {
@@ -588,8 +601,7 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
     setPlayerActiveTools([]);
     setPlayerActiveProgram(null);
     setPlayerArchetype(ARCHETYPES[0]);
-    setProgramMarket(PROGRAM_CARDS.slice(0, 3));
-    setProgramDeck(PROGRAM_CARDS.slice(3));
+
     setPlayerScore(0);
     setServers(SERVERS_DATA);
     setDeployedExploits([]);
@@ -601,7 +613,10 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
     setLogs(['Board Game reiniciado!']);
 
     const randArchetype = ARCHETYPES[Math.floor(Math.random() * ARCHETYPES.length)];
-    const randProgram = PROGRAM_CARDS[Math.floor(Math.random() * 3)]; // from market
+    const shuffledPrograms = shuffleArray(PROGRAM_CARDS);
+    setProgramMarket(shuffledPrograms.slice(0, 3));
+    setProgramDeck(shuffledPrograms.slice(3));
+    const randProgram = shuffledPrograms[Math.floor(Math.random() * 3)]; // from market
     setTimeout(() => {
       completeSetup(randArchetype, randProgram);
     }, 100);
