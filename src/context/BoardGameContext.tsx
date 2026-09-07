@@ -595,10 +595,16 @@ export const BoardGameProvider: React.FC<{ children: ReactNode }> = ({ children 
     setDeployedExploits([]);
     setCurrentTurn(1);
     setActivePlayerRole('player-1');
-    setIsSetupWizardOpen(true);
+    setIsSetupWizardOpen(false);
     setPatchAlertModal(false);
     setIsDiceModalOpen(false);
     setLogs(['Board Game reiniciado!']);
+
+    const randArchetype = ARCHETYPES[Math.floor(Math.random() * ARCHETYPES.length)];
+    const randProgram = PROGRAM_CARDS[Math.floor(Math.random() * 3)]; // from market
+    setTimeout(() => {
+      completeSetup(randArchetype, randProgram);
+    }, 100);
   };
 
   return (

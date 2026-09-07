@@ -10,7 +10,7 @@ import { GameSetupWizard } from './GameSetupWizard';
 import { EventCardModal } from './EventCardModal';
 import { PrintAndPlayModal } from './PrintAndPlayModal';
 import { ARCHETYPES, PROGRAM_CARDS, ProgramCard } from '../data/cardsData';
-import { Layers, RefreshCw, Eye, Users, ShieldAlert, Globe, Printer, BookOpen, Trophy } from 'lucide-react';
+import { Layers, RefreshCw, Eye, Users, ShieldAlert, Globe, Printer, BookOpen, Trophy, Home } from 'lucide-react';
 import { soundFx } from '../utils/audio';
 
 class ErrorBoundary extends React.Component<{children: React.ReactNode}, {hasError: boolean}> {
@@ -139,6 +139,25 @@ const BoardGameContent: React.FC = () => {
 
         {/* View Mode Toggle Buttons, Print & Play & Multiplayer Lobby Button */}
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          <button
+            onClick={() => { soundFx.playClick(); window.location.href = '/'; }}
+            style={{
+              padding: '8px 14px',
+              background: 'transparent',
+              color: 'var(--text-secondary)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: '12px',
+              fontWeight: '900',
+              fontFamily: 'var(--font-mono)',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}
+          >
+            <Home size={15} /> Início
+          </button>
           <button
             onClick={() => { soundFx.playClick(); window.open('/pwnd-manual.html', '_blank'); }}
             style={{
