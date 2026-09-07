@@ -388,7 +388,7 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
                             <span style={{ fontSize: '18px' }}>{card.icon}</span>
                           )}
                           <span style={{ fontSize: '8.5px', fontWeight: 'bold', border: '1px solid #000', padding: '1px 5px', borderRadius: '3px', textTransform: 'uppercase' }}>
-                            {card.type}
+                            {card.type === 'defuse' ? 'SAFEGUARD' : card.type}
                           </span>
                         </div>
 
