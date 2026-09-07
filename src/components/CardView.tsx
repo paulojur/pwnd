@@ -282,8 +282,30 @@ export const ProgramCardView: React.FC<ProgramCardViewProps> = ({ program, isSel
               📋 REGRAS DE ESCOPO & DEDUZIBILIDADE
             </div>
             <div style={{ color: '#fff', fontWeight: '700', marginBottom: '4px' }}>Classes Permitidas (Scope):</div>
-            <div style={{ color: 'var(--terminal-green)', marginBottom: '8px' }}>
-              {program.allowedClasses === 'ALL' ? '✓ Escopo Amplo (Aceita TODAS as classes!)' : (program.allowedClasses as string[]).join(', ')}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginBottom: '8px' }}>
+              {program.allowedClasses === 'ALL' ? (
+                <span style={{ background: '#333', color: '#fff', padding: '2px 6px', borderRadius: '4px', fontSize: '10px' }}>
+                  ✓ [Todas as classes]
+                </span>
+              ) : (
+                (program.allowedClasses as string[]).map(cls => {
+                  let color = '#ccc';
+                  let label = cls;
+                  if (cls === 'INJ') { color = '#E67E22'; }
+                  else if (cls === 'BAC') { color = '#4B0082'; }
+                  else if (cls === 'XSS') { color = '#E91E63'; }
+                  else if (cls === 'AUTH') { color = '#F1C40F'; }
+                  else if (cls === 'SSRF') { color = '#2196F3'; }
+                  else if (cls === 'BL') { color = '#008080'; label = 'LOGIC'; }
+                  else if (cls === 'CRYPTO') { color = '#27AE60'; }
+                  else if (cls === 'LEGENDARY') { color = '#B39DDB'; label = '⚡ LEGENDARY'; }
+                  return (
+                    <span key={cls} style={{ background: color, color: '#fff', padding: '2px 6px', borderRadius: '4px', fontSize: '10px', display: 'flex', alignItems: 'center', textShadow: '0 0 2px rgba(0,0,0,0.8)' }}>
+                      {label}
+                    </span>
+                  );
+                })
+              )}
             </div>
             <div style={{ color: 'var(--alert-red)' }}>
               🎲 Teste D6 Patch: {program.patchSpeed}

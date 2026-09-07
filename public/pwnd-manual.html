@@ -1316,12 +1316,7 @@
                     (Tools) para o seu <strong>Tools Rack</strong> (máximo de 3), <strong>desde que descarte 1 carta da
                         sua mão para cada Tool instalada</strong>.</p>
                 <div class="callout">
-                    <span class="label">Nota sobre Ferramentas e Cargas</span>
-                    <p>As Ferramentas ficam alocadas no seu <strong>Tools Rack (máx. 3)</strong> com um <strong>Sistema
-                            de Cargas Degradáveis</strong>. Ferramentas comuns possuem 2 cargas (1ª carga dá +$1.000
-                        bônus, 2ª carga degrada para +$500). Ferramentas Raras/Épicas possuem 1 carga única (+$2.000
-                        bônus). Cada Report consome 1 carga das ferramentas usadas no Rack.</p>
-                </div>
+                    
 
                 <h3>Ação 3 — Report (Submissão Formal — Modelo A: Soma Direta)</h3>
                 <p>Realize a entrega formal de todas as Vulnerability Cards alocadas na sua Zona de Exploits. O
@@ -1342,8 +1337,7 @@
                     <li><strong>Alerta Global:</strong> <em>Atenção: A partir da Rodada 5, entra em vigor o Alerta
                             Global, e TODOS os programas passam a exigir no mínimo 2 cartas válidas.</em></li>
                     <li><strong>Cálculo do Payout (Modelo A — Soma Direta):</strong>
-                        $$\text{Bounty Total} = \sum \text{Valor das vulnerabilidades} + \text{Bônus do Programa} + \sum
-                        \text{Bônus das Tools}$$
+                        $$\text{Bounty Total} = \sum \text{Valor das vulnerabilidades} + \text{Bônus do Programa}$$
                         <div class="callout" style="margin-top:.7rem">
                             <span class="label">Tabela de Bônus Fixos do Modelo A</span>
                             <p>
@@ -1351,22 +1345,17 @@
                                 (+$4.000) | Épica
                                 (+$5.000) | Lendária (+$6.000)<br>
                                 <strong>• Programas:</strong> Baixo (+$0) | Médio (+$1.000) | Alto (+$2.500) | Crítico
-                                (+$4.000)<br>
-                                <strong>• Tools:</strong> Épicas/Raras (+$2.000) | Comuns (1ª carga: +$1.000 / 2ª carga:
-                                +$500)
+                                (+$4.000)
                             </p>
                         </div>
                         <div class="callout cyan" style="margin-top:.7rem">
                             <span class="label">Exemplo de Cálculo Aditivo na Mesa</span>
-                            <p>1 vulnerabilidade Rara ($4.000) + 1 Incomum ($2.500) na BankSafe (Alto +$2.500) com 1
-                                Tool (1ª
-                                carga +$1.000):<br>
-                                $$\$4.000 + \$2.500 + \$2.500 + \$1.000 = \mathbf{\$10.000\text{ Payout Total}}$$
+                            <p>1 vulnerabilidade Rara ($4.000) + 1 Incomum ($2.500) na BankSafe (Alto +$2.500):<br>
+                                $$\$4.000 + \$2.500 + \$2.500 = \mathbf{\$9.000\text{ Payout Total}}$$
                                 → Se o saldo do jogador era <strong>$1.500</strong>, o novo saldo é
-                                <strong>$11.500</strong>.<br>
-                                → O peão avança e assenta no degrau <strong>$11.000</strong> da Bounty Track (o degrau
-                                imediatamente abaixo).<br>
-                                → A Tool consome 1 carga (passa a ter 1 carga de +$500 restante).
+                                <strong>$10.500</strong>.<br>
+                                → O peão avança e assenta no degrau <strong>$10.000</strong> da Bounty Track (o degrau
+                                imediatamente abaixo).
                             </p>
                         </div>
                     </li>
@@ -1936,6 +1925,7 @@
                                 <th>Empresa</th>
                                 <th>Tier</th>
                                 <th>Escopo Autorizado</th>
+                                <th>Cores de Escopo</th>
                                 <th>Patch Speed</th>
                                 <th>Mín. de Vulnerabilidades</th>
                                 <th>Bônus Fixo (Programa)</th>
@@ -1946,6 +1936,7 @@
                                 <td><strong>ShopAll Global</strong></td>
                                 <td>Medium</td>
                                 <td>Escopo Amplo (todas as classes)</td>
+                                <td><span style="background:#333;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;">✓ [Todas as classes]</span></td>
                                 <td>Moderada (7-8)</td>
                                 <td>1</td>
                                 <td>+$1.000</td>
@@ -1954,6 +1945,7 @@
                                 <td><strong>SocialBee Media</strong></td>
                                 <td>Medium</td>
                                 <td>Cross-Site Scripting, Business Logic, Broken Access Control</td>
+                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E91E63;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">XSS</span><span style="background:#008080;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">LOGIC</span><span style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span></div></td>
                                 <td>Moderada (7-8)</td>
                                 <td>1</td>
                                 <td>+$1.000</td>
@@ -1962,6 +1954,7 @@
                                 <td><strong>DeliveryDash App</strong></td>
                                 <td>Medium</td>
                                 <td>Business Logic, Broken Access Control, Cross-Site Scripting</td>
+                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E91E63;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">XSS</span><span style="background:#008080;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">LOGIC</span><span style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span></div></td>
                                 <td>Moderada (7-8)</td>
                                 <td>1</td>
                                 <td>+$1.000</td>
@@ -1970,6 +1963,7 @@
                                 <td><strong>GameVerse MMO</strong></td>
                                 <td>Medium</td>
                                 <td>Business Logic, Injection, Cross-Site Scripting</td>
+                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span style="background:#E91E63;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">XSS</span><span style="background:#008080;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">LOGIC</span></div></td>
                                 <td>Moderada (7-8)</td>
                                 <td>1</td>
                                 <td>+$1.000</td>
@@ -1978,6 +1972,7 @@
                                 <td><strong>BankSafe Financial</strong></td>
                                 <td>High</td>
                                 <td>Authentication, Cryptographic Failures, Broken Access Control, Injection</td>
+                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span><span style="background:#F1C40F;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">AUTH</span><span style="background:#27AE60;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">CRYPTO</span></div></td>
                                 <td>Rápida (6-8)</td>
                                 <td>2</td>
                                 <td>+$2.500</td>
@@ -1986,6 +1981,7 @@
                                 <td><strong>HealthLock EHR</strong></td>
                                 <td>High</td>
                                 <td>Cryptographic Failures, Authentication, SSRF, Broken Access Control</td>
+                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span><span style="background:#F1C40F;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">AUTH</span><span style="background:#2196F3;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">SSRF</span><span style="background:#27AE60;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">CRYPTO</span></div></td>
                                 <td>Rápida (6-8)</td>
                                 <td>2</td>
                                 <td>+$2.500</td>
@@ -1994,6 +1990,7 @@
                                 <td><strong>PayGateway Prime</strong></td>
                                 <td>High</td>
                                 <td>Broken Access Control, Authentication, Injection</td>
+                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span><span style="background:#F1C40F;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">AUTH</span></div></td>
                                 <td>Rápida (6-8)</td>
                                 <td>2</td>
                                 <td>+$2.500</td>
@@ -2002,6 +1999,7 @@
                                 <td><strong>CloudNine Cloud Services</strong></td>
                                 <td>Critical</td>
                                 <td>SSRF, Injection, Legendary</td>
+                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span style="background:#2196F3;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">SSRF</span><span style="background:#B39DDB;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">⚡ LEGENDARY</span></div></td>
                                 <td>Extrema (5-8)</td>
                                 <td>2</td>
                                 <td>+$4.000</td>
@@ -2010,6 +2008,7 @@
                                 <td><strong>CryptoX Exchange</strong></td>
                                 <td>Critical</td>
                                 <td>Authentication, Cryptographic Failures, Business Logic, Legendary</td>
+                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#008080;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">LOGIC</span><span style="background:#F1C40F;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">AUTH</span><span style="background:#27AE60;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">CRYPTO</span><span style="background:#B39DDB;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">⚡ LEGENDARY</span></div></td>
                                 <td>Rápida (6-8)</td>
                                 <td>2</td>
                                 <td>+$4.000</td>
@@ -2018,6 +2017,7 @@
                                 <td><strong>AI Core Systems</strong></td>
                                 <td>Critical</td>
                                 <td>Injection, SSRF, Legendary</td>
+                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span style="background:#2196F3;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">SSRF</span><span style="background:#B39DDB;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">⚡ LEGENDARY</span></div></td>
                                 <td>Extrema (5-8)</td>
                                 <td>2</td>
                                 <td>+$4.000</td>
@@ -2026,6 +2026,7 @@
                                 <td><strong>GovPortal Legacy</strong></td>
                                 <td>Low</td>
                                 <td>Broken Access Control</td>
+                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span></div></td>
                                 <td>Lenta (8)</td>
                                 <td>1</td>
                                 <td>+$0</td>
@@ -2034,6 +2035,7 @@
                                 <td><strong>EduConnect LMS</strong></td>
                                 <td>Low</td>
                                 <td>Escopo Amplo (todas as classes)</td>
+                                <td><span style="background:#333;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;">✓ [Todas as classes]</span></td>
                                 <td>Lenta (8)</td>
                                 <td>1</td>
                                 <td>+$0</td>
@@ -2269,7 +2271,7 @@
                             <tr>
                                 <td><code>BAC</code></td>
                                 <td>Broken Access Control (IDOR, BOLA, Priv Esc)</td>
-                                <td>Roxo</td>
+                                <td>Índigo</td>
                             </tr>
                             <tr>
                                 <td><code>XSS</code></td>
@@ -2299,7 +2301,7 @@
                             <tr>
                                 <td><code>LEGENDARY</code></td>
                                 <td>Zero-Day / RCE de impacto global (CVSS 9.5–10.0)</td>
-                                <td>Violeta</td>
+                                <td>Violeta Claro</td>
                             </tr>
                         </tbody>
                     </table>

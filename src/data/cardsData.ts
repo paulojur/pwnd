@@ -394,7 +394,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     patchSpeed: 'Moderada',
     bountyRange: '+$1.0k Bônus Fixos',
     flatBountyBonus: 1000,
-    description: 'Frequentes falhas de lógica em promoções e cupons da plataforma.'
+    description: 'Frequentes vulnerabilidades de lógica em promoções e cupons da plataforma.'
   }
 ];
 

@@ -36,6 +36,33 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
     }
   };
 
+  const getPnPBadgeProps = (vulnClass: string | undefined, cardId?: string) => {
+    let key = vulnClass;
+    if (!key && cardId) {
+      if (cardId.startsWith('inj-')) key = 'Injection';
+      else if (cardId.startsWith('bac-')) key = 'Broken Access Control';
+      else if (cardId.startsWith('xss-')) key = 'Cross-Site Scripting';
+      else if (cardId.startsWith('auth-')) key = 'Authentication';
+      else if (cardId.startsWith('ssrf-')) key = 'SSRF';
+      else if (cardId.startsWith('bl-')) key = 'Business Logic';
+      else if (cardId.startsWith('crypto-')) key = 'Cryptography';
+      else if (cardId.startsWith('leg-')) key = 'Legendary';
+    }
+
+    switch (key) {
+      case 'Injection': return { color: '#E67E22', label: 'INJ' };
+      case 'Broken Access Control': return { color: '#4B0082', label: 'BAC' };
+      case 'Cross-Site Scripting': return { color: '#E91E63', label: 'XSS' };
+      case 'Authentication': return { color: '#F1C40F', label: 'AUTH' };
+      case 'SSRF': return { color: '#2196F3', label: 'SSRF' };
+      case 'Business Logic': return { color: '#008080', label: 'LOGIC' };
+      case 'Cryptography':
+      case 'Cryptographic Failures': return { color: '#27AE60', label: 'CRYPTO' };
+      case 'Legendary': return { color: '#B39DDB', label: '⚡ LEGENDARY' };
+      default: return { color: '#ccc', label: 'VULN' };
+    }
+  };
+
   const [activeCategory, setActiveCategory] = useState<'cards' | 'events' | 'archetypes_programs' | 'center_mat' | 'player_mat' | 'tokens'>('cards');
   const [cardFilter, setCardFilter] = useState<'all' | 'exploits' | 'tools' | 'defuse'>('all');
   const [paperSize, setPaperSize] = useState<'A4' | 'A3'>('A4');
@@ -345,7 +372,21 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
                         }}
                       >
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '18px' }}>{card.icon}</span>
+                          {card.type === 'exploit' ? (
+                            <span style={{ 
+                              background: getPnPBadgeProps((card as any).vulnClass, card.id).color, 
+                              color: '#fff', 
+                              padding: '2px 6px', 
+                              borderRadius: '4px', 
+                              fontSize: '11px',
+                              fontWeight: 'bold',
+                              textShadow: '0 0 2px rgba(0,0,0,0.8)'
+                            }}>
+                              {getPnPBadgeProps((card as any).vulnClass, card.id).label}
+                            </span>
+                          ) : (
+                            <span style={{ fontSize: '18px' }}>{card.icon}</span>
+                          )}
                           <span style={{ fontSize: '8.5px', fontWeight: 'bold', border: '1px solid #000', padding: '1px 5px', borderRadius: '3px', textTransform: 'uppercase' }}>
                             {card.type}
                           </span>
@@ -524,6 +565,22 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
 
                         <div style={{ fontSize: '8.5px', lineHeight: '1.25', borderTop: '1px solid #ddd', paddingTop: '4px' }}>
                           {prog.description}
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2px', marginTop: '6px' }}>
+                            {prog.allowedClasses === 'ALL' ? (
+                              <span style={{ background: '#333', color: '#fff', padding: '2px 4px', borderRadius: '3px', fontSize: '7px', fontWeight: 'bold' }}>
+                                ✓ [Todas as classes]
+                              </span>
+                            ) : (
+                              (prog.allowedClasses as string[]).map(cls => {
+                                const badge = getPnPBadgeProps(cls);
+                                return (
+                                  <span key={cls} style={{ background: badge.color, color: '#fff', padding: '2px 4px', borderRadius: '3px', fontSize: '7px', fontWeight: 'bold', textShadow: '0 0 1px rgba(0,0,0,0.8)' }}>
+                                    {badge.label}
+                                  </span>
+                                );
+                              })
+                            )}
+                          </div>
                         </div>
 
                         <div style={{ textAlign: 'center', fontSize: '7.5px', fontWeight: 'bold', borderTop: '1px solid #000', paddingTop: '2px', textTransform: 'uppercase' }}>
