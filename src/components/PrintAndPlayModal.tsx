@@ -36,6 +36,25 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
     }
   };
 
+  const getRarityBorderColor = (rarity?: string) => {
+    switch (rarity) {
+      case 'Common': return '#808080'; // Cinza
+      case 'Uncommon': return '#27AE60'; // Verde
+      case 'Rare': return '#2196F3'; // Azul
+      case 'Epic': return '#9B59B6'; // Roxa
+      case 'Legendary': return '#F1C40F'; // Dourada
+      default: return '#808080';
+    }
+  };
+
+  const getPatchNumbers = (speed: string) => {
+    if (speed === 'Extrema') return '(5 a 8)';
+    if (speed === 'Rápida') return '(6 a 8)';
+    if (speed === 'Moderada') return '(7 e 8)';
+    if (speed === 'Lenta') return '(apenas 8)';
+    return '';
+  };
+
   const getPnPBadgeProps = (vulnClass: string | undefined, cardId?: string) => {
     let key = vulnClass;
     if (!key && cardId) {
@@ -363,6 +382,7 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
                         style={{
                           ...getCardStyle(),
                           border: '2px dashed #000',
+                          boxShadow: card.type === 'exploit' ? `inset 10px 0 0 ${getRarityBorderColor(card.rarity)}` : 'none',
                           borderRadius: '8px',
                           padding: '10px',
                           display: 'flex',
@@ -559,7 +579,7 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
                         <div>
                           <div style={{ fontSize: '13px', fontWeight: 'bold', marginTop: '4px' }}>{prog.name}</div>
                           <div style={{ fontSize: '8.5px', color: '#c2410c', fontWeight: 'bold', marginTop: '2px' }}>
-                            Patch: {prog.patchSpeed}
+                            Patch: {prog.patchSpeed} <span style={{ color: '#000', marginLeft: '2px' }}>{getPatchNumbers(prog.patchSpeed)}</span>
                           </div>
                         </div>
 

@@ -694,7 +694,17 @@
                 line-height: 1.4;
             }
 
-            h1, h2, h3, h4, h5, h6, strong, b, p strong, li strong, .section-header h2 {
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6,
+            strong,
+            b,
+            p strong,
+            li strong,
+            .section-header h2 {
                 color: #111 !important;
             }
 
@@ -1032,7 +1042,8 @@
                     <div class="card-type program">
                         <h4>Program Cards</h4>
                         <p>Corporações fictícias (ShopAll, BankSafe, CloudNine...) com escopo autorizado, faixa de
-                            recompensa (Tier) e velocidade de correção (Patch Speed). As empresas possuem entre 1 e 3 cópias no baralho, dependendo da sua raridade,
+                            recompensa (Tier) e velocidade de correção (Patch Speed). As empresas possuem entre 1 e 3
+                            cópias no baralho, dependendo da sua raridade,
                             permitindo a disputa por <em>Duplicate Report!</em> nos alvos mais comuns.</p>
                         <span class="count">24 cartas · 12 corporações de recompensa (distribuição ponderada)</span>
                     </div>
@@ -1050,7 +1061,8 @@
                             <strong>Bypass</strong> — anula 100% as penalidades do PATCH DEPLOYED! (financeiras e
                             descarte de exploits).
                             <strong>CVE Assignment Protection</strong> — proteção de escopo reativa e de uso único:
-                            descarta ao ser usada. Anula a penalidade de 10% do <em>Duplicate Report!</em> no seu próprio Report E os Eventos <em>Duplicate Report!</em>, <em>Out of Scope!</em> e <em>DNS
+                            descarta ao ser usada. Anula a penalidade de 10% do <em>Duplicate Report!</em> no seu
+                            próprio Report E os Eventos <em>Duplicate Report!</em>, <em>Out of Scope!</em> e <em>DNS
                                 Hijack!</em> direcionados a você. O jogador pode segurar na mão
                             ou jogar imediatamente (custa 1 slot de mão). Não protege contra PATCH DEPLOYED!.
                         </p>
@@ -1155,8 +1167,8 @@
                     adaptarem suas estratégias e experimentarem novas dinâmicas a cada partida.
                 </p>
 
-                <h3>4.4 · Distribuição da Mão Inicial (Regra N+4)</h3>
-                <p>A distribuição de Safeguards segue a <strong>Fórmula N+4</strong>: cada jogador começa com
+                <h3>4.4 · Distribuição da Mão Inicial (Regra N+5)</h3>
+                <p>A distribuição de Safeguards segue a <strong>Fórmula N+5</strong>: cada jogador começa com
                     <strong>1 carta Bypass garantida na mão</strong>. No Main Deck ficam embaralhadas <strong>2 Bypass +
                         2 CVE Assignment Protection</strong>.
                 </p>
@@ -1327,61 +1339,71 @@
                     (Tools) para o seu <strong>Tools Rack</strong> (máximo de 3), <strong>desde que descarte 1 carta da
                         sua mão para cada Tool instalada</strong>.</p>
                 <div class="callout">
-                    
 
-                <h3>Ação 3 — Report (Submissão Formal — Modelo A: Soma Direta)</h3>
-                <p>Realize a entrega formal de todas as Vulnerability Cards alocadas na sua Zona de Exploits. O
-                    processamento ocorre por <strong>Adição Simples (Zero Calculadora)</strong>:</p>
-                <ol>
-                    <li><strong>Mínimo de Escopo:</strong> A quantidade mínima de vulnerabilidades válidas para poder
-                        executar a
-                        ação de Report varia por Tier do programa: Low/Medium exigem no mínimo <strong>1 vulnerabilidade
-                            válida</strong>; High/Critical exigem no mínimo <strong>2 vulnerabilidades válidas</strong>.
-                        Cartas
-                        descidas fora do escopo são descartadas antes da contagem e não contam para o mínimo. Se você
-                        estiver abaixo do mínimo exigido, a ação de Report <strong>não está disponível</strong> (você
-                        deve usar Recon para trocar de alvo ou Exploit para descer novas vulnerabilidades). <em>Nota
-                            (Bug Hunter):
-                            o mínimo de 2 vulnerabilidades em programas Alto/Crítico se aplica ao TOTAL do Report, e
-                            nunca por
-                            lote.</em></li>
-                    <li><strong>Alerta Global:</strong> <em>Atenção: A partir da Rodada 5, entra em vigor o Alerta
-                            Global, e TODOS os programas passam a exigir no mínimo 2 cartas válidas.</em></li>
-                    <li><strong>Cálculo do Payout (Modelo A — Soma Direta):</strong>
-                        $$\text{Bounty Total} = \sum \text{Valor das vulnerabilidades} + \text{Bônus do Programa}$$
-                        <div class="callout" style="margin-top:.7rem">
-                            <span class="label">Tabela de Bônus Fixos do Modelo A</span>
-                            <p>
-                                <strong>• vulnerabilidades:</strong> Comum (+$1.500) | Incomum (+$2.500) | Rara
-                                (+$4.000) | Épica
-                                (+$5.000) | Lendária (+$6.000)<br>
-                                <strong>• Programas:</strong> Baixo (+$0) | Médio (+$1.000) | Alto (+$2.500) | Crítico
-                                (+$4.000)
-                            </p>
-                        </div>
-                        <div class="callout cyan" style="margin-top:.7rem">
-                            <span class="label">Exemplo de Cálculo Aditivo na Mesa</span>
-                            <p>1 vulnerabilidade Rara ($4.000) + 1 Incomum ($2.500) na BankSafe (Alto +$2.500):<br>
-                                $$\$4.000 + \$2.500 + \$2.500 = \mathbf{\$9.000\text{ Payout Total}}$$
-                                → Se o saldo do jogador era <strong>$1.500</strong>, o novo saldo é
-                                <strong>$10.500</strong>.<br>
-                                → O peão avança e assenta no degrau <strong>$10.000</strong> da Bounty Track (o degrau
-                                imediatamente abaixo).
-                            </p>
-                        </div>
-                    </li>
-                    <li><strong>O Custo do Sucesso (Evento Obrigatório):</strong> Imediatamente após receber seu
-                        dinheiro, você deve obrigatoriamente <strong>comprar e resolver 1 Carta de Evento</strong>. O
-                        barulho do seu report atraiu as autoridades e o caos corporativo!</li>
-                    <li><strong>Descarte e Reposição:</strong> descarte as vulnerabilidades submetidas. O programa ativo
-                        é concluído e enviado ao descarte. Escolha imediatamente uma nova empresa do Program Market.
-                    </li>
-                </ol>
-                <div class="callout warn">
-                    <span class="label">Risco</span>
-                    <p>Se outro pesquisador já reportou o mesmo título exato no mesmo programa nesta partida, você
-                        recebe <em>Duplicate Report!</em> — e a recompensa cai para apenas 10% do valor calculado.</p>
-                </div>
+
+                    <h3>Ação 3 — Report (Submissão Formal — Modelo A: Soma Direta)</h3>
+                    <p>Realize a entrega formal de todas as Vulnerability Cards alocadas na sua Zona de Exploits. O
+                        processamento ocorre por <strong>Adição Simples (Zero Calculadora)</strong>:</p>
+                    <ol>
+                        <li><strong>Mínimo de Escopo:</strong> A quantidade mínima de vulnerabilidades válidas para
+                            poder
+                            executar a
+                            ação de Report varia por Tier do programa: Low/Medium exigem no mínimo <strong>1
+                                vulnerabilidade
+                                válida</strong>; High/Critical exigem no mínimo <strong>2 vulnerabilidades
+                                válidas</strong>.
+                            Cartas
+                            descidas fora do escopo são descartadas antes da contagem e não contam para o mínimo. Se
+                            você
+                            estiver abaixo do mínimo exigido, a ação de Report <strong>não está disponível</strong>
+                            (você
+                            deve usar Recon para trocar de alvo ou Exploit para descer novas vulnerabilidades). <em>Nota
+                                (Bug Hunter):
+                                o mínimo de 2 vulnerabilidades em programas Alto/Crítico se aplica ao TOTAL do Report, e
+                                nunca por
+                                lote.</em></li>
+                        <li><strong>Alerta Global:</strong> <em>Atenção: A partir da Rodada 5, entra em vigor o Alerta
+                                Global, e TODOS os programas passam a exigir no mínimo 2 cartas válidas.</em></li>
+                        <li><strong>Cálculo do Payout (Modelo A — Soma Direta):</strong>
+                            $$\text{Bounty Total} = \sum \text{Valor das vulnerabilidades} + \text{Bônus do Programa}$$
+                            <div class="callout" style="margin-top:.7rem">
+                                <span class="label">Tabela de Bônus Fixos do Modelo A</span>
+                                <p>
+                                    <strong>• vulnerabilidades:</strong> Comum (+$1.500) | Incomum (+$2.500) | Rara
+                                    (+$4.000) | Épica
+                                    (+$5.000) | Lendária (+$6.000)<br>
+                                    <strong>• Programas:</strong> Baixo (+$0) | Médio (+$1.000) | Alto (+$2.500) |
+                                    Crítico
+                                    (+$4.000)
+                                </p>
+                            </div>
+                            <div class="callout cyan" style="margin-top:.7rem">
+                                <span class="label">Exemplo de Cálculo Aditivo na Mesa</span>
+                                <p>1 vulnerabilidade Rara ($4.000) + 1 Incomum ($2.500) na BankSafe (Alto +$2.500):<br>
+                                    $$\$4.000 + \$2.500 + \$2.500 = \mathbf{\$9.000\text{ Payout Total}}$$
+                                    → Se o saldo do jogador era <strong>$1.500</strong>, o novo saldo é
+                                    <strong>$10.500</strong>.<br>
+                                    → O peão avança e assenta no degrau <strong>$10.000</strong> da Bounty Track (o
+                                    degrau
+                                    imediatamente abaixo).
+                                </p>
+                            </div>
+                        </li>
+                        <li><strong>O Custo do Sucesso (Evento Obrigatório):</strong> Imediatamente após receber seu
+                            dinheiro, você deve obrigatoriamente <strong>comprar e resolver 1 Carta de Evento</strong>.
+                            O
+                            barulho do seu report atraiu as autoridades e o caos corporativo!</li>
+                        <li><strong>Descarte e Reposição:</strong> descarte as vulnerabilidades submetidas. O programa
+                            ativo
+                            é concluído e enviado ao descarte. Escolha imediatamente uma nova empresa do Program Market.
+                        </li>
+                    </ol>
+                    <div class="callout warn">
+                        <span class="label">Risco</span>
+                        <p>Se outro pesquisador já reportou o mesmo título exato no mesmo programa nesta partida, você
+                            recebe <em>Duplicate Report!</em> — e a recompensa cai para apenas 10% do valor calculado.
+                        </p>
+                    </div>
             </section>
 
             <!-- ================= 07 PATCH SPEED ================= -->
@@ -1732,7 +1754,8 @@
                     <div class="archetype-card">
                         <h4>n00b</h4>
                         <div class="role">O Iniciante Dedicado</div>
-                        <p><strong>Playstyle:</strong> Engine Builder: Ganha +1 habilidade passiva constante a cada report enviado com sucesso.</p>
+                        <p><strong>Playstyle:</strong> Engine Builder: Ganha +1 habilidade passiva constante a cada
+                            report enviado com sucesso.</p>
                         <p style="margin-top:.6rem"><strong>Limite de Mão:</strong> 6 cartas</p>
                         <ul style="margin-top:.6rem; padding-left:1.2rem;">
                             <li>Inicia simples</li>
@@ -1743,7 +1766,8 @@
                     <div class="archetype-card">
                         <h4>The Old Guard</h4>
                         <div class="role">O Veterano de C/ASM</div>
-                        <p><strong>Playstyle:</strong> Mão Expandida: Pode segurar até 9 cartas, perfeito para montar combos devastadores de alta severidade.</p>
+                        <p><strong>Playstyle:</strong> Mão Expandida: Pode segurar até 9 cartas, perfeito para montar
+                            combos devastadores de alta severidade.</p>
                         <p style="margin-top:.6rem"><strong>Limite de Mão:</strong> 9 cartas</p>
                         <ul style="margin-top:.6rem; padding-left:1.2rem;">
                             <li>Limite de mão: 9 cartas</li>
@@ -1754,7 +1778,8 @@
                     <div class="archetype-card">
                         <h4>Bug Hunter</h4>
                         <div class="role">O Caçador em Escala</div>
-                        <p><strong>Playstyle:</strong> Submissão em Dois Lotes: Ao realizar Report, divide a Zona de Exploits em 2 lotes independentes no mesmo Active Program.</p>
+                        <p><strong>Playstyle:</strong> Submissão em Dois Lotes: Ao realizar Report, divide a Zona de
+                            Exploits em 2 lotes independentes no mesmo Active Program.</p>
                         <p style="margin-top:.6rem"><strong>Limite de Mão:</strong> 6 cartas</p>
                         <ul style="margin-top:.6rem; padding-left:1.2rem;">
                             <li>2 Lotes em 1 Report</li>
@@ -1765,7 +1790,8 @@
                     <div class="archetype-card">
                         <h4>Social Engineer</h4>
                         <div class="role">O Manipulador Social</div>
-                        <p><strong>Playstyle:</strong> Caos Redirecionado: Pode escolher nominalmente qual adversário sofrerá o impacto de cartas de Evento jogadas.</p>
+                        <p><strong>Playstyle:</strong> Caos Redirecionado: Pode escolher nominalmente qual adversário
+                            sofrerá o impacto de cartas de Evento jogadas.</p>
                         <p style="margin-top:.6rem"><strong>Limite de Mão:</strong> 6 cartas</p>
                         <ul style="margin-top:.6rem; padding-left:1.2rem;">
                             <li>Redireciona cartas de evento</li>
@@ -1776,7 +1802,8 @@
                     <div class="archetype-card">
                         <h4>Red Teamer</h4>
                         <div class="role">O Operador Ofensivo</div>
-                        <p><strong>Playstyle:</strong> Sem Limites: Ignora todas as restrições de escopo dos programas (paga -30% nos bounties obtidos).</p>
+                        <p><strong>Playstyle:</strong> Sem Limites: Ignora todas as restrições de escopo dos programas
+                            (paga -30% nos bounties obtidos).</p>
                         <p style="margin-top:.6rem"><strong>Limite de Mão:</strong> 6 cartas</p>
                         <ul style="margin-top:.6rem; padding-left:1.2rem;">
                             <li>Ignora escopo de programas</li>
@@ -1787,7 +1814,8 @@
                     <div class="archetype-card">
                         <h4>The Pentester</h4>
                         <div class="role">O Auditor Metódico</div>
-                        <p><strong>Playstyle:</strong> Imunidade Profissional: Imune a cartas de disrupção como Duplicate Report! e Triage Delay!.</p>
+                        <p><strong>Playstyle:</strong> Imunidade Profissional: Imune a cartas de disrupção como
+                            Duplicate Report! e Triage Delay!.</p>
                         <p style="margin-top:.6rem"><strong>Limite de Mão:</strong> 6 cartas</p>
                         <ul style="margin-top:.6rem; padding-left:1.2rem;">
                             <li>Imunidade a Duplicate Report!</li>
@@ -1910,7 +1938,8 @@
                 <h2 class="sec"><span class="num">12</span> Program Cards — Empresas Corporativas</h2>
                 <p>As empresas corporativas determinam os limites operacionais, bônus fixos de remuneração (Soma Direta)
                     e a
-                    volatilidade do Patch Speed Check. As empresas possuem entre 1 e 3 cópias no baralho (distribuição ponderada por tier), permitindo a disputa por <em>Duplicate Report!</em> nos alvos mais comuns.
+                    volatilidade do Patch Speed Check. As empresas possuem entre 1 e 3 cópias no baralho (distribuição
+                    ponderada por tier), permitindo a disputa por <em>Duplicate Report!</em> nos alvos mais comuns.
                 </p>
 
                 <h3>Regra de Mercado Vazio (Program Market Rotation)</h3>
@@ -1947,7 +1976,9 @@
                                 <td><strong>ShopAll Global</strong></td>
                                 <td>Medium</td>
                                 <td>Escopo Amplo (todas as classes)</td>
-                                <td><span style="background:#333;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;">✓ [Todas as classes]</span></td>
+                                <td><span
+                                        style="background:#333;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;">✓
+                                        [Todas as classes]</span></td>
                                 <td>Moderada (7-8)</td>
                                 <td>1</td>
                                 <td>+$1.000</td>
@@ -1956,7 +1987,13 @@
                                 <td><strong>SocialBee Media</strong></td>
                                 <td>Medium</td>
                                 <td>Cross-Site Scripting, Business Logic, Broken Access Control</td>
-                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E91E63;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">XSS</span><span style="background:#008080;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">LOGIC</span><span style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span></div></td>
+                                <td>
+                                    <div style="display:flex;gap:4px;flex-wrap:wrap;"><span
+                                            style="background:#E91E63;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">XSS</span><span
+                                            style="background:#008080;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">LOGIC</span><span
+                                            style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span>
+                                    </div>
+                                </td>
                                 <td>Moderada (7-8)</td>
                                 <td>1</td>
                                 <td>+$1.000</td>
@@ -1965,7 +2002,13 @@
                                 <td><strong>DeliveryDash App</strong></td>
                                 <td>Medium</td>
                                 <td>Business Logic, Broken Access Control, Cross-Site Scripting</td>
-                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E91E63;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">XSS</span><span style="background:#008080;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">LOGIC</span><span style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span></div></td>
+                                <td>
+                                    <div style="display:flex;gap:4px;flex-wrap:wrap;"><span
+                                            style="background:#E91E63;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">XSS</span><span
+                                            style="background:#008080;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">LOGIC</span><span
+                                            style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span>
+                                    </div>
+                                </td>
                                 <td>Moderada (7-8)</td>
                                 <td>1</td>
                                 <td>+$1.000</td>
@@ -1974,7 +2017,13 @@
                                 <td><strong>GameVerse MMO</strong></td>
                                 <td>Medium</td>
                                 <td>Business Logic, Injection, Cross-Site Scripting</td>
-                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span style="background:#E91E63;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">XSS</span><span style="background:#008080;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">LOGIC</span></div></td>
+                                <td>
+                                    <div style="display:flex;gap:4px;flex-wrap:wrap;"><span
+                                            style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span
+                                            style="background:#E91E63;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">XSS</span><span
+                                            style="background:#008080;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">LOGIC</span>
+                                    </div>
+                                </td>
                                 <td>Moderada (7-8)</td>
                                 <td>1</td>
                                 <td>+$1.000</td>
@@ -1983,7 +2032,14 @@
                                 <td><strong>BankSafe Financial</strong></td>
                                 <td>High</td>
                                 <td>Authentication, Cryptographic Failures, Broken Access Control, Injection</td>
-                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span><span style="background:#F1C40F;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">AUTH</span><span style="background:#27AE60;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">CRYPTO</span></div></td>
+                                <td>
+                                    <div style="display:flex;gap:4px;flex-wrap:wrap;"><span
+                                            style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span
+                                            style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span><span
+                                            style="background:#F1C40F;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">AUTH</span><span
+                                            style="background:#27AE60;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">CRYPTO</span>
+                                    </div>
+                                </td>
                                 <td>Rápida (6-8)</td>
                                 <td>2</td>
                                 <td>+$2.500</td>
@@ -1992,7 +2048,14 @@
                                 <td><strong>HealthLock EHR</strong></td>
                                 <td>High</td>
                                 <td>Cryptographic Failures, Authentication, SSRF, Broken Access Control</td>
-                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span><span style="background:#F1C40F;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">AUTH</span><span style="background:#2196F3;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">SSRF</span><span style="background:#27AE60;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">CRYPTO</span></div></td>
+                                <td>
+                                    <div style="display:flex;gap:4px;flex-wrap:wrap;"><span
+                                            style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span><span
+                                            style="background:#F1C40F;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">AUTH</span><span
+                                            style="background:#2196F3;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">SSRF</span><span
+                                            style="background:#27AE60;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">CRYPTO</span>
+                                    </div>
+                                </td>
                                 <td>Rápida (6-8)</td>
                                 <td>2</td>
                                 <td>+$2.500</td>
@@ -2001,7 +2064,13 @@
                                 <td><strong>PayGateway Prime</strong></td>
                                 <td>High</td>
                                 <td>Broken Access Control, Authentication, Injection</td>
-                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span><span style="background:#F1C40F;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">AUTH</span></div></td>
+                                <td>
+                                    <div style="display:flex;gap:4px;flex-wrap:wrap;"><span
+                                            style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span
+                                            style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span><span
+                                            style="background:#F1C40F;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">AUTH</span>
+                                    </div>
+                                </td>
                                 <td>Rápida (6-8)</td>
                                 <td>2</td>
                                 <td>+$2.500</td>
@@ -2010,7 +2079,13 @@
                                 <td><strong>CloudNine Cloud Services</strong></td>
                                 <td>Critical</td>
                                 <td>SSRF, Injection, Legendary</td>
-                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span style="background:#2196F3;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">SSRF</span><span style="background:#B39DDB;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">⚡ LEGENDARY</span></div></td>
+                                <td>
+                                    <div style="display:flex;gap:4px;flex-wrap:wrap;"><span
+                                            style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span
+                                            style="background:#2196F3;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">SSRF</span><span
+                                            style="background:#B39DDB;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">⚡
+                                            LEGENDARY</span></div>
+                                </td>
                                 <td>Extrema (5-8)</td>
                                 <td>2</td>
                                 <td>+$4.000</td>
@@ -2019,7 +2094,14 @@
                                 <td><strong>CryptoX Exchange</strong></td>
                                 <td>Critical</td>
                                 <td>Authentication, Cryptographic Failures, Business Logic, Legendary</td>
-                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#008080;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">LOGIC</span><span style="background:#F1C40F;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">AUTH</span><span style="background:#27AE60;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">CRYPTO</span><span style="background:#B39DDB;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">⚡ LEGENDARY</span></div></td>
+                                <td>
+                                    <div style="display:flex;gap:4px;flex-wrap:wrap;"><span
+                                            style="background:#008080;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">LOGIC</span><span
+                                            style="background:#F1C40F;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">AUTH</span><span
+                                            style="background:#27AE60;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">CRYPTO</span><span
+                                            style="background:#B39DDB;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">⚡
+                                            LEGENDARY</span></div>
+                                </td>
                                 <td>Rápida (6-8)</td>
                                 <td>2</td>
                                 <td>+$4.000</td>
@@ -2028,7 +2110,13 @@
                                 <td><strong>AI Core Systems</strong></td>
                                 <td>Critical</td>
                                 <td>Injection, SSRF, Legendary</td>
-                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span style="background:#2196F3;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">SSRF</span><span style="background:#B39DDB;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">⚡ LEGENDARY</span></div></td>
+                                <td>
+                                    <div style="display:flex;gap:4px;flex-wrap:wrap;"><span
+                                            style="background:#E67E22;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">INJ</span><span
+                                            style="background:#2196F3;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">SSRF</span><span
+                                            style="background:#B39DDB;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">⚡
+                                            LEGENDARY</span></div>
+                                </td>
                                 <td>Extrema (5-8)</td>
                                 <td>2</td>
                                 <td>+$4.000</td>
@@ -2037,7 +2125,11 @@
                                 <td><strong>GovPortal Legacy</strong></td>
                                 <td>Low</td>
                                 <td>Broken Access Control</td>
-                                <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><span style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span></div></td>
+                                <td>
+                                    <div style="display:flex;gap:4px;flex-wrap:wrap;"><span
+                                            style="background:#4B0082;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-shadow:0 0 2px rgba(0,0,0,0.8)">BAC</span>
+                                    </div>
+                                </td>
                                 <td>Lenta (8)</td>
                                 <td>1</td>
                                 <td>+$0</td>
@@ -2046,7 +2138,9 @@
                                 <td><strong>EduConnect LMS</strong></td>
                                 <td>Low</td>
                                 <td>Escopo Amplo (todas as classes)</td>
-                                <td><span style="background:#333;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;">✓ [Todas as classes]</span></td>
+                                <td><span
+                                        style="background:#333;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;">✓
+                                        [Todas as classes]</span></td>
                                 <td>Lenta (8)</td>
                                 <td>1</td>
                                 <td>+$0</td>
@@ -2376,7 +2470,7 @@
                     <dd>Ação de alocar uma vulnerabilidade na Zona de Exploits do Player Mat, pagando os custos de
                         ferramentas requeridos e respeitando o escopo do programa ativo.</dd>
 
-                    <dt>Fórmula N+4 (Distribuição de Safeguards)</dt>
+                    <dt>Fórmula N+5 (Distribuição de Safeguards)</dt>
                     <dd>Regra de distribuição de Safeguards: cada jogador (N) começa com 1 Bypass na mão. No Main Deck
                         ficam embaralhadas 2 Bypass + 2 CVE Assignment Protection. Total em jogo = N + 4 Safeguards (as
                         CVE sempre entram no deck).</dd>
@@ -2384,8 +2478,7 @@
                     <dt>Main Deck</dt>
                     <dd>Baralho central compartilhado composto por 80 Vulnerability Cards, 36 Tool Cards (12 tipos × 3
                         cópias) e 4 Safeguards (2 Bypass + 2 CVE Assignment Protection) — total exato de 120 cartas no
-                        deck de compra. (A caixa contém 126 componentes físicos = 120 no deck + N na mão (1 Bypass por
-                        jogador) + (6 − N) na caixa).</dd>
+                        deck de compra.</dd>
 
                     <dt>Out of Scope</dt>
                     <dd>vulnerabilidade técnica cuja classe de ataque não consta no escopo autorizado do programa ativo
