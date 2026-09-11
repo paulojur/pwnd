@@ -55,6 +55,29 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
     return '';
   };
 
+  const getSimulatedCVSS = (rarity?: string, id?: string) => {
+    let seed = 0;
+    if (id) {
+      for (let i = 0; i < id.length; i++) {
+        seed += id.charCodeAt(i);
+      }
+    }
+    
+    let min = 4.0;
+    let max = 5.9;
+    
+    switch (rarity) {
+      case 'Common': min = 4.0; max = 5.9; break;
+      case 'Uncommon': min = 6.0; max = 6.9; break;
+      case 'Rare': min = 7.0; max = 7.9; break;
+      case 'Epic': min = 8.0; max = 8.9; break;
+      case 'Legendary': min = 9.0; max = 10.0; break;
+    }
+    
+    const value = min + ((seed % 20) / 19) * (max - min);
+    return value.toFixed(1);
+  };
+
   const getPnPBadgeProps = (vulnClass: string | undefined, cardId?: string) => {
     let key = vulnClass;
     if (!key && cardId) {
@@ -393,17 +416,22 @@ export const PrintAndPlayModal: React.FC<PrintAndPlayModalProps> = ({ isOpen, on
                       >
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                           {card.type === 'exploit' ? (
-                            <span style={{ 
-                              background: getPnPBadgeProps((card as any).vulnClass, card.id).color, 
-                              color: '#fff', 
-                              padding: '2px 6px', 
-                              borderRadius: '4px', 
-                              fontSize: '11px',
-                              fontWeight: 'bold',
-                              textShadow: '0 0 2px rgba(0,0,0,0.8)'
-                            }}>
-                              {getPnPBadgeProps((card as any).vulnClass, card.id).label}
-                            </span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <span style={{ 
+                                background: getPnPBadgeProps((card as any).vulnClass, card.id).color, 
+                                color: '#fff', 
+                                padding: '2px 6px', 
+                                borderRadius: '4px', 
+                                fontSize: '11px',
+                                fontWeight: 'bold',
+                                textShadow: '0 0 2px rgba(0,0,0,0.8)'
+                              }}>
+                                {getPnPBadgeProps((card as any).vulnClass, card.id).label}
+                              </span>
+                              <span style={{ fontSize: '10px', fontWeight: '900', color: '#111', fontFamily: 'monospace' }}>
+                                CVSS {getSimulatedCVSS(card.rarity, card.id)}
+                              </span>
+                            </div>
                           ) : (
                             <span style={{ fontSize: '18px' }}>{card.icon}</span>
                           )}

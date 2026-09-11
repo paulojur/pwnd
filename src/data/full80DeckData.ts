@@ -829,7 +829,7 @@ export const FULL_12_TOOLS: CardV2[] = [
     points: 0,
     rarity: 'Epic',
     icon: '🧰',
-    simpleDescription: 'FERRAMENTA CORINGA: Substitui qualquer equipamento necessário para colocar um Exploit no tabuleiro.'
+    simpleDescription: 'Ignore a régua de cores do programa ao baixar 1 vulnerabilidade.'
   },
   {
     id: 'tool-burp-2',
@@ -839,7 +839,7 @@ export const FULL_12_TOOLS: CardV2[] = [
     points: 0,
     rarity: 'Epic',
     icon: '🧰',
-    simpleDescription: 'FERRAMENTA CORINGA UNIVERSAL: Atua como substituto de qualquer ferramenta específica.'
+    simpleDescription: 'Ignore a régua de cores do programa ao baixar 1 vulnerabilidade.'
   },
   {
     id: 'tool-nmap-1',
@@ -869,7 +869,7 @@ export const FULL_12_TOOLS: CardV2[] = [
     points: 0,
     rarity: 'Common',
     icon: '⚡',
-    simpleDescription: 'ATIVA: Zera o custo de ferramentas para vulnerabilidades de severidade Low e Medium.'
+    simpleDescription: 'Baixe 2 vulnerabilidades na mesma ação de Exploit.'
   },
   {
     id: 'tool-postman',
@@ -879,7 +879,7 @@ export const FULL_12_TOOLS: CardV2[] = [
     points: 0,
     rarity: 'Common',
     icon: '🚀',
-    simpleDescription: 'ATIVA: Reduz o custo de ativação de vulnerabilidades da classe Broken Access Control em 1 recurso.'
+    simpleDescription: 'Baixe 1 vulnerabilidade da classe BAC ignorando a régua de cores do programa.'
   },
   {
     id: 'tool-devtools-1',
@@ -909,7 +909,7 @@ export const FULL_12_TOOLS: CardV2[] = [
     points: 0,
     rarity: 'Uncommon',
     icon: '🛢️',
-    simpleDescription: 'ATIVA: Zera o custo de ferramentas para qualquer vulnerabilidade da classe Injection.'
+    simpleDescription: 'Baixe 1 vulnerabilidade da classe Injection ignorando a régua de cores do programa.'
   },
   {
     id: 'tool-collaborator',

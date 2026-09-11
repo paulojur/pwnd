@@ -1,0 +1,32 @@
+--- POSTMAN ---
+<td><strong>Postman</strong></td>
+                                <td>Reduz em 1 unidade o custo de ferramentas para vulnerabilidades da classe Broken
+                                    Access Control.</td>
+                                <td>🔴 
+
+--- SQLMAP ---
+<td><strong>SQLMap</strong></td>
+                                <td>Vulnerabilidades da classe Injection têm custo de ferramentas zerado. Inclui SQLi,
+                                    NoSQLi e Command Injection.</td>
+                          
+
+--- MAO INICIAL ---
+<span class="label">Mão Inicial</span>
+                    <p>Cada jogador recebe <strong>5 cartas aleatórias do Main Deck + 1 carta Bypass
+                            garantida</strong> = <strong>6 cartas no total</strong>. <em>Todos iniciam com o mesmo
+                            volume de cartas (incluindo The Old Guard, que usará seu limite de 9 apenas durante o
+                           
+
+--- REACAO ---
+<!DOCTYPE html>
+<html lang="pt-BR" data-i18n-root="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manual de Regras V1.1 — PWND! Bug Bounty Chaos. Find it. Report it. Get paid.">
+    <title>PWND! — Bug Bounty Chaos · Manual de Regras V1.1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter
+

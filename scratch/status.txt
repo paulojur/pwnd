@@ -1,0 +1,29 @@
+--- RODADA 8 ---
+2. Patch Implacável: todos os testes de Patch Speed usam 2D8 (falha se QUALQUER dado acionar o limiar). No Stealth Mode, o limiar do programa conta 1 ponto menor: Lenta 8→7, Moderada 7→6, Rápida 6→5, Extrema 5→4. Red Teamer e Pentester continuam tomando patch apenas no resultado natural 8.:</strong> todos os testes de Patch Speed passam a
+                        exigir
+                        a 
+
+--- BURP ---
+<td><strong>Burp Suite Pro</strong> — Ignore a régua de cores do programa ao baixar 1 vulnerabilidade.</td>
+                                <td>Coringa universal — substitui qualquer exigência de fer
+
+--- POSTMAN ---
+<td><strong>Postman</strong></td>
+                                <td>Baixe 1 vulnerabilidade da classe BAC ignorando a régua de cores do programa.</td>
+                                <td>🔴 Ativa (
+
+--- SQLMAP ---
+<td><strong>SQLMap</strong></td>
+                                <td>Baixe 1 vulnerabilidade da classe Injection ignorando a régua de cores do programa.</td>
+                                <td>🔴 At
+
+--- MAO INICIAL ---
+NOT FOUND
+
+--- REACAO ---
+Cartas de Defesa (Bypass)Um Bypass recém-comprado fica na mão e NÃO protege até ser colocado no Slot Safeguard (ação livre quando o slot estiver vazio). Ele é descartado ao ser usado, anulando o PATCH DEPLOYED!.salvação final.</p>
+
+                <h3>Diretrizes de Resolução</h3>
+                <ul>
+                    <li><strong>Cartas IMEDIATAS</strong> são resolvidas no momento em que são
+
