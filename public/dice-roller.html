@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lançador D8 - Copinho</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0f13;
+            --table-color: #1a1a24;
+            --dice-border: #4a4a5a;
+            --highlight: #00ffcc;
+            --highlight-dim: rgba(0, 255, 204, 0.2);
+            --text-color: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            letter-spacing: 2px;
+            color: var(--dice-border);
+            text-transform: uppercase;
+            z-index: 20;
+        }
+
+        .table-area {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 60vh;
+            background: radial-gradient(circle at center, var(--table-color) 0%, var(--bg-color) 70%);
+            border-bottom: 2px solid var(--dice-border);
+            margin-bottom: 2rem;
+            perspective: 1000px;
+        }
+
+        .cup-wrapper {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            transform-origin: bottom center;
+        }
+
+        .cup {
+            width: 100px;
+            height: 130px;
+            background: linear-gradient(135deg, #2a2a35 0%, #111118 100%);
+            border-radius: 10px 10px 30px 30px;
+            border: 2px solid var(--dice-border);
+            border-top: 15px solid #0a0a0f;
+            box-shadow: inset 0 20px 20px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .cup::after {
+            content: 'PWND';
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: #4a4a5a;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+        .cup-wrapper.shaking {
+            animation: shake 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+        }
+
+        .cup-wrapper.throwing {
+            animation: throw 0.6s ease-out forwards;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(-50%) rotate(0deg) translateY(0); }
+            25% { transform: translateX(-60%) rotate(-15deg) translateY(-10px); }
+            50% { transform: translateX(-40%) rotate(15deg) translateY(0); }
+            75% { transform: translateX(-60%) rotate(-15deg) translateY(-5px); }
+            100% { transform: translateX(-50%) rotate(0deg) translateY(0); }
+        }
+
+        @keyframes throw {
+            0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+            40% { transform: translateX(-50%) translateY(-150px) rotate(-130deg); }
+            80% { transform: translateX(-50%) translateY(-130px) rotate(-130deg); }
+            100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+        }
+
+        .die {
+            position: absolute;
+            width: 90px;
+            height: 120px;
+            bottom: 40px;
+            left: 50%;
+            margin-left: -45px;
+            z-index: 5;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .die svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+            transition: filter 0.3s;
+        }
+
+        .die-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .die.flying {
+            animation: fly-out 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes fly-out {
+            0% { 
+                transform: translate(0, 0) scale(0.3) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--target-x), var(--target-y)) scale(1) rotate(var(--target-rot));
+                opacity: 1;
+            }
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            z-index: 20;
+        }
+
+        button {
+            background: transparent;
+            border: 2px solid var(--dice-border);
+            color: var(--text-color);
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover:not(:disabled) {
+            border-color: var(--highlight);
+            color: var(--highlight);
+            box-shadow: 0 0 15px var(--highlight-dim) inset;
+        }
+
+        button:active:not(:disabled) {
+            transform: scale(0.95);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            border-color: var(--highlight);
+            color: var(--highlight);
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            box-shadow: 0 0 20px var(--highlight-dim);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: rgba(0, 255, 204, 0.1);
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
+        }
+
+        .result-log {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            min-height: 5rem;
+            color: #888;
+            font-weight: 400;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .log-line span.number {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Verificação de Sistemas (D8)</h1>
+    
+    <div class="table-area">
+        <div class="cup-wrapper" id="cup">
+            <div class="cup"></div>
+        </div>
+
+        <div class="die" id="die1">
+            <svg viewBox="0 0 100 133" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="50,0 100,33 50,133 0,33" fill="#1a1a24" stroke="#4a4a5a" stroke-width="1.5" stroke-linejoin="round"/>
+                <polygon points="50,0 100,33 50,66" fill="#2a2a35" stroke="#4a4a5a" stroke-width="1.5" stroke-linejoin="round"/>
+                <polygon points="50,0 0,33 50,66" fill="#22222d" stroke="#4a4a5a" stroke-width="1.5" stroke-linejoin="round"/>
+                <polygon points="50,133 100,33 50,66" fill="#15151e" stroke="#4a4a5a" stroke-width="1.5" stroke-linejoin="round"/>
+                <polygon points="50,133 0,33 50,66" fill="#111118" stroke="#4a4a5a" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+            <div class="die-value" id="val1">8</div>
+        </div>
+
+        <div class="die" id="die2">
+            <svg viewBox="0 0 100 133" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="50,0 100,33 50,133 0,33" fill="#1a1a24" stroke="#4a4a5a" stroke-width="1.5" stroke-linejoin="round"/>
+                <polygon points="50,0 100,33 50,66" fill="#2a2a35" stroke="#4a4a5a" stroke-width="1.5" stroke-linejoin="round"/>
+                <polygon points="50,0 0,33 50,66" fill="#22222d" stroke="#4a4a5a" stroke-width="1.5" stroke-linejoin="round"/>
+                <polygon points="50,133 100,33 50,66" fill="#15151e" stroke="#4a4a5a" stroke-width="1.5" stroke-linejoin="round"/>
+                <polygon points="50,133 0,33 50,66" fill="#111118" stroke="#4a4a5a" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+            <div class="die-value" id="val2">8</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="btn1" onclick="roll(1)">Rolar 1 Dado</button>
+        <button id="btn2" class="btn-primary" onclick="roll(2)">Rolar 2 Dados</button>
+    </div>
+
+    <div class="result-log" id="log">
+        <div class="log-line">Aguardando comando...</div>
+    </div>
+
+    <script>
+        let isRolling = false;
+
+        function getRandomValue() {
+            return Math.floor(Math.random() * 8) + 1;
+        }
+
+        function roll(numDice) {
+            if (isRolling) return;
+            isRolling = true;
+            
+            document.getElementById('btn1').disabled = true;
+            document.getElementById('btn2').disabled = true;
+
+            const cup = document.getElementById('cup');
+            const log = document.getElementById('log');
+
+            const dados = [
+                { el: document.getElementById('die1'), val: document.getElementById('val1') },
+                { el: document.getElementById('die2'), val: document.getElementById('val2') }
+            ];
+
+            dados.forEach(d => {
+                d.el.classList.remove('flying');
+                d.el.style.opacity = '0';
+                d.val.style.color = '#fff';
+                d.val.style.textShadow = 'none';
+                d.el.querySelector('svg').style.filter = 'drop-shadow(0 10px 15px rgba(0,0,0,0.5))';
+            });
+
+            log.innerHTML = '<div class="log-line">Misturando...</div>';
+            
+            cup.classList.add('shaking');
+
+            setTimeout(() => {
+                cup.classList.remove('shaking');
+                cup.classList.add('throwing');
+
+                for (let i = 0; i < numDice; i++) {
+                    throwDie(dados[i], i, numDice);
+                }
+
+                setTimeout(() => {
+                    cup.classList.remove('throwing');
+                    
+                    log.innerHTML = '';
+                    
+                    for (let i = 0; i < numDice; i++) {
+                        const finalVal = dados[i].finalVal;
+                        log.innerHTML += `<div class="log-line">Resultado ${i+1}: <span class="number" style="color:var(--highlight)">${finalVal}</span></div>`;
+                    }
+                    
+                    isRolling = false;
+                    document.getElementById('btn1').disabled = false;
+                    document.getElementById('btn2').disabled = false;
+
+                }, 900);
+
+            }, 700);
+        }
+
+        function throwDie(dadoObj, index, totalDices) {
+            dadoObj.el.classList.remove('flying');
+            void dadoObj.el.offsetWidth; 
+            
+            let targetX;
+            if (totalDices === 1) {
+                targetX = (Math.random() * 200 - 100) + 'px';
+            } else {
+                targetX = (index === 0 ? (Math.random() * -150 - 50) : (Math.random() * 150 + 50)) + 'px';
+            }
+            
+            const targetY = (Math.random() * -150 - 150) + 'px'; 
+            
+            const spins = (Math.floor(Math.random() * 2) + 2) * 360; 
+            const wobble = (Math.random() * 20 - 10); 
+            const targetRot = (spins + wobble) + 'deg'; 
+
+            dadoObj.el.style.setProperty('--target-x', targetX);
+            dadoObj.el.style.setProperty('--target-y', targetY);
+            dadoObj.el.style.setProperty('--target-rot', targetRot);
+
+            dadoObj.el.classList.add('flying');
+
+            const finalVal = getRandomValue();
+            let timer = setInterval(() => {
+                dadoObj.val.textContent = getRandomValue();
+            }, 50);
+
+            setTimeout(() => {
+                clearInterval(timer);
+                dadoObj.val.textContent = finalVal;
+                dadoObj.finalVal = finalVal;
+                
+                // Dá um brilho neutro
+                dadoObj.val.style.color = 'var(--highlight)';
+                dadoObj.val.style.textShadow = '0 0 15px var(--highlight-dim)';
+                dadoObj.el.querySelector('svg').style.filter = 'drop-shadow(0 0 15px var(--highlight-dim))';
+
+            }, 800);
+        }
+    </script>
+</body>
+</html>
