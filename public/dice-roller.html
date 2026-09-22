@@ -15,11 +15,6 @@
             --text-color: #ffffff;
         }
 
-        /* 
-           O body agora é travado. Sem scroll, 
-           ocupando 100% da tela exatamente, 
-           perfeito para o celular não ficar "dançando".
-        */
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -32,6 +27,7 @@
             top: 0; left: 0; right: 0; bottom: 0;
             display: flex;
             flex-direction: column;
+            flex-wrap: wrap; /* Ajuda no layout horizontal */
         }
 
         h1 {
@@ -42,30 +38,64 @@
             color: var(--dice-border);
             text-transform: uppercase;
             z-index: 20;
+            width: 100%;
         }
 
-        /* A mesa ocupa a parte de cima da tela */
         .table-area {
             position: relative;
             width: 100%;
-            flex: 1; /* Estica para preencher o espaço livre */
+            flex: 1; 
             background: radial-gradient(circle at center, var(--table-color) 0%, var(--bg-color) 70%);
             border-bottom: 2px solid var(--dice-border);
             perspective: 1000px;
             min-height: 250px;
         }
 
-        /* O painel inferior fixa os botões sempre na Thumb Zone (dedão) */
         .bottom-panel {
             height: 35%;
             min-height: 220px;
             max-height: 350px;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 1rem;
             box-sizing: border-box;
             position: relative;
+        }
+
+        /* RESPONSIVIDADE PARA MODO HORIZONTAL (Paisagem) */
+        @media (orientation: landscape) and (max-height: 500px) {
+            h1 {
+                margin: 5px 0;
+                font-size: 1rem;
+            }
+            .table-area {
+                width: 55%;
+                height: calc(100vh - 35px);
+                flex: none;
+                border-bottom: none;
+                border-right: 2px solid var(--dice-border);
+                min-height: unset;
+            }
+            .bottom-panel {
+                width: 45%;
+                height: calc(100vh - 35px);
+                flex: none;
+                min-height: unset;
+                max-height: unset;
+                padding: 0.5rem;
+                justify-content: center;
+            }
+            .cup-wrapper {
+                bottom: 10px;
+            }
+            .die {
+                bottom: 30px;
+            }
+            .info-shake {
+                display: none; /* Esconde para ganhar espaço de tela */
+            }
         }
 
         .cup-wrapper {
@@ -190,7 +220,6 @@
             transition: all 0.2s;
             text-transform: uppercase;
             letter-spacing: 1px;
-            /* Evita double-tap zoom em celulares */
             touch-action: manipulation;
         }
 
@@ -217,7 +246,6 @@
             box-shadow: 0 0 20px var(--highlight-dim);
         }
 
-        /* Container do histórico de rolagens */
         .history-container {
             width: 100%;
             max-width: 400px;
@@ -227,7 +255,6 @@
             flex-direction: column;
             gap: 0.4rem;
             align-items: center;
-            /* Esconde a barra de rolagem visualmente mas mantém função */
             scrollbar-width: none; 
         }
         .history-container::-webkit-scrollbar {
@@ -265,7 +292,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Botão invisível quase para pedir permissão de sensor no iOS */
         .permission-btn {
             position: absolute;
             top: 10px;
@@ -342,7 +368,6 @@
         let wakeLock = null;
         let sensorsEnabled = false;
 
-        // --- MANTER TELA ACESA ---
         async function requestWakeLock() {
             try {
                 if ('wakeLock' in navigator) {
@@ -359,12 +384,10 @@
             }
         });
 
-        // --- ACELERÔMETRO (Agitar para rolar) ---
         function initSensors() {
             if (sensorsEnabled) return;
             requestWakeLock();
 
-            // iOS 13+ requer pedido explícito
             if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
                 DeviceMotionEvent.requestPermission()
                     .then(response => {
@@ -382,13 +405,12 @@
             }
         }
 
-        // Ativa os sensores no primeiro toque na tela para evitar bloqueios silenciosos
         document.addEventListener('click', () => {
             if (!sensorsEnabled) initSensors();
         }, {once: true});
 
         let lastX, lastY, lastZ;
-        let shakeThreshold = 22; // Força necessária do chacoalho
+        let shakeThreshold = 22; 
 
         function handleMotion(e) {
             if (!e.accelerationIncludingGravity) return;
@@ -399,19 +421,15 @@
                 return;
             }
             
-            // Calcula variação brusca
             let delta = Math.abs(lastX - acc.x) + Math.abs(lastY - acc.y) + Math.abs(lastZ - acc.z);
             
             if (delta > shakeThreshold && !isRolling) {
-                // Ao chacoalhar, roda o padrão de 2 dados
                 roll(2);
             }
             
             lastX = acc.x; lastY = acc.y; lastZ = acc.z;
         }
 
-
-        // --- LÓGICA DO JOGO ---
         function getRandomValue() {
             return Math.floor(Math.random() * 8) + 1;
         }
@@ -425,7 +443,6 @@
 
             const cup = document.getElementById('cup');
             
-            // Vibração inicial (Tátil) - Suportado apenas no Android
             if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
 
             const dados = [
@@ -454,10 +471,8 @@
                 setTimeout(() => {
                     cup.classList.remove('throwing');
                     
-                    // Vibração de pouso (Tátil)
                     if (navigator.vibrate) navigator.vibrate(60);
 
-                    // Cria o log histórico
                     let histHtml = '';
                     if (numDice === 1) {
                         histHtml = `Lance #${rollCounter}: <span class="number">${dados[0].finalVal}</span>`;
@@ -467,13 +482,10 @@
                     
                     const histContainer = document.getElementById('history');
                     
-                    // Remove o placeholder na primeira vez
                     if (rollCounter === 1) histContainer.innerHTML = ''; 
                     
-                    // Adiciona no topo
                     histContainer.insertAdjacentHTML('afterbegin', `<div class="hist-item">${histHtml}</div>`);
                     
-                    // Mantém apenas os últimos 5
                     if (histContainer.children.length > 5) {
                         histContainer.lastChild.remove();
                     }
@@ -492,22 +504,37 @@
             dadoObj.el.classList.remove('flying');
             void dadoObj.el.offsetWidth; 
             
+            // Cálculos dinâmicos com base no tamanho exato da tela do usuário
+            const table = document.querySelector('.table-area');
+            const tWidth = table.clientWidth;
+            const tHeight = table.clientHeight;
+            const dieW = 90;
+            const dieH = 120;
+            
+            // Limite X (largura)
+            const maxX = (tWidth / 2) - (dieW / 2) - 10;
             let targetX;
             if (totalDices === 1) {
-                targetX = (Math.random() * 200 - 100) + 'px';
+                targetX = (Math.random() * (maxX * 2)) - maxX;
             } else {
-                targetX = (index === 0 ? (Math.random() * -150 - 50) : (Math.random() * 150 + 50)) + 'px';
+                if (index === 0) {
+                    targetX = -(Math.random() * (maxX - 10) + 10);
+                } else {
+                    targetX = (Math.random() * (maxX - 10) + 10);
+                }
             }
             
-            // Joga os dados não tão alto para caber bem em telas pequenas
-            const targetY = (Math.random() * -80 - 100) + 'px'; 
+            // Limite Y (altura)
+            let maxUp = -(tHeight - dieH - 60); 
+            if (maxUp > -20) maxUp = -20; // limite de segurança para telas anãs
+            const targetY = (Math.random() * (maxUp + 20) - 20); 
             
             const spins = (Math.floor(Math.random() * 2) + 2) * 360; 
             const wobble = (Math.random() * 20 - 10); 
             const targetRot = (spins + wobble) + 'deg'; 
 
-            dadoObj.el.style.setProperty('--target-x', targetX);
-            dadoObj.el.style.setProperty('--target-y', targetY);
+            dadoObj.el.style.setProperty('--target-x', targetX + 'px');
+            dadoObj.el.style.setProperty('--target-y', targetY + 'px');
             dadoObj.el.style.setProperty('--target-rot', targetRot);
 
             dadoObj.el.classList.add('flying');
